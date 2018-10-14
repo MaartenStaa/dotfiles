@@ -24,7 +24,7 @@ $ZSH=$(which zsh)
 $ZSH links.sh
 
 # Restore configuration files.
-mackup restore
+$ZSH bin/dot-restore.sh
 
 # Make ZSH the default shell environment
 if [ $SHELL != $ZSH ]; then
