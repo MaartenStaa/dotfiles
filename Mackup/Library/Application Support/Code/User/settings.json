@@ -45,39 +45,6 @@
   "workbench.colorTheme": "One Dark Pro Vivid",
   "editor.renderControlCharacters": false,
 
-  // Which docsets to look through for PHP.
-  "dash.docset.php": [
-    "php",
-    "wordpress",
-    "drupal",
-    "zend",
-    "laravel",
-    "yii",
-    "joomla",
-    "ee",
-    "codeigniter",
-    "cakephp",
-    "phpunit",
-    "symfony",
-    "typo3",
-    "twig",
-    "smarty",
-    "craft",
-    "phpp",
-    "html",
-    "statamic",
-    "mysql",
-    "sqlite",
-    "mongodb",
-    "psql",
-    "redis",
-    "moodle"
-  ],
-  "dash.docset.less": [
-    "css",
-    "less"
-  ],
-
   "window.zoomLevel": 0,
   "workbench.startupEditor": "newUntitledFile",
 
