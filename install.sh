@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 echo "Setting up your Mac..."
 
@@ -14,8 +14,13 @@ brew update
 brew tap homebrew/bundle
 brew bundle
 
+# Install Prezto if it's not there yet.
+if [ ! -d ~/.zprezto ]; then
+  git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+fi
+
 # Link configuration files.
-$ZSH = $(which zsh)
+$ZSH=$(which zsh)
 $ZSH links.sh
 
 # Make ZSH the default shell environment
