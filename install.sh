@@ -23,6 +23,9 @@ fi
 $ZSH=$(which zsh)
 $ZSH links.sh
 
+# Restore configuration files.
+mackup restore
+
 # Make ZSH the default shell environment
 if [ $SHELL != $ZSH ]; then
   echo "Changing shell to zsh..."
