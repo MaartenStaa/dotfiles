@@ -12,9 +12,14 @@ brew update
 
 # Install Homebrew dependencies from Brewfile
 brew tap homebrew/bundle
-# brew bundle
+brew bundle
+
+# Link configuration files.
+$ZSH = $(which zsh)
+$ZSH links.sh
 
 # Make ZSH the default shell environment
-if [ $SHELL != $(which zsh) ]; then
-  chsh -s $(which zsh)
+if [ $SHELL != $ZSH ]; then
+  echo "Changing shell to zsh..."
+  chsh -s $ZSH
 fi
