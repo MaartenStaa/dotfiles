@@ -15,6 +15,6 @@ brew tap homebrew/bundle
 # brew bundle
 
 # Make ZSH the default shell environment
-if [ -z $ZSH_VERSION ]; then
+if [ $SHELL != $(which zsh) ]; then
   chsh -s $(which zsh)
 fi
