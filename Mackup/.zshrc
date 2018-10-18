@@ -50,4 +50,20 @@ alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/co
 
 # Keybindings
 bindkey '^ ' autosuggest-accept
+bindkey '^r' history-incremental-search-backward
+
+# For VIM mode
+# https://dougblack.io/words/zsh-vi-mode.html
+zstyle ':prezto:module:editor' ps-context 'yes'
+zstyle ':prezto:module:editor:info:keymap:primary' format '[NORMAL]'
+zstyle ':prezto:module:editor:info:keymap:alternate' format '[ALT]'
+zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format '[OVERWRITE]'
+
+function zle-line-init zle-keymap-select {
+  VIM_PROMPT="%F{yellow} $editor_info[keymap]%f"
+  RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$EPS1"
+  zle reset-prompt
+}
+
+export KEYTIMEOUT=1
 
