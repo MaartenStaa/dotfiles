@@ -12,3 +12,4 @@ link () {
 }
 
 link ".mackup.cfg"
+link ".tmux.conf"
