@@ -19,6 +19,12 @@ if [ ! -d ~/.zprezto ]; then
   git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 fi
 
+# Pull Tmux plugin manager if it's not there yet.
+if [ ! -d ~/.tmux/plugins/tpm ]; then
+  mkdir -p ~/.tmux/plugins/tpm
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
+
 # Link configuration files.
 $ZSH=$(which zsh)
 $ZSH links.sh
