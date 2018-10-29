@@ -45,6 +45,7 @@ brew "redis", restart_service: true
 # Apps
 #cask "google-chrome"
 #cask "iterm2"
+cask "virtualbox"
 #cask "visual-studio-code"
 
 # fonts
