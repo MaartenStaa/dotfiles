@@ -18,7 +18,7 @@ fi
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 lazynvm() {
-  unset -f nvm node npm
+  unset -f nvm node npm yarn
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 }
@@ -36,6 +36,11 @@ node() {
 npm() {
   lazynvm
   npm $@
+}
+
+yarn() {
+  lazynvm
+  yarn $@
 }
 
 # Editors
