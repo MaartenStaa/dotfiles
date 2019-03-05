@@ -42,6 +42,15 @@ brew "php", restart_service: true
 brew "postgresql"
 brew "redis", restart_service: true
 
+# QuickLook extensions
+cask "qlcolorcode"
+cask "qlimagesize"
+cask "qlmarkdown"
+cask "qlstephen"
+cask "quicklook-json"
+cask "suspicious-package"
+cask "webpquicklook"
+
 # Apps
 #cask "google-chrome"
 #cask "iterm2"
