@@ -9,6 +9,7 @@ austin.code-gnu-global
 bbenoist.Nix
 bmewburn.vscode-intelephense-client
 brian-anders.sublime-duplicate-text
+bungcip.better-toml
 carlosjs23.vscode-yarn-script
 christian-kohler.npm-intellisense
 christian-kohler.path-intellisense
@@ -30,12 +31,12 @@ esbenp.prettier-vscode
 espresso3389.genuuid
 fatihacet.gitlab-workflow
 felixfbecker.php-debug
-felixfbecker.php-intellisense
 formulahendry.auto-close-tag
 formulahendry.auto-rename-tag
 formulahendry.github-actions
 gamunu.vscode-yarn
 geddski.macros
+getpsalm.psalm-vscode-plugin
 GrapeCity.gc-excelviewer
 Gruntfuggly.triggertaskonsave
 hangxingliu.vscode-nginx-conf-hint
@@ -48,11 +49,11 @@ ikappas.phpcs
 JakeBecker.elixir-ls
 jasonnutter.search-node-modules
 jrebocho.vscode-random
+JulioGold.vscode-smart-split-into-lines
 junstyle.php-cs-fixer
 kkozee.theme-one-dark-vivid
 kumar-harsh.graphql-for-vscode
 lafe.contextualduplicate
-lamartire.git-indicators
 mariusschulz.yarn-lock-syntax
 mechatroner.rainbow-csv
 mikestead.dotenv
@@ -60,6 +61,7 @@ mjmcloug.vscode-elixir
 mrmlnc.vscode-apache
 mrmlnc.vscode-attrs-sorter
 mrmlnc.vscode-duplicate
+ms-azuretools.vscode-docker
 ms-vscode.azure-account
 ms-vscode.cpptools
 ms-vscode.Go
@@ -70,8 +72,8 @@ msjsdiag.debugger-for-chrome
 mubaidr.vuejs-extension-pack
 neilbrayfield.php-docblocker
 octref.vetur
-PeterJausovec.vscode-docker
 prograhammer.tslint-vue
+robertoachar.vscode-essentials-snippets
 rust-lang.rust
 ryannaddy.laravel-artisan
 shaharkazaz.git-merger

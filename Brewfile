@@ -5,10 +5,11 @@ tap "homebrew/apache"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
-tap "homebrew/dupes"
 tap "homebrew/php"
 tap "homebrew/services"
 tap "homebrew/versions"
+tap "neovim/neovim"
+tap "rogual/neovim-dot-app"
 
 # Command line tools
 brew "ack"
@@ -38,6 +39,8 @@ brew "git-flow"
 brew "go"
 brew "mariadb", restart_service: true
 brew "mongodb", restart_service: true
+brew "neovim"
+brew "neovim-dot-app"
 brew "php", restart_service: true
 brew "postgresql"
 brew "redis", restart_service: true
@@ -59,5 +62,6 @@ cask "virtualbox"
 
 # fonts
 cask "font-fira-code"
+cask "font-montserrat"
 
 # Mac AppStore

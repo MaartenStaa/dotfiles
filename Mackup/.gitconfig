@@ -1,3 +1,9 @@
 [user]
 	name = Maarten Staa
 	email = maarten.staa@brightalley.nl
+[core]
+	excludesfile = /Users/maarten/.gitignore_global
+[rerere]
+	enabled = true
+[pull]
+	ff = only
