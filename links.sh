@@ -13,3 +13,5 @@ link () {
 
 link ".mackup.cfg"
 link ".tmux.conf"
+link ".config/fish"
+link ".config/karabiner"
