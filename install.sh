@@ -32,8 +32,12 @@ $ZSH links.sh
 # Restore configuration files.
 $ZSH bin/dot-restore.sh
 
+# Install oh-my-fish and things.
+fish omf.fish
+
 # Make ZSH the default shell environment
-if [ $SHELL != $ZSH ]; then
-  echo "Changing shell to zsh..."
-  chsh -s $ZSH
+$FISH=$(which fish)
+if [ $SHELL != $FISH ]; then
+  echo "Changing shell to fish..."
+  chsh -s $FISH
 fi

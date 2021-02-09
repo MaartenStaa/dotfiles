@@ -32,12 +32,11 @@ brew "composer"
 brew "dnsmasq", restart_service: true
 brew "elixir"
 brew "exercism"
+brew "git"
 brew "git-flow"
 brew "go"
 brew "mariadb", restart_service: true
-brew "mongodb", restart_service: true
 brew "neovim"
-brew "neovim-dot-app"
 brew "php", restart_service: true
 brew "postgresql"
 brew "redis", restart_service: true
@@ -59,7 +58,7 @@ cask "virtualbox"
 #cask "visual-studio-code"
 
 # fonts
-cask "font-fira-code"
-cask "font-montserrat"
+# cask "font-fira-code"
+# cask "font-montserrat"
 
 # Mac AppStore
