@@ -13,6 +13,9 @@ link () {
 
 link ".mackup.cfg"
 link ".tmux.conf"
+link ".vimrc"
 link ".config/fish"
 link ".config/karabiner"
 link ".config/omf"
+link ".config/nvim"
+link ".vim"
