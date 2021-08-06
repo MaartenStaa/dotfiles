@@ -44,6 +44,7 @@ set guioptions-=R
 "----------Mappings----------"
 "ev -> edit vimrc file
 nmap <Leader>ev :tabedit ~/.vimrc<cr>
+nmap <Leader>ep :tabedit ~/.vim/plugins.vim<cr>
 "leaderleader -> switch between the last two files
 nnoremap <Leader><Leader> <C-^>
 "tc -> create tab
@@ -108,7 +109,8 @@ if has('autocmd')
     augroup autosourcing
         autocmd!
         autocmd BufWritePost .vimrc source %
-        autocmd BufWritePost plugins.vim source ~/.vimrc
+        autocmd BufWritePost plugins.vim source %
+        autocmd BufWritePost init.vim source %
     augroup END
 
     "Fix blade filetype not being set correctly.
