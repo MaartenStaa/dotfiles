@@ -34,6 +34,10 @@ fi
 $ZSH=$(which zsh)
 $ZSH links.sh
 
+# Add Cargo and related packages.
+rustup install stable
+cargo install exa
+
 # Restore configuration files.
 $ZSH bin/dot-restore.sh
 
