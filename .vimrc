@@ -33,7 +33,7 @@ set t_CO=256
 "set guifont=Fira_Code:h15
 set background=dark
 set termguicolors
-colorscheme material-monokai
+colorscheme darcula
 
 set guioptions-=l
 set guioptions-=L
@@ -69,66 +69,31 @@ nmap <silent> <C-S-H> :Dash<cr>
 "nmap ; :
 "s -> toggle spell check
 nmap <Leader>s :setlocal spell!<cr>
+"Use the sneak plugin to use f/F/t/T across lines
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
 
 "use space and ctrl-space for page down and page up
 nmap <space> <PageDown>
 nmap <NUL> <PageUp>
 
-"Use tab for auto completion in coc
-inoremap <silent><expr> <TAB>
-    \ pumvisible() ? "\<C-n>" :
-    \ <SID>check_back_space() ? "\<TAB>" :
-    \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"Use tab for auto completion via LSP
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<S-Tab>"
+inoremap <expr><S-TAB>        pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-"Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-"Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-"Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-"Use `[c` and `]c` to navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
-
-"Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-"Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-    if (index(['vim', 'help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
-    elseif has('CocAction')
-        call CocAction('doHover')
-    endif
-endfunction
-
-if has('CocActionAsync')
-    "Highlight symbol under cursor on CursorHold
-    autocmd CursorHold * silent call CocActionAsync('highlight')
-endif
-
-"Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
-
-"Show auto-fix options
-nmap <leader>q :CocFix<cr>
+"Autocomplete settings
+" menuone: popup even when there's only one match
+" noinsert: Do not insert text until a selection is made
+" noselect: Do not select, force user to select one from the menu
+set completeopt=menuone,noinsert,noselect
+inoremap <C-space> <C-x><C-o>
 
 "Remap for format selected region
-vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>p  :Prettier<cr>
+"vmap <leader>f <Plug>(coc-format-selected)
+"nmap <leader>f <Plug>(coc-format-selected)
+nmap <leader>p :Prettier<cr>
 
 "-----Invisible character-----"
 set listchars=tab:»·,trail:·,nbsp:·,space:·,eol:$
