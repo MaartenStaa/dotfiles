@@ -4,6 +4,12 @@ SETUVAR __fish_initialized:3100
 SETUVAR _fish_abbr_art:php\x20artisan
 SETUVAR _fish_abbr_brewu:brew\x20update\x20\x26\x26\x20brew\x20upgrade
 SETUVAR _fish_abbr_code:/Applications/Visual\x5c\x20Studio\x5c\x20Code\x2eapp/Contents/Resources/app/bin/code
+SETUVAR _fish_abbr_dc:docker\x20compose
+SETUVAR _fish_abbr_dcb:docker\x20compose\x20build
+SETUVAR _fish_abbr_dce:docker\x20compose\x20run\x20app
+SETUVAR _fish_abbr_dcr:docker\x20compose\x20run\x20app
+SETUVAR _fish_abbr_dcsh:docker\x20compose\x20exec\x20app\x20ash
+SETUVAR _fish_abbr_dcu:docker\x20compose\x20up
 SETUVAR _fish_abbr_gb:git\x20branch
 SETUVAR _fish_abbr_gc:git\x20commit
 SETUVAR _fish_abbr_gco:git\x20checkout
@@ -16,6 +22,8 @@ SETUVAR _fish_abbr_gs:git\x20status
 SETUVAR _fish_abbr_gwd:git\x20diff\x20\x2d\x2dno\x2dext\x2ddiff
 SETUVAR _fish_abbr_ll:exa\x20\x2dhal
 SETUVAR _fish_abbr_ls:exa
+SETUVAR _fish_abbr_mc:mutagen\x20compose
+SETUVAR _fish_abbr_mcu:mutagen\x20compose\x20up
 SETUVAR _fish_abbr_subl:/Applications/Sublime\x5c\x20Text\x2eapp/Contents/SharedSupport/bin/subl
 SETUVAR _fish_abbr_vim:nvim
 SETUVAR fish_color_autosuggestion:747369
