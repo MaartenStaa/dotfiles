@@ -7,3 +7,5 @@
 	enabled = true
 [pull]
 	ff = only
+[alias]
+	fixup = commit --amend --no-edit
