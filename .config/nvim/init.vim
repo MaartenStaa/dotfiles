@@ -6,6 +6,12 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source ~/.vimrc
 
+let g:fzf_layout = { 'down': '40%' }
+let g:fzf_action = {
+            \ 'enter': 'tab split',
+            \ 'ctrl-x': 'split',
+            \ 'ctrl-v': 'vsplit' }
+
 "-----Automatic commands----"
 if has('autocmd')
     " Enable type inlay hints

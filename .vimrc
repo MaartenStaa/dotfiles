@@ -13,6 +13,7 @@ set nowritebackup
 set relativenumber                  "Enable relative line-numbers
 set redrawtime=5000                 "Allow more time to redraw before disabling syntax highlighting
 set ts=4 sts=4 sw=4 expandtab       "Insert spaces for tabs
+set rtp+=/usr/local/opt/fzf
 
 "---------Searching---------"
 set hlsearch                        "Enable search term highlighting
@@ -61,6 +62,7 @@ nmap <Leader><space> :nohlsearch<cr>
 nmap <Leader>b :NERDTreeToggle<cr>
 "ctrl-r -> go to symbol
 nmap <C-R> :CtrlPBufTag<cr>
+nmap <C-P> :FZF<cr>
 "l -> toggle list
 nmap <Leader>l :set list!<cr>:IndentGuidesToggle<cr>
 "ctrl-shift-r -> search in dash
@@ -125,12 +127,6 @@ endif
 if executable('ag')
     " Use Ag over Grep
     set grepprg=ag\ --nogroup\ --nocolor
-
-    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    let g:ctrlp_user_command = 'ag --literal --files-with-matches --nocolor --hidden -g "" %s'
-
-    " ag is fast enough that CtrlP doesn't need to cache
-    "let g:ctrlp_use_caching = 1
 
     if !exists(":Ag")
         command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
