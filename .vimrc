@@ -44,6 +44,7 @@ set guioptions-=R
 "----------Mappings----------"
 "ev -> edit vimrc file
 nmap <Leader>ev :tabedit ~/.vimrc<cr>
+nmap <Leader>env :tabedit ~/.config/nvim/init.vim<cr>
 nmap <Leader>ep :tabedit ~/.vim/plugins.vim<cr>
 "leaderleader -> switch between the last two files
 nnoremap <Leader><Leader> <C-^>
@@ -66,8 +67,11 @@ nmap <C-R> :CtrlPBufTag<cr>
 nmap <C-P> :FZF<cr>
 "l -> toggle list
 nmap <Leader>l :set list!<cr>:IndentGuidesToggle<cr>
-"ctrl-shift-r -> search in dash
+"ctrl-shift-h -> search in dash
 nmap <silent> <C-S-H> :Dash<cr>
+"use H and L to go to the start and end of a line
+nmap H ^
+nmap L $
 "; -> :
 "nmap ; :
 "s -> toggle spell check
@@ -83,7 +87,7 @@ nmap <space> <PageDown>
 nmap <NUL> <PageUp>
 
 "Use tab for auto completion via LSP
-inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<S-Tab>"
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr><S-TAB>        pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 "Autocomplete settings
