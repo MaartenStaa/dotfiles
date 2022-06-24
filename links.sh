@@ -15,6 +15,7 @@ link () {
   fi
 }
 
+link ".ideavimrc"
 link ".mackup.cfg"
 link ".tmux.conf"
 link ".vimrc"

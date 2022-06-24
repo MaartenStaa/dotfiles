@@ -1,0 +1,30 @@
+set relativenumber
+set number
+
+" https://github.com/JetBrains/ideavim/blob/master/doc/emulated-plugins.md
+set surround
+
+" https://youtrack.jetbrains.com/issue/VIM-1970
+set highlightedyank
+
+" https://github.com/JetBrains/ideavim/wiki/%60ideajoin%60-examples
+" Smarter joining of lines (J)
+set ideajoin
+
+" https://youtrack.jetbrains.com/issue/VIM-1521
+" Allow to comment / un-comment code using Vim-style commands (gcc,
+" gc{motion})
+set commentary
+
+" https://github.com/JetBrains/ideavim/wiki/Emulated-plugins#vim-paragraph-motion
+" Let { and } also match lines that only contain whitespace.
+set vim-paragraph-motion
+
+" Leader shortcuts
+set mapleader = ","
+set incsearch
+map <Leader><Space> :nohlsearch
+
+map <Space> <Action>(GotoNextError)
+map <S-Space> <Action>(GotoPreviousError)
+
