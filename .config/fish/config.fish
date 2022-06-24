@@ -10,4 +10,5 @@ bind \cF -M insert nextd-or-forward-word
 
 # Environment
 export EDITOR=/usr/local/bin/nvim
+export VISUAL=/usr/local/bin/nvim
 
