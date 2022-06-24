@@ -22,21 +22,17 @@
   "php-docblocker.useShortNames": true,
   // Optional. The name or path of the coding standard to use. Defaults to the one set in phpcs global config.
   "phpcs.standard": "PSR2",
-  "phpcs.ignorePatterns": [
-    "_ide_helper.php",
-    "vendor"
-  ],
+  "phpcs.ignorePatterns": ["_ide_helper.php", "vendor"],
   // Controls if Problems view should automatically reveal files when opening them
   "problems.autoReveal": false,
   // Customizes which terminal application to run on OS X.
   "terminal.external.osxExec": "iTerm.app",
   // Controls the font family of the terminal, this defaults to editor.fontFamily's value.
-  "terminal.integrated.fontFamily": "Meslo LG M DZ for Powerline",
+  "terminal.integrated.fontFamily": "Menlo",
   // Controls the font size in pixels of the terminal.
   "terminal.integrated.fontSize": 13,
   "workbench.colorTheme": "One Dark Pro Vivid",
   "editor.renderControlCharacters": false,
-  "window.zoomLevel": 0,
   "workbench.startupEditor": "newUntitledFile",
   // Enable/disable semantic checking of JavaScript files. Existing jsconfig.json or tsconfig.json files override this setting. Requires TypeScript >=2.3.1.
   "javascript.implicitProjectConfig.checkJs": true,
@@ -116,7 +112,7 @@
     "source.fixAll.eslint": true
   },
   "[php]": {
-    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -133,9 +129,7 @@
   },
   "editor.formatOnSaveTimeout": 5000,
   "auto-close-tag.SublimeText3Mode": true,
-  "cSpell.dictionaries": [
-    "en-GB"
-  ],
+  "cSpell.dictionaries": ["en-GB"],
   "cSpell.userWords": [
     "AMRO",
     "Ebbinghaus",
@@ -180,5 +174,23 @@
   "vscode-neovim.mouseSelectionStartVisualMode": true,
   "vscode-neovim.neovimPath": "/usr/local/bin/nvim",
   "editor.suggestSelection": "first",
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "rust-analyzer.cargo.allFeatures": true,
+  "rust-analyzer.checkOnSave.command": "clippy",
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[handlebars]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "prettier.documentSelectors": [
+    "*.{js,ts,tsx,php,json,graphql,css,scss,less}"
+  ],
+  "terminal.integrated.env.osx": {
+    "FIG_NEW_SESSION": "1"
+  },
+  "editor.accessibilitySupport": "off"
 }
