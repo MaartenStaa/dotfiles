@@ -1,34 +1,55 @@
 call plug#begin('~/.vim/plugged')
 
-Plug '2072/PHP-Indenting-for-VIm'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'airblade/vim-gitgutter'
+"Theming
 Plug 'doums/darcula'
+Plug 'mofiqul/dracula.nvim'
+Plug 'navarasu/onedark.nvim'
+Plug 'rktjmp/lush.nvim'
+Plug 'skielbasa/vim-material-monokai'
+
+"Language support
+Plug '2072/php-indenting-for-vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'fladson/vim-kitty'
+Plug 'sheerun/vim-polyglot'
+
+"LSP & autocomplete
+Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/nvim-cmp'
-Plug 'junegunn/fzf'
-Plug 'junegunn/goyo.vim'
-Plug 'justinmk/vim-sneak'
-Plug 'jwalton512/vim-blade'
-Plug 'machakann/vim-highlightedyank'
-Plug 'markonm/traces.vim'
-Plug 'nathanaelkane/vim-indent-guides'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
-Plug 'prettier/vim-prettier', { 'branch': 'release/1.x', 'do': 'yarn install' }
-Plug 'rizzatti/dash.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'skielbasa/vim-material-monokai'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-vinegar'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'ray-x/lsp_signature.nvim'
+Plug 'sirver/ultisnips' "CMP requires a snippet engine
 Plug 'williamboman/nvim-lsp-installer'
+
+"UI enhancements
+Plug 'airblade/vim-gitgutter'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/goyo.vim' "Distraction free mode
+Plug 'karb94/neoscroll.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'machakann/vim-highlightedyank'
+Plug 'markonm/traces.vim' "Preview for substitutions
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'romgrk/barbar.nvim'
+Plug 'scrooloose/nerdtree'
+
+"Misc
+Plug 'itchyny/vim-gitbranch' "Provides gitbranch#name for lightline
+Plug 'junegunn/fzf' "Fuzzy file finder
+Plug 'justinmk/vim-sneak' "f and t across lines
+Plug 'rizzatti/dash.vim' "Integration with Dash (search docs)
+Plug 'sbdchd/neoformat' "Autoformatting
+Plug 'tpope/vim-commentary' "Toggle comments
+Plug 'tpope/vim-repeat' "Handles repeating plugin commands as a whole
+Plug 'tpope/vim-sensible' "Set some sensible defaults
+Plug 'tpope/vim-surround' "Add/change/remove surrounding brackets
+Plug 'tpope/vim-vinegar' "Netrw enhancements
+Plug 'windwp/nvim-autopairs' "Automatically insert matching brackets, and jump over them when typing them
 
 call plug#end()
 

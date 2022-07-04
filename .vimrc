@@ -14,6 +14,7 @@ set relativenumber                  "Enable relative line-numbers
 set redrawtime=5000                 "Allow more time to redraw before disabling syntax highlighting
 set ts=4 sts=4 sw=4 expandtab       "Insert spaces for tabs
 set rtp+=/usr/local/opt/fzf
+set re=0                            "yats: Old regexp engine will incur performance issues for yats and old engine is usually turned on by other plugins.
 
 "---------Searching---------"
 set hlsearch                        "Enable search term highlighting
@@ -30,11 +31,11 @@ nmap <C-H> <C-W><C-H>
 nmap <C-L> <C-W><C-L>
 
 "----------Visuals----------"
-set t_CO=256
+"set t_CO=256
 "set guifont=Fira_Code:h15
-set background=dark
+"set background=dark
 set termguicolors
-colorscheme darcula
+colorscheme onedark
 
 set guioptions-=l
 set guioptions-=L
@@ -82,10 +83,6 @@ map F <Plug>Sneak_F
 map t <Plug>Sneak_t
 map T <Plug>Sneak_T
 
-"use space and ctrl-space for page down and page up
-nmap <space> <PageDown>
-nmap <NUL> <PageUp>
-
 "Use tab for auto completion via LSP
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr><S-TAB>        pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -100,10 +97,11 @@ inoremap <C-space> <C-x><C-o>
 "Remap for format selected region
 "vmap <leader>f <Plug>(coc-format-selected)
 "nmap <leader>f <Plug>(coc-format-selected)
-nmap <leader>p :Prettier<cr>
+let g:neoformat_try_node_exe = 1 "Look for project Prettier install
+let g:neoformat_only_msg_on_error = 1
 
 "-----Invisible character-----"
-set listchars=tab:»·,trail:·,nbsp:·,space:·,eol:$
+set listchars=tab:»·,trail:·,nbsp:·,multispace:·,eol:$
 highlight NonText guifg=#3b4048
 highlight SpecialKey guifg=#3b4048
 
