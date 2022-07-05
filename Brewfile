@@ -38,6 +38,7 @@ brew "gh"
 brew "git"
 brew "git-flow"
 brew "go"
+brew "lua-language-server"
 brew "mariadb", restart_service: true
 brew "neovim"
 brew "php", restart_service: true
