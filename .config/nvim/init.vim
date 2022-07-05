@@ -184,7 +184,8 @@ let g:lightline = {
             \ },
       \ }
 function! LightlineGitBranch()
-    return ' ' . gitbranch#name()
+    let name = gitbranch#name()
+    return name !=# '' ? ' ' . gitbranch#name() : ''
 endfunction
 "if lightline#
 "  "Calling this again fixes lightline losing its colour upon sourcing this file
