@@ -43,8 +43,12 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
+-- Reference: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 local servers = {
   cssls = { cmd = { "css-languageserver", "--stdio" } },
+  cssmodules_ls = {},
+  eslint = {},
+  graphql = {},
   intelephense = {},
   sumneko_lua = {
     settings = {
