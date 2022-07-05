@@ -9,3 +9,5 @@
 	ff = only
 [alias]
 	fixup = commit --amend --no-edit
+[init]
+	defaultBranch = main
