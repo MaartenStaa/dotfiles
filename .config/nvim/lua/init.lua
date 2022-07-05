@@ -38,7 +38,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<Leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 end
 
-function merge(a, b)
+local function merge(a, b)
     for k, v in pairs(b) do
         a[k] = v
     end
@@ -54,18 +54,22 @@ local servers = {
   cssls = { cmd = { "css-languageserver", "--stdio" } },
   intelephense = {},
   sumneko_lua = {
-    runtime = { version = 'LuaJIT' },
-    diagnostics = {
-      -- Get the language server to recognize the `vim` global
-      globals = { 'vim' },
-    },
-    workspace = {
-      -- Make the server aware of Neovim runtime files
-      library = vim.api.nvim_get_runtime_file("", true),
-    },
-    telemetry = {
-      -- Do not send telemetry data containing a randomized but unique identifier
-      enable = false,
+    settings = {
+      Lua = {
+        runtime = { version = 'LuaJIT' },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = { 'vim' },
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = vim.api.nvim_get_runtime_file("", true),
+        },
+        telemetry = {
+          -- Do not send telemetry data containing a randomized but unique identifier
+          enable = false,
+        },
+      },
     },
   },
   rust_analyzer = {},
@@ -109,7 +113,7 @@ cmp.setup({
   mapping = cmp.mapping.preset.insert({
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-Space>'] = cmp.mapping.complete({}),
     ['<C-e>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   }),

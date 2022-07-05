@@ -134,19 +134,21 @@ if has('autocmd')
         autocmd!
         autocmd BufWritePost plugins.vim source %
         autocmd BufWritePost init.vim source %
+        autocmd BufWritePost init.lua source %
     augroup END
 
     "Fix blade filetype not being set correctly.
     autocmd BufRead,BufNewFile *.blade.php set filetype=blade
 
     "Set tabbing based on file type
-    autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType css setlocal ts=4 sts=4 sw=4 expandtab
-    autocmd FileType scss setlocal ts=4 sts=4 sw=4 expandtab
-    autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType php setlocal ts=4 sts=4 sw=4 expandtab
     autocmd FileType blade setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType vim setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType css setlocal ts=4 sts=4 sw=4 expandtab
+    autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType lua setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType php setlocal ts=4 sts=4 sw=4 expandtab
+    autocmd FileType scss setlocal ts=4 sts=4 sw=4 expandtab
+    autocmd FileType vim setlocal ts=4 sts=4 sw=4 expandtab
 endif
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
