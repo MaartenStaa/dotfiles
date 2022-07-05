@@ -45,11 +45,12 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- Reference: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 local servers = {
-  cssls = { cmd = { "css-languageserver", "--stdio" } },
+  cssls = {},
   cssmodules_ls = {},
   eslint = {},
   graphql = {},
   intelephense = {},
+  marksman = {},
   sumneko_lua = {
     settings = {
       Lua = {
@@ -70,7 +71,7 @@ local servers = {
     },
   },
   rust_analyzer = {},
-  tsserver = { cmd = { "typescript-language-server", "--stdio" } },
+  tsserver = {},
   vimls = {}
 }
 for lsp, config in pairs(servers) do
