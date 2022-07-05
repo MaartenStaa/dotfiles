@@ -40,9 +40,10 @@ Plug 'romgrk/barbar.nvim'
 Plug 'scrooloose/nerdtree'
 
 "For easy navigation
-Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/plenary.nvim' "Dependency of telescope
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+Plug 'nvim-telescope/telescope-ui-select.nvim' "Style ui-select (like code actions) with telescope
 
 "Misc
 Plug 'itchyny/vim-gitbranch' "Provides gitbranch#name for lightline

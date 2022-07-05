@@ -103,7 +103,10 @@ map <Leader>ff :Telescope git_files<cr>
 map <Leader>fa :Telescope find_files<cr>
 map <Leader>fg :Telescope live_grep<cr>
 map <Leader>fb :Telescope buffers<cr>
-map <Leader>gl :Telescope loclist<cr>
+map <Leader>gd :Telescope lsp_definitions<cr>
+map <Leader>gl :Telescope diagnostics bufnr=0<cr>
+map <Leader>gr :Telescope lsp_references<cr>
+map <Leader>gi :Telescope lsp_implementations<cr>
 
 "Use tab for auto completion via LSP
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<Tab>"
