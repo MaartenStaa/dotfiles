@@ -187,10 +187,10 @@ function! LightlineGitBranch()
     let name = gitbranch#name()
     return name !=# '' ? ' ' . gitbranch#name() : ''
 endfunction
-"if lightline#
-"  "Calling this again fixes lightline losing its colour upon sourcing this file
-"  call lightline#colorscheme()
-"endif
+if exists('*lightline#colorscheme')
+  "Calling this again fixes lightline losing its colour upon sourcing this file
+  call lightline#colorscheme()
+endif
 call lightline#lsp#register()
 
 "-----Automatic commands----"
