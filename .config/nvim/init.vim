@@ -1,5 +1,5 @@
 if (!exists('g:vscode'))
-    so ~/.vim/plugins.vim
+    so ~/.config/nvim/plugins.vim
 endif
 
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
@@ -53,7 +53,7 @@ set guioptions-=R
 "----------Mappings----------"
 nmap <Leader>env :tabedit ~/.config/nvim/init.vim<cr>
 nmap <Leader>enl :tabedit ~/.config/nvim/lua/init.lua<cr>
-nmap <Leader>ep :tabedit ~/.vim/plugins.vim<cr>
+nmap <Leader>ep :tabedit ~/.config/nvim/plugins.vim<cr>
 "leaderleader -> switch between the last two files
 nnoremap <Leader><Leader> <C-^>
 "tc -> create tab
