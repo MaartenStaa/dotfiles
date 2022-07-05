@@ -4,7 +4,160 @@ endif
 
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
-source ~/.vimrc
+
+syntax enable
+
+set nocompatible
+set backspace=indent,eol,start		"Make backspace behave normally
+set cmdheight=2                     "Better display for messages
+set linespace=12                    "Set line height (only for macvim)
+let mapleader=','                   "Set comma as command namespace (leader)
+set number                          "Enable line-numbers
+"set macligatures                   "Enable font ligature support
+set nobackup
+set noswapfile
+set nowritebackup
+set relativenumber                  "Enable relative line-numbers
+set redrawtime=5000                 "Allow more time to redraw before disabling syntax highlighting
+set ts=4 sts=4 sw=4 expandtab       "Insert spaces for tabs
+set rtp+=/usr/local/opt/fzf
+set re=0                            "yats: Old regexp engine will incur performance issues for yats and old engine is usually turned on by other plugins.
+set noshowmode                      "Already shown by lightline
+
+"---------Searching---------"
+set hlsearch                        "Enable search term highlighting
+set incsearch                       "Incremental search
+set ignorecase                      "Case-insensitive search
+
+"-----Split management------"
+set splitbelow
+set splitright
+
+nmap <C-J> <C-W><C-J>
+nmap <C-K> <C-W><C-K>
+nmap <C-H> <C-W><C-H>
+nmap <C-L> <C-W><C-L>
+
+"----------Visuals----------"
+"set t_CO=256
+"set guifont=Fira_Code:h15
+"set background=dark
+set termguicolors
+colorscheme onedark
+
+set guioptions-=l
+set guioptions-=L
+set guioptions-=r
+set guioptions-=R
+
+"----------Mappings----------"
+nmap <Leader>env :tabedit ~/.config/nvim/init.vim<cr>
+nmap <Leader>ep :tabedit ~/.vim/plugins.vim<cr>
+"leaderleader -> switch between the last two files
+nnoremap <Leader><Leader> <C-^>
+"tc -> create tab
+nmap <Leader>tc :tabnew<cr>
+"tn -> next tab
+nmap <Leader>tn :tabnext<cr>
+nmap <C-Tab> :tabnext<cr>
+"tp -> previous tab
+nmap <Leader>tp :tabprevious<cr>
+nmap <C-S-Tab> :tabprevious<cr>
+"tw -> close tab
+nmap <Leader>tw :tabclose<cr>
+"to -> only tab
+nmap <Leader>to :tabonly<cr>
+"space -> end searching (get rid of highlights)
+nmap <Leader><space> :nohlsearch<cr>
+"b -> nerdtree toggle
+nmap <Leader>b :NERDTreeToggle<cr>
+"l -> toggle list
+nmap <Leader>l :set list!<cr>:IndentGuidesToggle<cr>
+"ctrl-shift-h -> search in dash
+nmap <silent> <C-S-H> :Dash<cr>
+"use H and L to go to the start and end of a line
+nmap H ^
+nmap L $
+"; -> :
+"nmap ; :
+"s -> toggle spell check
+nmap <Leader>s :setlocal spell!<cr>
+"Use the sneak plugin to use f/F/t/T across lines
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
+"Yank and Paste to system clipboard
+nmap <Leader>y "+y
+vmap <Leader>y "+y
+nmap <Leader>p "+p
+vmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>P "+P
+
+"Go to stuff with Telescope
+map <C-R> :Telescope lsp_document_symbols<cr>
+map <C-P> :Telescope git_files<cr>
+map <Leader>ff :Telescope git_files<cr>
+map <Leader>fa :Telescope find_files<cr>
+map <Leader>fg :Telescope live_grep<cr>
+map <Leader>fb :Telescope buffers<cr>
+map <Leader>gl :Telescope loclist<cr>
+
+"Use tab for auto completion via LSP
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr><S-TAB>        pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+"Autocomplete settings
+" menuone: popup even when there's only one match
+" noinsert: Do not insert text until a selection is made
+" noselect: Do not select, force user to select one from the menu
+set completeopt=menuone,noinsert,noselect
+inoremap <C-space> <C-x><C-o>
+
+"Remap for format selected region
+"vmap <leader>f <Plug>(coc-format-selected)
+"nmap <leader>f <Plug>(coc-format-selected)
+let g:neoformat_try_node_exe = 1 "Look for project Prettier install
+let g:neoformat_only_msg_on_error = 1
+
+"-----Invisible character-----"
+set listchars=tab:»·,trail:·,nbsp:·,multispace:·,eol:$
+highlight NonText guifg=#3b4048
+highlight SpecialKey guifg=#3b4048
+
+"-----Automatic commands----"
+if has('autocmd')
+    "Automatically source vimrc file on searching
+    augroup autosourcing
+        autocmd!
+        autocmd BufWritePost plugins.vim source %
+        autocmd BufWritePost init.vim source %
+    augroup END
+
+    "Fix blade filetype not being set correctly.
+    autocmd BufRead,BufNewFile *.blade.php set filetype=blade
+
+    "Set tabbing based on file type
+    autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType css setlocal ts=4 sts=4 sw=4 expandtab
+    autocmd FileType scss setlocal ts=4 sts=4 sw=4 expandtab
+    autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType php setlocal ts=4 sts=4 sw=4 expandtab
+    autocmd FileType blade setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType vim setlocal ts=2 sts=2 sw=2 expandtab
+endif
+
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+    " Use Ag over Grep
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    if !exists(":Ag")
+        command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+        nnoremap \ :Ag<SPACE>
+    endif
+endif
 
 let g:fzf_layout = { 'down': '40%' }
 let g:fzf_action = {
@@ -12,19 +165,26 @@ let g:fzf_action = {
             \ 'ctrl-x': 'split',
             \ 'ctrl-v': 'vsplit' }
 
+"Lightline UI
 let g:lightline = {
             \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+            \   'left': [
+            \     [ 'mode', 'paste' ],
+            \     [ 'lsp_info', 'lsp_hints', 'lsp_errors', 'lsp_warnings', 'lsp_ok' ], [ 'lsp_status' ],
+            \     [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
             \ },
             \ 'component_function': {
             \   'gitbranch': 'LightlineGitBranch'
             \ },
       \ }
 function! LightlineGitBranch()
-    "'e725'
     return ' ' . gitbranch#name()
 endfunction
+"if lightline#
+"  "Calling this again fixes lightline losing its colour upon sourcing this file
+"  call lightline#colorscheme()
+"endif
+call lightline#lsp#register()
 
 "-----Automatic commands----"
 if has('autocmd')
@@ -32,7 +192,6 @@ if has('autocmd')
     autocmd CursorHold,CursorHoldI * :lua require'lsp_extensions'.inlay_hints{ only_current_line = false }
 endif
 
-" LSP configuration
 lua << EOF
   require("nvim-autopairs").setup({
     check_ts = true
@@ -45,6 +204,7 @@ lua << EOF
 
   require('neoscroll').setup()
 
+  -- LSP configuration
   local lspconfig = require('lspconfig')
   local on_attach = function(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -88,8 +248,25 @@ lua << EOF
   local servers = {
     cssls = { cmd = { "css-languageserver", "--stdio" } },
     intelephense = {},
+    sumneko_lua = {
+      runtime = { version = 'LuaJIT' },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = { 'vim' },
+      },
+      filetypes = { 'lua', 'vim' },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      telemetry = {
+        -- Do not send telemetry data containing a randomized but unique identifier
+        enable = false,
+      },
+    },
     rust_analyzer = {},
-    tsserver = { cmd = { "typescript-language-server", "--stdio" } }
+    tsserver = { cmd = { "typescript-language-server", "--stdio" } },
+    vimls = {}
   }
   for lsp, config in pairs(servers) do
     lspconfig[lsp].setup(merge({
@@ -192,4 +369,30 @@ lua << EOF
       },
     },
   }
+
+  local actions = require('telescope.actions')
+  require('telescope').setup {
+    mappings = {
+      i = {
+        ["<C-k>"] = {
+          action = actions.move_selection_previous,
+          opts = { nowait = true, silent = true }
+        },
+        ["<C-j>"] = {
+          action = actions.move_selection_next,
+          opts = { nowait = true, silent = true }
+        },
+      }
+    },
+    extensions = {
+      fzf = {
+        fuzzy = true,                    -- false will only do exact matching
+        override_generic_sorter = true,  -- override the generic sorter
+        override_file_sorter = true,     -- override the file sorter
+        case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+                                         -- the default case_mode is "smart_case"
+      }
+    }
+  }
+  require('telescope').load_extension('fzf')
 EOF
