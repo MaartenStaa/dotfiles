@@ -36,6 +36,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'machakann/vim-highlightedyank'
 Plug 'markonm/traces.vim' "Preview for substitutions
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'petertriho/nvim-scrollbar'
 Plug 'romgrk/barbar.nvim'
 Plug 'scrooloose/nerdtree'
 

@@ -23,6 +23,7 @@ set ts=4 sts=4 sw=4 expandtab       "Insert spaces for tabs
 set rtp+=/usr/local/opt/fzf
 set re=0                            "yats: Old regexp engine will incur performance issues for yats and old engine is usually turned on by other plugins.
 set noshowmode                      "Already shown by lightline
+set mouse=nv                        "Allow mouse usage in normal and visual modes
 
 "---------Searching---------"
 set hlsearch                        "Enable search term highlighting
@@ -97,8 +98,8 @@ nmap <Leader>P "+P
 vmap <Leader>P "+P
 
 "Go to stuff with Telescope
-map <C-R> :Telescope lsp_document_symbols<cr>
-map <C-P> :Telescope git_files<cr>
+map <C-r> :Telescope lsp_document_symbols<cr>
+map <C-p> :Telescope git_files<cr>
 map <Leader>ff :Telescope git_files<cr>
 map <Leader>fa :Telescope find_files<cr>
 map <Leader>fg :Telescope live_grep<cr>
@@ -107,6 +108,7 @@ map <Leader>gd :Telescope lsp_definitions<cr>
 map <Leader>gl :Telescope diagnostics bufnr=0<cr>
 map <Leader>gr :Telescope lsp_references<cr>
 map <Leader>gi :Telescope lsp_implementations<cr>
+map <Leader>ga :Telescope builtin<cr>
 
 "Use tab for auto completion via LSP
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -138,6 +140,11 @@ if has('autocmd')
         autocmd BufWritePost plugins.vim source %
         autocmd BufWritePost init.vim source %
         autocmd BufWritePost init.lua source %
+    augroup END
+
+    augroup fmt
+        autocmd!
+        autocmd BufWritePre * undojoin | Neoformat
     augroup END
 
     "Fix blade filetype not being set correctly.
