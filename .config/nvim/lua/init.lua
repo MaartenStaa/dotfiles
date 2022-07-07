@@ -4,8 +4,25 @@ require('nvim-autopairs').setup({
 })
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
-require("nvim-lsp-installer").setup({
+-- Set up LSP installer, manually adding the Relay LS.
+local lsp_installer = require('nvim-lsp-installer')
+local npm = require('nvim-lsp-installer.core.managers.npm')
+lsp_installer.setup({
   automatic_installation = true
+})
+local relay_install_dir = require('nvim-lsp-installer.core.path').concat({
+  require('nvim-lsp-installer.settings').current.install_root_dir,
+ 'relay',
+})
+lsp_installer.register(require('nvim-lsp-installer.server').Server:new {
+  name = 'relay',
+  root_dir = relay_install_dir,
+  languages = { 'graphql', 'typescriptreact' },
+  homepage = 'https://github.com/facebook/relay',
+  installer = npm.packages { 'relay-compiler' },
+  default_options = {
+    cmd_env = npm.env(relay_install_dir),
+  },
 })
 
 require('neoscroll').setup()
@@ -45,13 +62,28 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- Reference: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+local lsp_configs = require('lspconfig.configs')
+if not lsp_configs.relay then
+  lsp_configs.relay = {
+    default_config = {
+      cmd = { 'relay-compiler', 'lsp' },
+      filetypes = { 'graphq', 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },
+      root_dir = function(fname)
+        local util = require('lspconfig.util')
+        return util.root_pattern('relay.config.json')(fname)
+          or util.root_pattern('package.json', '.git')(fname)
+      end,
+    },
+  }
+end
+
 local servers = {
   cssls = {},
   cssmodules_ls = {},
   eslint = {},
-  graphql = {},
   intelephense = {},
   marksman = {},
+  relay = {},
   sumneko_lua = {
     settings = {
       Lua = {
