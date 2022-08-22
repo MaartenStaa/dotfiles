@@ -45,6 +45,7 @@ nmap <C-L> <C-W><C-L>
 "set background=dark
 set termguicolors
 colorscheme onedark
+set cursorline
 
 set guioptions-=l
 set guioptions-=L

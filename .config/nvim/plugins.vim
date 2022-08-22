@@ -46,18 +46,28 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 Plug 'nvim-telescope/telescope-ui-select.nvim' "Style ui-select (like code actions) with telescope
 
+"Debugging
+Plug 'mfussenegger/nvim-dap'
+Plug 'mxsdev/nvim-dap-vscode-js' "Requires nvim-dap
+Plug 'microsoft/vscode-js-debug', { 'do': 'npm install --legacy-peer-deps && npm run compile' } "For nvim-dap-vscode-js
+Plug 'rcarriga/nvim-dap-ui'
+Plug 'theHamsta/nvim-dap-virtual-text'
+
 "Misc
+Plug 'Shatur/neovim-session-manager' "Automatically track sessions per directory
 Plug 'itchyny/vim-gitbranch' "Provides gitbranch#name for lightline
 Plug 'junegunn/fzf' "Fuzzy file finder
 Plug 'justinmk/vim-sneak' "f and t across lines
 Plug 'rizzatti/dash.vim' "Integration with Dash (search docs)
 Plug 'sbdchd/neoformat' "Autoformatting
+Plug 'schickling/vim-bufonly' "Add :BufOnly command
 Plug 'tpope/vim-commentary' "Toggle comments
 Plug 'tpope/vim-repeat' "Handles repeating plugin commands as a whole
 Plug 'tpope/vim-sensible' "Set some sensible defaults
 Plug 'tpope/vim-surround' "Add/change/remove surrounding brackets
 Plug 'tpope/vim-vinegar' "Netrw enhancements
 Plug 'windwp/nvim-autopairs' "Automatically insert matching brackets, and jump over them when typing them
+Plug 'windwp/nvim-ts-autotag' "And kind of the same for tags (HTML, JSX)
 
 call plug#end()
 
