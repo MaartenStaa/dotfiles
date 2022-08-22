@@ -12,7 +12,7 @@ lsp_installer.setup({
 })
 local relay_install_dir = require('nvim-lsp-installer.core.path').concat({
   require('nvim-lsp-installer.settings').current.install_root_dir,
- 'relay',
+  'relay',
 })
 lsp_installer.register(require('nvim-lsp-installer.server').Server:new {
   name = 'relay',
@@ -34,7 +34,7 @@ local on_attach = function(client, bufnr)
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   -- Mappings.
-  local opts = { noremap=true, silent=true }
+  local opts = { noremap = true, silent = true }
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
@@ -44,17 +44,17 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<Leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   buf_set_keymap('n', '[c', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']c', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<Leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  buf_set_keymap('n', '<Leader>f', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', opts)
 
   buf_set_keymap('n', '<Leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 end
 
 local function merge(a, b)
-    for k, v in pairs(b) do
-        a[k] = v
-    end
+  for k, v in pairs(b) do
+    a[k] = v
+  end
 
-    return a
+  return a
 end
 
 -- Add additional capabilities supported by nvim-cmp
@@ -67,11 +67,12 @@ if not lsp_configs.relay then
   lsp_configs.relay = {
     default_config = {
       cmd = { 'relay-compiler', 'lsp' },
-      filetypes = { 'graphq', 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },
+      filetypes = { 'graphq', 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact',
+        'typescript.tsx' },
       root_dir = function(fname)
         local util = require('lspconfig.util')
         return util.root_pattern('relay.config.json')(fname)
-          or util.root_pattern('package.json', '.git')(fname)
+            or util.root_pattern('package.json', '.git')(fname)
       end,
     },
   }
@@ -119,14 +120,14 @@ end
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = true,
-    signs = true,
-    update_in_insert = true,
-  }
+  virtual_text = true,
+  signs = true,
+  update_in_insert = true,
+}
 )
 
 -- Autocompletion (nvim-cmp)
-local cmp = require'cmp'
+local cmp = require 'cmp'
 cmp.setup({
   snippet = {
     -- REQUIRED - you must specify a snippet engine
@@ -177,20 +178,18 @@ cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 require 'lsp_signature'.setup({})
 
 -- Treesitter
-require'nvim-treesitter.configs'.setup({
+require 'nvim-treesitter.configs'.setup({
   ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  ignore_install = {}, -- List of parsers to ignore installing
+  ignore_install = { "phpdoc" }, -- List of parsers to ignore installing
   highlight = {
     enable = true, -- false will disable the whole extension
-    disable = {},  -- list of language that will be disabled
+    disable = {}, -- list of language that will be disabled
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
-})
-require'nvim-treesitter.configs'.setup {
   textobjects = {
     select = {
       enable = true,
@@ -207,7 +206,7 @@ require'nvim-treesitter.configs'.setup {
       },
     },
   },
-}
+})
 
 local actions = require('telescope.actions')
 require('telescope').setup {
@@ -225,11 +224,11 @@ require('telescope').setup {
   },
   extensions = {
     fzf = {
-      fuzzy = true,                    -- false will only do exact matching
-      override_generic_sorter = true,  -- override the generic sorter
-      override_file_sorter = true,     -- override the file sorter
-      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-                                       -- the default case_mode is "smart_case"
+      fuzzy = true, -- false will only do exact matching
+      override_generic_sorter = true, -- override the generic sorter
+      override_file_sorter = true, -- override the file sorter
+      case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+      -- the default case_mode is "smart_case"
     },
     ['ui-select'] = {
       require("telescope.themes").get_dropdown {
