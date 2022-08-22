@@ -44,7 +44,10 @@ $ZSH bin/dot-restore.sh
 # Install oh-my-fish and things.
 fish omf.fish
 
-# Make ZSH the default shell environment
+# Install patched tmux-256color terminfo for Kitty (with undercurl support)
+sudo tic -xe tmux-256color tmux256color.info
+
+# Make Fish the default shell environment
 $FISH=$(which fish)
 if [ $SHELL != $FISH ]; then
   echo "Changing shell to fish..."
