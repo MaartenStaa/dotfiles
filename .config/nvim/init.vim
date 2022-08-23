@@ -1,7 +1,3 @@
-if (!exists('g:vscode'))
-    so ~/.config/nvim/plugins.vim
-endif
-
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 
@@ -55,7 +51,7 @@ set guioptions-=R
 "----------Mappings----------"
 nmap <Leader>env :tabedit ~/.config/nvim/init.vim<cr>
 nmap <Leader>enl :tabedit ~/.config/nvim/lua/init.lua<cr>
-nmap <Leader>ep :tabedit ~/.config/nvim/plugins.vim<cr>
+nmap <Leader>ep :tabedit ~/.config/nvim/lua/plugins.lua<cr>
 "leaderleader -> switch between the last two files
 nnoremap <Leader><Leader> <C-^>
 "tc -> create tab
@@ -97,19 +93,8 @@ nmap <Leader>p "+p
 vmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>P "+P
-
-"Go to stuff with Telescope
-map <C-r> :Telescope lsp_document_symbols<cr>
-map <C-p> :Telescope git_files<cr>
-map <Leader>ff :Telescope git_files<cr>
-map <Leader>fa :Telescope find_files<cr>
-map <Leader>fg :Telescope live_grep<cr>
-map <Leader>fb :Telescope buffers<cr>
-map <Leader>gd :Telescope lsp_definitions<cr>
-map <Leader>gl :Telescope diagnostics bufnr=0<cr>
-map <Leader>gr :Telescope lsp_references<cr>
-map <Leader>gi :Telescope lsp_implementations<cr>
-map <Leader>ga :Telescope builtin<cr>
+"delete buffers easily
+map <leader>w :bd<cr>
 
 "Use tab for auto completion via LSP
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -129,16 +114,16 @@ let g:neoformat_try_node_exe = 1 "Look for project Prettier install
 let g:neoformat_only_msg_on_error = 1
 
 "-----Invisible character-----"
-set listchars=tab:»·,trail:·,nbsp:·,multispace:·,eol:$
-highlight NonText guifg=#3b4048
-highlight SpecialKey guifg=#3b4048
+"set listchars=tab:»·,trail:·,nbsp:·,multispace:·,eol:$
+"highlight NonText guifg=#3b4048
+"highlight SpecialKey guifg=#3b4048
 
 "-----Automatic commands----"
 if has('autocmd')
     "Automatically source vimrc file on searching
     augroup autosourcing
         autocmd!
-        autocmd BufWritePost plugins.vim source %
+        autocmd BufWritePost plugins.lua source %
         autocmd BufWritePost init.vim source %
         autocmd BufWritePost init.lua source %
     augroup END
@@ -172,12 +157,6 @@ if executable('ag')
         nnoremap \ :Ag<SPACE>
     endif
 endif
-
-let g:fzf_layout = { 'down': '40%' }
-let g:fzf_action = {
-            \ 'enter': 'tab split',
-            \ 'ctrl-x': 'split',
-            \ 'ctrl-v': 'vsplit' }
 
 "Lightline UI
 let g:lightline = {
