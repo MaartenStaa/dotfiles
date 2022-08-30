@@ -11,7 +11,7 @@ end
 vim.cmd([[
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+    autocmd BufWritePost plugins.lua source <afile> | PackerSync | PackerCompile
   augroup end
 ]])
 
@@ -43,7 +43,7 @@ return require('packer').startup({ function(use)
   use 'nvim-treesitter/nvim-treesitter-textobjects'
   use {
     'ray-x/lsp_signature.nvim',
-    config = function ()
+    config = function()
       require 'lsp_signature'.setup({})
     end
   }
@@ -62,12 +62,13 @@ return require('packer').startup({ function(use)
     })
   end } -- Highlight other uses of item under cursor
   use 'airblade/vim-gitgutter'
+  use 'f-person/git-blame.nvim'
   use 'itchyny/lightline.vim'
   use 'josa42/nvim-lightline-lsp'
   use 'junegunn/goyo.vim' -- Distraction free mode
   use {
     'karb94/neoscroll.nvim',
-    config = function ()
+    config = function()
       require('neoscroll').setup()
     end
   }
@@ -137,7 +138,7 @@ return require('packer').startup({ function(use)
     -- Automatically track sessions per directory
     'Shatur/neovim-session-manager',
     requires = { 'nvim-lua/plenary.nvim' },
-    config = function ()
+    config = function()
       require('session_manager').setup({
         autoload_mode = require('session_manager.config').AutoloadMode.CurrentDir,
         autosave_only_in_session = false
@@ -158,9 +159,16 @@ return require('packer').startup({ function(use)
     -- Automatically insert matching brackets, and jump over them when typing them
     'windwp/nvim-autopairs',
     config = function()
-      require('nvim-autopairs').setup({
+      local autopairs = require('nvim-autopairs')
+      autopairs.setup({
         check_ts = true
       })
+
+      local Rule = require('nvim-autopairs.rule')
+      autopairs.add_rule(
+        Rule("%<%>$", "</>", { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' })
+          :use_regex(true)
+      )
     end
   }
   use 'windwp/nvim-ts-autotag' -- And kind of the same for tags (HTML, JSX)

@@ -41,6 +41,8 @@ vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>gl', function() builtin.diagnostics({
 vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>gr', builtin.lsp_references)
 vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>gi', builtin.lsp_implementations)
 vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>ga', builtin.builtin)
+vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>gs', builtin.lsp_document_symbols)
+vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>fs', builtin.lsp_dynamic_workspace_symbols)
 
 telescope.load_extension('refactoring')
 vim.keymap.set(

@@ -72,6 +72,7 @@ if not lsp_configs.relay then
 end
 
 local servers = {
+  bashls = {},
   cssls = {},
   cssmodules_ls = {},
   eslint = {},
