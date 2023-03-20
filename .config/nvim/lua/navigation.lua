@@ -1,64 +1,35 @@
-local actions = require('telescope.actions')
-local telescope = require('telescope')
-telescope.setup({
-  mappings = {
-    i = {
-      ['<C-k>'] = {
-        actions = actions.move_selection_previous,
-        opts = { nowait = true, silent = true }
-      },
-      ['<C-j>'] = {
-        actions = actions.move_selection_next,
-        opts = { nowait = true, silent = true }
-      },
-    }
-  },
-  extensions = {
-    fzf = {
-      fuzzy = true, -- false will only do exact matching
-      override_generic_sorter = true,
-      override_file_sorter = true,
-      case_mode = 'smart_case' -- options: ignore_case, respect_case, smart_case
-    },
-    ['ui-select'] = {
-      require('telescope.themes').get_dropdown({
+local fzf = require('fzf-lua')
+vim.keymap.set({ 'n', 'v', 'o' }, '<C-p>', fzf.files)
+vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>ff', fzf.files)
+vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>fg', function()
+  fzf.live_grep({ cmd = "git grep --line-number --column --ignore-case --color=always --untracked" })
+end)
+vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>fb', fzf.buffers)
+vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>fd', function() fzf.files({ cwd = "~/.config/nvim" }) end)
+vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>gd', function() fzf.lsp_definitions({ jump_to_single_result = true }) end)
+vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>gl', fzf.diagnostics_document)
+vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>gr', fzf.lsp_references)
+vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>gi', fzf.lsp_implementations)
+vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>ga', fzf.builtin)
+vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>gs', fzf.lsp_document_symbols)
+vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>fs', fzf.lsp_live_workspace_symbols)
 
-      })
-    }
-  }
-})
 
-telescope.load_extension('fzf')
-telescope.load_extension('ui-select')
-
-local builtin = require('telescope.builtin')
-vim.keymap.set({ 'n', 'v', 'o' }, '<C-p>', builtin.find_files)
-vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>ff', builtin.find_files)
-vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>fg', builtin.live_grep)
-vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>fb', builtin.buffers)
-vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>gd', builtin.lsp_definitions)
-vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>gl', function() builtin.diagnostics({ bufnr = 0 }) end)
-vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>gr', builtin.lsp_references)
-vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>gi', builtin.lsp_implementations)
-vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>ga', builtin.builtin)
-vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>gs', builtin.lsp_document_symbols)
-vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>fs', builtin.lsp_dynamic_workspace_symbols)
-
-telescope.load_extension('refactoring')
-vim.keymap.set(
-  "n",
-  "<leader>rr",
-  "viw<Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<CR>",
-  -- function()
-  --   vim.k
-  --   vim.cmd [[packadd packer.nvim]]
-  -- end,
-  { noremap = true}
-)
-vim.keymap.set(
-    "v",
-    "<leader>rr",
-    telescope.extensions.refactoring.refactors,
-    --"<Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<CR>",
-    { noremap = true }
-)
+-- telescope.load_extension('refactoring')
+--vim.keymap.set(
+--  "n",
+--  "<leader>rr",
+--  "viw<Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<CR>",
+--  -- function()
+--  --   vim.k
+--  --   vim.cmd [[packadd packer.nvim]]
+--  -- end,
+--  { noremap = true}
+--)
+--vim.keymap.set(
+--    "v",
+--    "<leader>rr",
+--    telescope.extensions.refactoring.refactors,
+--    --"<Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<CR>",
+--    { noremap = true }
+--)

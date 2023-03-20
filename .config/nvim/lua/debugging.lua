@@ -5,7 +5,7 @@ local dap = require('dap')
 
 require('dap-vscode-js').setup({
   -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
-  debugger_path = '/Users/maartens/.config/nvim/plugged/vscode-js-debug', -- Path to vscode-js-debug installation.
+  -- debugger_path = '/Users/maartens/.config/nvim/plugged/vscode-js-debug', -- Path to vscode-js-debug installation.
   adapters = { 'pwa-node' }, -- which adapters to register in nvim-dap
 })
 for _, language in ipairs({ 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' }) do

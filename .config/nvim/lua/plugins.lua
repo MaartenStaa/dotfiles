@@ -1,79 +1,131 @@
--- Automatically bootstrap packer
-local fn = vim.fn
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-local packer_bootstrap = nil
-if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
-    install_path })
-  vim.cmd [[packadd packer.nvim]]
+-- Automatically bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
 
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync | PackerCompile
-  augroup end
-]])
+vim.opt.rtp:prepend(lazypath)
 
-return require('packer').startup({ function(use)
+-- vim.cmd([[
+--   augroup lazy_user_config
+--     autocmd!
+--     autocmd BufWritePost plugins.lua source <afile> | Lazy sync
+--   augroup end
+-- ]])
+
+return require('lazy').setup({
   -- Let packer manage itself
-  use 'wbthomason/packer.nvim'
+  'wbthomason/packer.nvim',
 
   -- Theming
-  use 'navarasu/onedark.nvim'
-  -- use 'doums/darcula'
-  -- use 'mofiqul/dracula.nvim'
-  -- use 'rktjmp/lush.nvim'
-  -- use 'skielbasa/vim-material-monokai'
+  {
+    'navarasu/onedark.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd([[colorscheme onedark]])
+    end
+  },
+  -- 'doums/darcula',
+  -- 'mofiqul/dracula.nvim',
+  -- 'rktjmp/lush.nvim',
+  -- 'skielbasa/vim-material-monokai',
 
   -- Language support
-  use '2072/php-indenting-for-vim'
-  use 'editorconfig/editorconfig-vim'
-  use 'fladson/vim-kitty'
-  use 'sheerun/vim-polyglot'
+  '2072/php-indenting-for-vim',
+  'editorconfig/editorconfig-vim',
+  'fladson/vim-kitty',
+  'sheerun/vim-polyglot',
 
   -- LSP & autocomplete
-  use 'hrsh7th/cmp-cmdline'
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/nvim-cmp'
-  use 'neovim/nvim-lspconfig'
-  use 'nvim-lua/lsp_extensions.nvim'
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  use 'nvim-treesitter/nvim-treesitter-textobjects'
-  use {
+  'hrsh7th/cmp-cmdline',
+  'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/cmp-path',
+  'hrsh7th/nvim-cmp',
+  'neovim/nvim-lspconfig',
+  {
+    'jose-elias-alvarez/null-ls.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' }
+  },
+  'nvim-lua/lsp_extensions.nvim',
+  { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
+  'nvim-treesitter/nvim-treesitter-textobjects',
+  {
     'ray-x/lsp_signature.nvim',
-    config = function()
-      require 'lsp_signature'.setup({})
-    end
-  }
-  use 'sirver/ultisnips' -- CMP requires a snippet engine
-  use 'williamboman/nvim-lsp-installer'
+    config = true
+  },
+  'sirver/ultisnips', -- CMP requires a snippet engine
+  'williamboman/nvim-lsp-installer',
 
   -- UI enhancements
-  use { 'RRethy/vim-illuminate', config = function()
-    require('illuminate').configure({
-      providers = {
-        'lsp',
-        'treesitter'
-      },
-      delay = 10,
-      under_cursor = true
-    })
-  end } -- Highlight other uses of item under cursor
-  use 'airblade/vim-gitgutter'
-  use 'f-person/git-blame.nvim'
-  use 'itchyny/lightline.vim'
-  use 'josa42/nvim-lightline-lsp'
-  use 'junegunn/goyo.vim' -- Distraction free mode
-  use {
-    'karb94/neoscroll.nvim',
+  -- Highlight other uses of item under cursor
+  {
+    'RRethy/vim-illuminate',
     config = function()
-      require('neoscroll').setup()
+      require('illuminate').configure({
+        providers = {
+          'lsp',
+          'treesitter'
+        },
+        delay = 10,
+        under_cursor = true
+      })
     end
-  }
-  use 'kyazdani42/nvim-web-devicons'
-  use {
+  },
+  'airblade/vim-gitgutter',
+  {
+    'akinsho/toggleterm.nvim',
+    version = "*",
+    keys = '<A-t>',
+    opts = {
+      size = function()
+        return vim.opt.columns:get() / 3 * 2
+      end,
+      open_mapping = '<A-t>',
+      direction = 'vertical'
+    }
+  },
+  {
+    'f-person/git-blame.nvim',
+    config = function()
+      vim.g.gitblame_ignored_filetypes = { 'terminal', '' }
+    end
+  },
+  'junegunn/goyo.vim', -- Distraction free mode
+  {
+    'karb94/neoscroll.nvim',
+    config = true
+  },
+  {
+    'kyazdani42/nvim-tree.lua',
+    dependencies = {
+      'kyazdani42/nvim-web-devicons'
+    },
+    tag = 'nightly', -- updated every week
+    keys = {
+      { '<Leader>b', '<cmd>NvimTreeFindFileToggle<CR>' }
+    },
+    config = function ()
+      require('nvim-tree').setup({
+        sync_root_with_cwd = true,
+        renderer = {
+          highlight_git = true
+        },
+        update_focused_file = {
+          enable = true
+        }
+      })
+    end
+  },
+  'kyazdani42/nvim-web-devicons',
+  {
     'lukas-reineke/indent-blankline.nvim',
     config = function()
       vim.opt.list = true
@@ -81,15 +133,15 @@ return require('packer').startup({ function(use)
       vim.opt.listchars:append "trail:⋅"
       vim.opt.listchars:append "eol:↴"
       require('indent_blankline').setup({
-        space_char_blankline = "",
+        space_char_blankline = " ",
         show_current_context = true,
         show_current_context_start = true
       })
     end
-  }
-  use 'machakann/vim-highlightedyank'
-  use 'markonm/traces.vim' -- Preview for substitutions
-  use {
+  },
+  'machakann/vim-highlightedyank',
+  'markonm/traces.vim', -- Preview for substitutions
+  {
     'nvim-treesitter/nvim-treesitter-context',
     config = function()
       require('treesitter-context').setup({
@@ -97,65 +149,115 @@ return require('packer').startup({ function(use)
         max_lines = 0
       })
     end
-  }
-  use {
+  },
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'kyazdani42/nvim-web-devicons', opt = true },
+    config = true
+  },
+  {
     'petertriho/nvim-scrollbar',
-    config = function()
-      require('scrollbar').setup()
-    end
-  }
-  use 'romgrk/barbar.nvim'
-  use 'scrooloose/nerdtree'
+    config = true
+  },
+  'romgrk/barbar.nvim',
+  {
+    'sindrets/diffview.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' }
+  },
 
   -- Refactoring
-  use {
-    'ThePrimeagen/refactoring.nvim',
-    requires = {
-      { 'nvim-lua/plenary.nvim' },
-      { 'nvim-treesitter/nvim-treesitter' }
-    },
-    config = function()
-      require('refactoring').setup({})
-    end
-  }
+  -- {
+  --   'ThePrimeagen/refactoring.nvim',
+  --   dependencies = {
+  --     { 'nvim-lua/plenary.nvim' },
+  --     { 'nvim-treesitter/nvim-treesitter' }
+  --   },
+  --   config = true
+  -- }
 
   -- For easy navigation
-  use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
-  use { 'nvim-telescope/telescope-fzf-native.nvim',
-    run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
-  use 'nvim-telescope/telescope-ui-select.nvim' -- Style ui-select (like code actions) with telescope
+  {
+    'ggandor/leap.nvim',
+    keys = { 's', 'S', 'gs', 'X' },
+    config = function ()
+      require('leap').add_default_mappings()
+    end
+  },
+  {
+    'ibhagwan/fzf-lua',
+    dependencies = { 'kyazdani42/nvim-web-devicons' },
+    config = function ()
+      local fzf = require('fzf-lua')
+      local actions = require 'fzf-lua.actions'
+
+      fzf.register_ui_select()
+      fzf.setup({
+        actions = {
+          files = {
+            ['default'] = actions.file_edit_or_qf,
+            ['ctrl-s']  = actions.file_split,
+            ['ctrl-v']  = actions.file_vsplit,
+            ['ctrl-t']  = actions.file_tabedit,
+            ['ctrl-q']  = actions.file_sel_to_qf,
+            ['ctrl-l']  = actions.file_sel_to_ll
+          }
+        }
+      })
+    end
+  },
 
   -- Debugging
-  use 'mfussenegger/nvim-dap'
-  use { 'mxsdev/nvim-dap-vscode-js', requires = { 'mfussenegger/nvim-dap' } }
-  use { 'microsoft/vscode-js-debug', opt = true, run = 'npm install --legacy-peer-deps && npm run compile' } -- For nvim-dap-vscode-js
-  use 'rcarriga/nvim-dap-ui'
-  use 'theHamsta/nvim-dap-virtual-text'
+  'mfussenegger/nvim-dap',
+  { 'mxsdev/nvim-dap-vscode-js', dependencies = { 'mfussenegger/nvim-dap' } },
+  {
+    'microsoft/vscode-js-debug',
+    lazy = true,
+    build = 'npm install --legacy-peer-deps && npm run compile && git checkout package-lock.json'
+  }, -- For nvim-dap-vscode-js
+  'rcarriga/nvim-dap-ui',
+  'theHamsta/nvim-dap-virtual-text',
 
   -- Misc
-  -- use 'junegunn/fzf' -- Fuzzy file finder
-  use {
+  {
     -- Automatically track sessions per directory
     'Shatur/neovim-session-manager',
-    requires = { 'nvim-lua/plenary.nvim' },
+    dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
       require('session_manager').setup({
         autoload_mode = require('session_manager.config').AutoloadMode.CurrentDir,
         autosave_only_in_session = false
       })
     end
-  }
-  use 'itchyny/vim-gitbranch' -- Provides gitbranch#name for lightline
-  use 'justinmk/vim-sneak' -- f and t across lines
-  use 'rizzatti/dash.vim' -- Integration with Dash (search docs)
-  use 'sbdchd/neoformat' -- Autoformatting
-  use 'schickling/vim-bufonly' -- Add :BufOnly command
-  use 'tpope/vim-commentary' -- Toggle comments
-  use 'tpope/vim-repeat' -- Handles repeating plugin commands as a whole
-  use 'tpope/vim-sensible' -- Set some sensible defaults
-  use 'tpope/vim-surround' -- Add/change/remove surrounding brackets
-  use 'tpope/vim-vinegar' -- Netrw enhancements
-  use {
+  },
+  {
+    -- Integration with Dash (search docs)
+    'rizzatti/dash.vim',
+    keys = {
+      { '<Leader>h', '<cmd><Plug>DashKeywords<CR>' }
+    }
+  },
+  {
+    -- Autoformatting
+    'sbdchd/neoformat',
+    config = function()
+      -- Look for project Prettier install
+      vim.g.neoformat_try_node_exe = 1
+      vim.g.neoformat_only_msg_on_error = 1
+
+      local augroup = vim.api.nvim_create_augroup('fmt', { clear = true })
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        command = 'try | undojoin | Neoformat | catch /E790/ | Neoformat | endtry',
+        group = augroup
+      })
+    end
+  },
+  'schickling/vim-bufonly', -- Add :BufOnly command
+  'tpope/vim-commentary', -- Toggle comments
+  'tpope/vim-repeat', -- Handles repeating plugin commands as a whole
+  'tpope/vim-sensible', -- Set some sensible defaults
+  'tpope/vim-surround', -- Add/change/remove surrounding brackets
+  'tpope/vim-vinegar', -- Netrw enhancements
+  {
     -- Automatically insert matching brackets, and jump over them when typing them
     'windwp/nvim-autopairs',
     config = function()
@@ -167,24 +269,23 @@ return require('packer').startup({ function(use)
       local Rule = require('nvim-autopairs.rule')
       autopairs.add_rule(
         Rule("%<%>$", "</>", { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' })
-          :use_regex(true)
+        :use_regex(true)
       )
     end
-  }
-  use 'windwp/nvim-ts-autotag' -- And kind of the same for tags (HTML, JSX)
-
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if packer_bootstrap then
-    require('packer').sync()
-  end
-end,
-  config = {
-    display = {
-      open_fn = require('packer.util').float,
-    },
-    profile = {
-      enable = true
+  },
+  'windwp/nvim-ts-autotag', -- And kind of the same for tags (HTML, JSX)
+}, {
+  install = {
+    colorscheme = { 'onedark' }
+  },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        'netrwPlugin'
+      }
     }
+  },
+  profile = {
+    enable = true
   }
 })
