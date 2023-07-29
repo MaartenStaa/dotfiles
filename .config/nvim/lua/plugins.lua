@@ -1,6 +1,6 @@
 -- Automatically bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
     "git",
     "clone",
@@ -21,9 +21,6 @@ vim.opt.rtp:prepend(lazypath)
 -- ]])
 
 return require('lazy').setup({
-  -- Let packer manage itself
-  'wbthomason/packer.nvim',
-
   -- Theming
   {
     'navarasu/onedark.nvim',
@@ -42,27 +39,34 @@ return require('lazy').setup({
   '2072/php-indenting-for-vim',
   'editorconfig/editorconfig-vim',
   'fladson/vim-kitty',
+  { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
+  'qnighy/lalrpop.vim',
   'sheerun/vim-polyglot',
 
   -- LSP & autocomplete
+  'github/copilot.vim',
   'hrsh7th/cmp-cmdline',
   'hrsh7th/cmp-nvim-lsp',
   'hrsh7th/cmp-path',
-  'hrsh7th/nvim-cmp',
+  {
+    'hrsh7th/nvim-cmp',
+    dependencies = { 'sirver/ultisnips' }
+  },
   'neovim/nvim-lspconfig',
   {
     'jose-elias-alvarez/null-ls.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' }
   },
   'nvim-lua/lsp_extensions.nvim',
-  { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
   'nvim-treesitter/nvim-treesitter-textobjects',
   {
     'ray-x/lsp_signature.nvim',
-    config = true
+    config = true,
+    enabled = false,
   },
-  'sirver/ultisnips', -- CMP requires a snippet engine
-  'williamboman/nvim-lsp-installer',
+  'williamboman/mason.nvim',
+  'williamboman/mason-lspconfig.nvim',
+  -- 'williamboman/nvim-lsp-installer',
 
   -- UI enhancements
   -- Highlight other uses of item under cursor
@@ -95,8 +99,42 @@ return require('lazy').setup({
   {
     'f-person/git-blame.nvim',
     config = function()
-      vim.g.gitblame_ignored_filetypes = { 'terminal', '' }
+      vim.g.gitblame_set_extmark_options = {
+        hl_mode = "combine",
+      }
+      vim.g.gitblame_ignored_filetypes = { 'terminal', '', 'toggleterm' }
     end
+  },
+  {
+    'folke/noice.nvim',
+    dependencies = {
+      'MunifTanjim/nui.nvim',
+      'rcarriga/nvim-notify',
+    },
+    opts = {
+      lsp = {
+        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
+        },
+      },
+      cmdline = {
+        -- view = 'cmdline',
+      },
+    },
+  },
+  {
+    'folke/trouble.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+      height = 20,
+      use_diagnostic_signs = true,
+    },
   },
   'junegunn/goyo.vim', -- Distraction free mode
   {
@@ -104,9 +142,9 @@ return require('lazy').setup({
     config = true
   },
   {
-    'kyazdani42/nvim-tree.lua',
+    'nvim-tree/nvim-tree.lua',
     dependencies = {
-      'kyazdani42/nvim-web-devicons'
+      'nvim-tree/nvim-web-devicons'
     },
     tag = 'nightly', -- updated every week
     keys = {
@@ -116,22 +154,27 @@ return require('lazy').setup({
       require('nvim-tree').setup({
         sync_root_with_cwd = true,
         renderer = {
-          highlight_git = true
+          highlight_git = true,
         },
         update_focused_file = {
-          enable = true
-        }
+          enable = true,
+        },
+        filesystem_watchers = {
+          ignore_dirs = {
+            ".*/node_modules/.*",
+          },
+        },
       })
     end
   },
-  'kyazdani42/nvim-web-devicons',
+  'nvim-tree/nvim-web-devicons',
   {
     'lukas-reineke/indent-blankline.nvim',
     config = function()
       vim.opt.list = true
       vim.opt.listchars:append "lead:⋅"
       vim.opt.listchars:append "trail:⋅"
-      vim.opt.listchars:append "eol:↴"
+      -- vim.opt.listchars:append "eol:↴"
       require('indent_blankline').setup({
         space_char_blankline = " ",
         show_current_context = true,
@@ -152,8 +195,16 @@ return require('lazy').setup({
   },
   {
     'nvim-lualine/lualine.nvim',
-    dependencies = { 'kyazdani42/nvim-web-devicons', opt = true },
-    config = true
+    dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
+    opts = {
+      options = {
+        component_separators = { left = '', right = ''},
+        section_separators = { left = '', right = ''},
+      },
+      sections = {
+        lualine_c = { { 'filename', path = 1 } }
+      }
+    }
   },
   {
     'petertriho/nvim-scrollbar',
@@ -175,6 +226,19 @@ return require('lazy').setup({
   --   config = true
   -- }
 
+  -- Integration with GitHub/GHE
+  {
+    'pwntester/octo.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      'nvim-tree/nvim-web-devicons',
+    },
+    opts = {
+      default_remote = { 'upstream', 'maartens', 'origin' },
+    },
+  },
+
   -- For easy navigation
   {
     'ggandor/leap.nvim',
@@ -185,7 +249,7 @@ return require('lazy').setup({
   },
   {
     'ibhagwan/fzf-lua',
-    dependencies = { 'kyazdani42/nvim-web-devicons' },
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function ()
       local fzf = require('fzf-lua')
       local actions = require 'fzf-lua.actions'
@@ -199,9 +263,18 @@ return require('lazy').setup({
             ['ctrl-v']  = actions.file_vsplit,
             ['ctrl-t']  = actions.file_tabedit,
             ['ctrl-q']  = actions.file_sel_to_qf,
-            ['ctrl-l']  = actions.file_sel_to_ll
+            ['ctrl-l']  = actions.file_sel_to_ll,
           }
-        }
+        },
+        commands = { sort_lastused = true },
+        files = {
+          cmd = 'fd --color=never --type f --strip-cwd-prefix --exclude .git',
+        },
+        git = {
+          files = {
+            cmd = 'git ls-files --others --exclude-standard',
+          },
+        },
       })
     end
   },
@@ -215,7 +288,11 @@ return require('lazy').setup({
     build = 'npm install --legacy-peer-deps && npm run compile && git checkout package-lock.json'
   }, -- For nvim-dap-vscode-js
   'rcarriga/nvim-dap-ui',
-  'theHamsta/nvim-dap-virtual-text',
+  {
+    'theHamsta/nvim-dap-virtual-text',
+    branch = 'inline-text',
+    config = true,
+  },
 
   -- Misc
   {
@@ -231,10 +308,21 @@ return require('lazy').setup({
   },
   {
     -- Integration with Dash (search docs)
-    'rizzatti/dash.vim',
+    'okuramasafumi/dash.nvim',
+    branch = 'fix-crash-with-fzf-lua',
+    build = 'make install',
     keys = {
-      { '<Leader>h', '<cmd><Plug>DashKeywords<CR>' }
-    }
+      { '<Leader>h', '<cmd>Dash<CR>' }
+    },
+    opts = {
+      search_engine = 'startpage',
+      file_type_keywords = {
+        javascript = { 'javascript', 'nodejs' },
+        typescript = { 'typescript', 'javascript', 'nodejs' },
+        typescriptreact = { 'typescript', 'javascript', 'react' },
+        javascriptreact = { 'javascript', 'react' },
+      },
+    },
   },
   {
     -- Autoformatting
@@ -243,6 +331,14 @@ return require('lazy').setup({
       -- Look for project Prettier install
       vim.g.neoformat_try_node_exe = 1
       vim.g.neoformat_only_msg_on_error = 1
+
+      -- Tweak autopep8 configuration
+      vim.g.neoformat_python_autopep8 = {
+        exe = 'autopep8',
+        args = { '-', '--max-line-length', '100' },
+        stdin = 1,
+      }
+      vim.g.neoformat_enabled_python = { 'autopep8' }
 
       local augroup = vim.api.nvim_create_augroup('fmt', { clear = true })
       vim.api.nvim_create_autocmd('BufWritePre', {
@@ -256,7 +352,7 @@ return require('lazy').setup({
   'tpope/vim-repeat', -- Handles repeating plugin commands as a whole
   'tpope/vim-sensible', -- Set some sensible defaults
   'tpope/vim-surround', -- Add/change/remove surrounding brackets
-  'tpope/vim-vinegar', -- Netrw enhancements
+  -- 'tpope/vim-vinegar', -- Netrw enhancements
   {
     -- Automatically insert matching brackets, and jump over them when typing them
     'windwp/nvim-autopairs',
