@@ -9,5 +9,8 @@
 	ff = only
 [alias]
 	fixup = commit --amend --no-edit
+	butd = !git fetch origin && git rebase origin/master
+	pf = push --force-with-lease
+	ptb = !git push -u $(whoami) $(git branch --show-current)
 [init]
 	defaultBranch = main
