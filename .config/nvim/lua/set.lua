@@ -16,7 +16,7 @@ vim.opt.mouse = 'nv'                                   -- Allow mouse usage in n
 vim.opt.undodir = os.getenv('HOME') .. '/.vim/undodir' -- Persistent undo history
 vim.opt.undofile = true
 vim.opt.scrolloff = 8                                  -- Leave more room between cursor line and top/bottom of screen
-vim.opt.colorcolumn = '80,120,+1'
+vim.opt.colorcolumn = '81,121,+1'
 
 -- Searching
 vim.opt.hlsearch = true   -- Enable search term highlighting
