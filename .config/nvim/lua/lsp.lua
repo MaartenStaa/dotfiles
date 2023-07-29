@@ -1,26 +1,32 @@
 -- Set up LSP installer, manually adding the Relay LS.
-local lsp_installer = require('nvim-lsp-installer')
-local npm = require('nvim-lsp-installer.core.managers.npm')
-lsp_installer.setup({
-  automatic_installation = true
+require('mason').setup()
+require('mason-lspconfig').setup({
+  automatic_installation = true,
 })
-local relay_install_dir = require('nvim-lsp-installer.core.path').concat({
-  require('nvim-lsp-installer.settings').current.install_root_dir,
-  'relay',
-})
-lsp_installer.register(require('nvim-lsp-installer.server').Server:new {
-  name = 'relay',
-  root_dir = relay_install_dir,
-  languages = { 'graphql', 'typescriptreact' },
-  homepage = 'https://github.com/facebook/relay',
-  installer = npm.packages { 'relay-compiler' },
-  default_options = {
-    cmd_env = npm.env(relay_install_dir),
-  },
-})
+
+-- local lsp_installer = require('nvim-lsp-installer')
+-- local npm = require('nvim-lsp-installer.core.managers.npm')
+-- lsp_installer.setup({
+--   automatic_installation = true
+-- })
+-- local relay_install_dir = require('nvim-lsp-installer.core.path').concat({
+--   require('nvim-lsp-installer.settings').current.install_root_dir,
+--   'relay',
+-- })
+-- lsp_installer.register(require('nvim-lsp-installer.server').Server:new {
+--   name = 'relay',
+--   root_dir = relay_install_dir,
+--   languages = { 'graphql', 'typescriptreact' },
+--   homepage = 'https://github.com/facebook/relay',
+--   installer = npm.packages { 'relay-compiler' },
+--   default_options = {
+--     cmd_env = npm.env(relay_install_dir),
+--   },
+-- })
 
 -- LSP configuration
 local lspconfig = require('lspconfig')
+---@diagnostic disable-next-line: unused-local
 local on_attach = function(client, bufnr)
   -- Mappings.
   local opts = { buffer = bufnr, noremap = true, silent = true }
@@ -28,14 +34,18 @@ local on_attach = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
   vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-  vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, opts)
-  vim.keymap.set('n', '<Leader>a', vim.lsp.buf.code_action, opts)
+  vim.keymap.set({'n', 'v'}, '<Leader>rn', vim.lsp.buf.rename, opts)
+  vim.keymap.set({'n', 'v'}, '<Leader>a', vim.lsp.buf.code_action, opts)
   vim.keymap.set('n', '<Leader>e', vim.diagnostic.open_float, opts)
-  vim.keymap.set('n', '[c', vim.diagnostic.goto_prev, opts)
-  vim.keymap.set('n', ']c', vim.diagnostic.goto_next, opts)
-  vim.keymap.set('n', '<Leader>f', function() vim.lsp.buf.format({ async = true }) end, opts)
+  vim.keymap.set({'n', 'v'}, '[c', vim.diagnostic.goto_prev, opts)
+  vim.keymap.set({'n', 'v'}, ']c', vim.diagnostic.goto_next, opts)
+  vim.keymap.set({'n', 'v'}, '<Leader>f', function() vim.lsp.buf.format({ async = true }) end, opts)
 
-  vim.keymap.set('n', '<Leader>q', vim.diagnostic.setloclist, opts)
+  vim.keymap.set({'n', 'v'}, '<Leader>q', vim.diagnostic.setloclist, opts)
+
+  if client.server_capabilities.inlayHintProvider then
+    vim.lsp.buf.inlay_hint(bufnr, true)
+  end
 end
 
 local function merge(a, b)
@@ -75,7 +85,20 @@ local servers = {
     filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx',
       'vue', 'svelte', 'astro' }
   },
-  gopls = {},
+  gopls = {
+    settings = {
+      gopls = {
+        hints = {
+          assignVariableTypes = true,
+          compositeLiteralFields = true,
+          constantValues = true,
+          functionTypeParameters = true,
+          parameterNames = true,
+          rangeVariableTypes = true
+        },
+      },
+    },
+  },
   intelephense = {},
   jdtls = {},
   jedi_language_server = {},
@@ -86,6 +109,9 @@ local servers = {
         diagnostics = {
           -- Get the language server to recognize the `vim` global
           globals = { 'vim' },
+        },
+        hint = {
+          enable = true,
         },
         workspace = {
           -- Make the server aware of Neovim runtime files
@@ -99,9 +125,10 @@ local servers = {
     },
   },
   marksman = {},
-  relay = {},
+  -- relay = {},
   starlark_rust = {
-    cmd = { '/Users/maartens/repos/github/facebookexperimental/starlark-rust/target/release/starlark', '--lsp'}
+    cmd = { '/Users/maartens/repos/github/facebookexperimental/starlark-rust/target/debug/starlark', '--lsp'},
+    filetypes = { "star", "bzl", "BUILD.bazel", "WORKSPACE.bazel", "BUILD", "WORKSPACE" },
   },
   rust_analyzer = {
     settings = {
@@ -121,7 +148,34 @@ local servers = {
       }
     }
   },
-  tsserver = {},
+  tsserver = {
+    settings = {
+      typescript = {
+        inlayHints = {
+          includeInlayParameterNameHints = 'all',
+          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHints = false,
+          includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+        }
+      },
+      javascript = {
+        inlayHints = {
+          includeInlayParameterNameHints = 'all',
+          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHints = false,
+          includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+        }
+      }
+    },
+  },
   vimls = {},
   yamlls = {
     settings = {
@@ -149,12 +203,21 @@ for lsp, config in pairs(servers) do
   }, config))
 end
 
--- vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
---   vim.lsp.diagnostic.on_publish_diagnostics,
---   {
---     virtual_text = true,
---     signs = true,
---     update_in_insert = true,
+vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics,
+  {
+    virtual_text = true,
+    signs = true,
+    update_in_insert = true,
+  }
+)
+
+-- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+--   vim.lsp.handlers.hover, {
+--     -- Use a sharp border with `FloatBorder` highlights
+--     border = 'rounded',
+--     -- add the title in hover float window
+--     -- title = "hover"
 --   }
 -- )
 
@@ -171,7 +234,11 @@ vim.diagnostic.config({
 
 local null_ls = require("null-ls")
 local helpers = require("null-ls.helpers")
-local log = require("null-ls.logger")
+-- local log = require("null-ls.logger")
+
+if vim.fn.has 'nvim-0.5.1' == 1 then
+  require('vim.lsp.log').set_format_func(vim.inspect)
+end
 
 null_ls.register({
   method = null_ls.methods.DIAGNOSTICS,
@@ -196,7 +263,6 @@ null_ls.register({
     format = 'json',
     check_exit_code = function(code, stderr)
       local success = code <= 1
-      print(success)
 
       if not success then
           -- can be noisy for things that run often (e.g. diagnostics), but can
@@ -220,7 +286,6 @@ null_ls.register({
     --   },
     -- }),
     on_output = function (params)
-      log:debug(params)
       if not params.output or not params.output.files then
         return {}
       end
@@ -257,7 +322,6 @@ null_ls.register({
         end
       end
 
-      log:debug(diagnostics)
       return parser({ output = diagnostics })
     end
   }),
