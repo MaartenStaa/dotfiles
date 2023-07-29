@@ -1,3 +1,6 @@
+-- Set leader key first so plugin triggers can register correctly
+vim.g.mapleader = ' '  -- Set space as command namespace (leader)
+
 -- Plugins first
 require 'plugins'
 
