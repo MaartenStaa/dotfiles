@@ -16,6 +16,7 @@ link () {
 }
 
 link ".ideavimrc"
+link ".fdignore"
 link ".mackup.cfg"
 link ".tmux.conf"
 link ".config/fish"

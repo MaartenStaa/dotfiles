@@ -1,8 +1,9 @@
 local fzf = require('fzf-lua')
 
 local function fzf_files()
-  fzf.fzf_exec('fd --type f --strip-cwd-prefix | ~/.dotfiles/bin/file-web-devicon', {
+  fzf.fzf_exec('fd --type f --strip-cwd-prefix --hidden | ~/.dotfiles/bin/file-web-devicon', {
     actions = fzf.defaults.actions.files,
+    fzf_opts = { ['--nth'] = 2, ['--delimiter'] = fzf.utils.nbsp },
     previewer = 'builtin',
   })
 end
