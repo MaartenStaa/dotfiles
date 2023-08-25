@@ -49,8 +49,8 @@ end
 vim.fn.sign_define('DapBreakpoint', { text = '🔴', texthl = '', linehl = '', numhl = '' })
 vim.fn.sign_define('DapBreakpointCondition', { text = '⭕', texthl = '', linehl = '', numhl = '' })
 
-vim.keymap.set('n', '<Leader>db', function() dap.toggle_breakpoint() end)
-vim.keymap.set('n', '<Leader>dc', function() dap.continue() end)
-vim.keymap.set('n', '<Leader>dso', function() dap.step_over({}) end)
-vim.keymap.set('n', '<Leader>dsi', function() dap.step_into() end)
-vim.keymap.set('n', '<Leader>r', function() dap.repl.open() end)
+vim.keymap.set('n', '<Leader>db', function() dap.toggle_breakpoint() end, { silent = true, desc = 'Toggle breakpoint' })
+vim.keymap.set('n', '<Leader>dc', function() dap.continue() end, { silent = true, desc = 'Continue running' })
+vim.keymap.set('n', '<Leader>dso', function() dap.step_over({}) end, { silent = true, desc = 'Step over' })
+vim.keymap.set('n', '<Leader>dsi', function() dap.step_into() end, { silent = true, desc = 'Step into' })
+vim.keymap.set('n', '<Leader>r', function() dap.repl.open() end, { silent = true, desc = 'Open debugging REPL' })

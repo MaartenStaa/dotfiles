@@ -32,16 +32,16 @@ local on_attach = function(client, bufnr)
   local opts = { buffer = bufnr, noremap = true, silent = true }
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-  vim.keymap.set({'n', 'v'}, '<Leader>rn', vim.lsp.buf.rename, opts)
-  vim.keymap.set({'n', 'v'}, '<Leader>a', vim.lsp.buf.code_action, opts)
-  vim.keymap.set('n', '<Leader>e', vim.diagnostic.open_float, opts)
-  vim.keymap.set({'n', 'v'}, '[c', vim.diagnostic.goto_prev, opts)
-  vim.keymap.set({'n', 'v'}, ']c', vim.diagnostic.goto_next, opts)
-  vim.keymap.set({'n', 'v'}, '<Leader>f', function() vim.lsp.buf.format({ async = true }) end, opts)
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, vim.tbl_extend('error', opts, { desc = 'Show hover information' }))
+  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, vim.tbl_extend('error', opts, { desc = 'Signature help' }))
+  vim.keymap.set({'n', 'v'}, '<Leader>rn', vim.lsp.buf.rename, vim.tbl_extend('error', opts, { desc = 'Rename symbol' }))
+  vim.keymap.set({'n', 'v'}, '<Leader>a', vim.lsp.buf.code_action, vim.tbl_extend('error', opts, { desc = 'Show code actions' }))
+  vim.keymap.set('n', '<Leader>e', vim.diagnostic.open_float, vim.tbl_extend('error', opts, { desc = 'Detailed error information' }))
+  vim.keymap.set({'n', 'v'}, '[c', vim.diagnostic.goto_prev, vim.tbl_extend('error', opts, { desc = 'Jump to next error' }))
+  vim.keymap.set({'n', 'v'}, ']c', vim.diagnostic.goto_next, vim.tbl_extend('error', opts, { desc = 'Jump to previous error' }))
+  -- vim.keymap.set({'n', 'v'}, '<Leader>f', function() vim.lsp.buf.format({ async = true }) end, vim.tbl_extend('error', opts, { desc = 'Format buffer' }))
 
-  vim.keymap.set({'n', 'v'}, '<Leader>q', vim.diagnostic.setloclist, opts)
+  vim.keymap.set({'n', 'v'}, '<Leader>q', vim.diagnostic.setloclist, vim.tbl_extend('error', opts, { desc = 'Add buffer diagnostics to loclist' }))
 
   if client.server_capabilities.inlayHintProvider then
     vim.lsp.buf.inlay_hint(bufnr, true)

@@ -136,6 +136,15 @@ return require('lazy').setup({
       use_diagnostic_signs = true,
     },
   },
+  {
+    'folke/which-key.nvim',
+     event = "VeryLazy",
+     init = function()
+       vim.o.timeout = true
+       vim.o.timeoutlen = 500
+     end,
+     opts = {},
+  },
   'junegunn/goyo.vim', -- Distraction free mode
   {
     'karb94/neoscroll.nvim',

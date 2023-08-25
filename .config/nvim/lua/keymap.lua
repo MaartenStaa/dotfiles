@@ -10,7 +10,8 @@ vim.keymap.set('n', '<Leader>ep', ':tabedit ~/.config/nvim/lua/plugins.lua<cr>',
 -- leaderleader -> switch between the last two files
 vim.keymap.set('n', '<Leader><Leader>', '<C-^>', { noremap = true, desc = 'Switch between the last two files' })
 -- c -> end searching (get rid of highlights)
-vim.keymap.set('n', '<Leader>c', ':nohlsearch<cr>', { noremap = true, desc = 'Clear search highlights' })
+vim.keymap.set({ 'n', 'v' }, '<Leader>c', ':nohlsearch<cr>', { silent = true, noremap = true, desc = 'Clear search highlights' })
+vim.keymap.set('n', '<Esc>', ':nohlsearch<cr>', { silent = true, noremap = true, desc = 'Clear search highlights' })
 -- l -> toggle list
 -- vim.keymap.set('n', '<Leader>l', ':set list!<cr>:IndentGuidesToggle<cr>', { noremap = true })
 -- use H and L to go to the start and end of a line
