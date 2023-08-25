@@ -31,7 +31,7 @@ vim.api.nvim_create_autocmd('FileType', {
 )
 vim.api.nvim_create_autocmd('FileType', {
   group = autosourcing,
-  pattern = '*.javascript',
+  pattern = '*.js',
   command = 'setlocal ts=2 sts=2 sw=2 expandtab' }
 )
 vim.api.nvim_create_autocmd('FileType', {
@@ -42,7 +42,7 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.api.nvim_create_autocmd('FileType', {
   group = autosourcing,
   pattern = '*.md',
-  command = 'setlocal textwidth=80' }
+  command = 'setlocal textwidth=80 spell' }
 )
 vim.api.nvim_create_autocmd('FileType', {
   group = autosourcing,
