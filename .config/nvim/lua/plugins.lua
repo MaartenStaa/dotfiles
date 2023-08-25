@@ -37,6 +37,7 @@ return require('lazy').setup({
 
   -- Language support
   '2072/php-indenting-for-vim',
+  'b0o/schemastore.nvim',
   'editorconfig/editorconfig-vim',
   'fladson/vim-kitty',
   { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
@@ -44,7 +45,10 @@ return require('lazy').setup({
   'sheerun/vim-polyglot',
 
   -- LSP & autocomplete
-  'github/copilot.vim',
+  {
+    'github/copilot.vim',
+    enabled = false,
+  },
   'hrsh7th/cmp-cmdline',
   'hrsh7th/cmp-nvim-lsp',
   'hrsh7th/cmp-path',
@@ -122,6 +126,9 @@ return require('lazy').setup({
       },
       cmdline = {
         -- view = 'cmdline',
+      },
+      messages = {
+        view_search = false,
       },
     },
   },
@@ -240,11 +247,12 @@ return require('lazy').setup({
     'pwntester/octo.nvim',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope.nvim',
+      -- 'nvim-telescope/telescope.nvim',
       'nvim-tree/nvim-web-devicons',
     },
     opts = {
       default_remote = { 'upstream', 'maartens', 'origin' },
+      picker = 'fzf-lua',
     },
   },
 
@@ -276,12 +284,9 @@ return require('lazy').setup({
           }
         },
         commands = { sort_lastused = true },
-        files = {
-          cmd = 'fd --color=never --type f --strip-cwd-prefix --exclude .git',
-        },
         git = {
           files = {
-            cmd = 'git ls-files --others --exclude-standard',
+            cmd = 'git ls-files --cached --others --exclude-standard',
           },
         },
       })

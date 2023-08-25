@@ -83,7 +83,17 @@ local servers = {
   dockerls = {},
   eslint = {
     filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx',
-      'vue', 'svelte', 'astro' }
+      'vue', 'svelte', 'astro' },
+    root_dir = function(fname)
+      local util = require('lspconfig.util')
+      return util.root_pattern('relay.config.json')(fname)
+          or util.root_pattern('package.json', '.git')(fname)
+    end,
+    settings = {
+      eslint = {
+        packageManager = 'pnpm',
+      }
+    }
   },
   gopls = {
     settings = {
@@ -102,6 +112,21 @@ local servers = {
   intelephense = {},
   jdtls = {},
   jedi_language_server = {},
+  jsonls = {
+    capabilities = {
+      textDocument = {
+        completion = {
+          completionItem = { snippetSupport = true },
+        },
+      },
+    },
+    settings = {
+      json = {
+        schemas = require('schemastore').json.schemas(),
+        validate = true,
+      }
+    }
+  },
   lua_ls = {
     settings = {
       Lua = {
