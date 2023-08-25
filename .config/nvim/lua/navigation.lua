@@ -8,8 +8,17 @@ local function fzf_files()
   })
 end
 
+local function fzf_all_files()
+  fzf.fzf_exec('fd --type f --strip-cwd-prefix --hidden --no-ignore-vcs | ~/.dotfiles/bin/file-web-devicon', {
+    actions = fzf.defaults.actions.files,
+    fzf_opts = { ['--nth'] = 2, ['--delimiter'] = fzf.utils.nbsp },
+    previewer = 'builtin',
+  })
+end
+
 vim.keymap.set({ 'n', 'v', 'o' }, '<C-p>', fzf_files, { desc = 'Find files' })
 vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>ff', fzf_files, { desc = 'Find files' })
+vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>fa', fzf_all_files, { desc = 'Find all files' })
 vim.keymap.set({ 'n', 'v', 'o' }, '<Leader>fg', function()
   fzf.live_grep({ cmd = "git grep --line-number --column --ignore-case --color=always --untracked" })
 end, { desc = 'Find in files' })
