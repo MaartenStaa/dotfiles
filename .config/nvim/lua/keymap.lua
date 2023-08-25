@@ -53,5 +53,35 @@ vim.keymap.set('n', '<leader>xd', function() require('trouble').open('document_d
 vim.keymap.set('n', '<leader>xl', function() require('trouble').open('loclist') end, { noremap = true, silent = true, desc = 'Open loclist' })
 vim.keymap.set('n', '<leader>xq', function() require('trouble').open('quickfix') end, { noremap = true, silent = true, desc = 'Open quickfix' })
 
+-- Go to test for this file
+vim.keymap.set('n', 'gt', function ()
+  local filename = vim.fn.expand('%')
+  if string.find(filename, '[tj]sx?$') and not string.find(filename, '\\.test\\.') then
+    local extension = vim.fn.expand('%:e')
+    local basename = string.sub(filename, 1, string.len(filename) - string.len(extension))
+
+    -- test file with same extension
+    local testfile = string.format("%stest.%s", basename, extension)
+    if vim.fn.filereadable(testfile) ~= 0 then
+      print('a', vim.fn.filereadable(testfile))
+      vim.cmd('e ' .. testfile)
+      return
+    end
+
+    -- js file with ts test
+    local tstestfile = string.format("%stest.ts", basename)
+    print(extension, tstestfile)
+    if extension == "js" then
+      print(extension, tstestfile)
+      if vim.fn.filereadable(tstestfile) ~= 0 then
+        print('b')
+        vim.cmd('e ' .. tstestfile)
+        return
+      end
+    end
+    print("not found")
+  end
+end, { noremap = true, silent = true, desc = 'Jump to test file' })
+
 -- Allow entering normal mode in terminal more easily
 -- vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", {noremap=true})
