@@ -322,19 +322,18 @@ return require('lazy').setup({
   },
   {
     -- Integration with Dash (search docs)
-    'okuramasafumi/dash.nvim',
-    branch = 'fix-crash-with-fzf-lua',
+    'maartenstaa/dash.nvim',
     build = 'make install',
     keys = {
-      { '<Leader>h', '<cmd>Dash<CR>' }
+      { '<Leader>h', '<cmd>DashWord<CR>' }
     },
     opts = {
       search_engine = 'startpage',
       file_type_keywords = {
-        javascript = { 'javascript', 'nodejs' },
-        typescript = { 'typescript', 'javascript', 'nodejs' },
-        typescriptreact = { 'typescript', 'javascript', 'react' },
-        javascriptreact = { 'javascript', 'react' },
+        javascript = { 'js', 'nodejs' },
+        typescript = { 'typescript', 'js', 'nodejs' },
+        typescriptreact = { 'typescript', 'js', 'react' },
+        javascriptreact = { 'js', 'react' },
       },
     },
   },
