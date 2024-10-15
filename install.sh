@@ -2,17 +2,10 @@
 
 echo "Setting up your Mac..."
 
-# Install Homebrew if it's not installed yet.
-if test ! $(which brew); then
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
-
-# Update Homebrew
-brew update
-
-# Install Homebrew dependencies from Brewfile
-brew tap homebrew/bundle
-brew bundle
+# Install NixOS
+sh <(curl -L https://nixos.org/nix/install)
+nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake ~/.dotfiles/nix#mbp
+darwin-rebuild switch --flake ~/.dotfiles/nix#mbp
 
 # Install Prezto if it's not there yet.
 if [ ! -d ~/.zprezto ]; then
@@ -23,11 +16,6 @@ fi
 if [ ! -d ~/.tmux/plugins/tpm ]; then
   mkdir -p ~/.tmux/plugins/tpm
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-fi
-
-# Install NVM
-if [ ! -d ~/.nvm ]; then
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
 fi
 
 # Link configuration files.
