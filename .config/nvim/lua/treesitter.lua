@@ -1,7 +1,7 @@
 -- Treesitter
 require 'nvim-treesitter.configs'.setup({
   ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  ignore_install = { "wgsl", "wgsl_bevy" }, -- List of parsers to ignore installing
+  ignore_install = { "wgsl", "wgsl_bevy", "norg" }, -- List of parsers to ignore installing
   highlight = {
     enable = true, -- false will disable the whole extension
     disable = {}, -- list of language that will be disabled
@@ -28,7 +28,36 @@ require 'nvim-treesitter.configs'.setup({
         ["ac"] = "@class.outer",
         ["ic"] = "@class.inner",
         ["as"] = "@statement.outer",
-        ["is"] = "@statement.inner",
+        ["ir"] = "@return.inner",
+        ["ar"] = "@return.outer",
+      },
+    },
+
+    swap = {
+      enable = true,
+
+      swap_next = {
+        ["<leader>m"] = "@parameter.inner",
+      },
+      swap_previous = {
+        ["<leader>M"] = "@parameter.inner",
+      }
+    },
+
+    move = {
+      enable = true,
+      set_jumps = true, -- whether to set jumps in the jumplist
+      goto_next_start = {
+        ["]m"] = "@function.outer",
+        ["]o"] = "@class.outer",
+        ["]s"] = { query = { "@statement.outer", "@return_statement" } },
+        ["]a"] = "@parameter.inner",
+      },
+      goto_previous_start = {
+        ["[m"] = "@function.outer",
+        ["[o"] = "@class.outer",
+        ["[s"] = { query = { "@statement.outer", "@return_statement" } },
+        ["[a"] = "@parameter.inner",
       },
     },
   },

@@ -10,9 +10,8 @@ vim.opt.sts = 4
 vim.opt.sw = 4
 vim.opt.expandtab = true
 vim.opt.rtp:append('/usr/local/opt/fzf')
-vim.opt.re = 0                                         -- yats: Old regexp engine will incur performance issues for yats and old engine is usually turned on by other plugins.
 vim.opt.showmode = false                              -- Already shown by lualine
-vim.opt.mouse = 'nv'                                   -- Allow mouse usage in normal and visual modes
+vim.opt.mouse = 'inv'                                   -- Allow mouse usage in normal and visual modes
 vim.opt.undodir = os.getenv('HOME') .. '/.vim/undodir' -- Persistent undo history
 vim.opt.undofile = true
 vim.opt.scrolloff = 8                                  -- Leave more room between cursor line and top/bottom of screen

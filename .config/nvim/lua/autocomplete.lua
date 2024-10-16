@@ -30,6 +30,13 @@ cmp.setup({
     -- { name = 'luasnip' }, -- For luasnip users.
     -- { name = 'ultisnips' }, -- For ultisnips users.
     -- { name = 'snippy' }, -- For snippy users.
+    {
+      name = 'tmux',
+      options = {
+        keyword_pattern = [[[^\s]\+]],
+        capture_history = true,
+      },
+    },
   }, {
     { name = 'buffer' },
   })
@@ -49,3 +56,10 @@ cmp.setup.cmdline(':', {
   })
 })
 cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+
+-- Trigger copilot manually
+vim.keymap.set({ 'n', 'i', }, '<C-e>', '<Esc>:Copilot panel<cr>', {
+  noremap = true,
+  silent = true,
+  desc = 'Open GitHub Copilot panel',
+})

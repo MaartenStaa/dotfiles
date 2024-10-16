@@ -11,7 +11,7 @@ vim.keymap.set('n', '<Leader>ep', ':tabedit ~/.config/nvim/lua/plugins.lua<cr>',
 vim.keymap.set('n', '<Leader><Leader>', '<C-^>', { noremap = true, desc = 'Switch between the last two files' })
 -- c -> end searching (get rid of highlights)
 vim.keymap.set({ 'n', 'v' }, '<Leader>c', ':nohlsearch<cr>', { silent = true, noremap = true, desc = 'Clear search highlights' })
-vim.keymap.set('n', '<Esc>', ':nohlsearch<cr>', { silent = true, noremap = true, desc = 'Clear search highlights' })
+vim.keymap.set('n', '<Leader>c', ':nohlsearch<cr>', { silent = true, noremap = true, desc = 'Clear search highlights' })
 -- l -> toggle list
 -- vim.keymap.set('n', '<Leader>l', ':set list!<cr>:IndentGuidesToggle<cr>', { noremap = true })
 -- use H and L to go to the start and end of a line
@@ -21,11 +21,13 @@ vim.keymap.set('n', 'L', '$', { noremap = true, desc = 'Go to the end of the lin
 -- vim.keymap.set('n', '<Leader>s', ':setlocal spell!<cr>', { noremap = true })
 -- Yank and Paste to system clipboard
 vim.keymap.set({ 'n', 'v' }, '<Leader>y', '"+y', { noremap = true, desc = 'Yank to system clipboard' })
+vim.keymap.set({ 'n', 'v' }, '<Leader>yf', ':let @+ = expand("%")<cr>', { noremap = true, silent = true, desc = 'Yank file path to system clipboard' })
 vim.keymap.set({ 'n', 'v' }, '<Leader>p', '"+p', { noremap = true, desc = 'Paste from system clipboard' })
 vim.keymap.set({ 'n', 'v' }, '<Leader>P', '"+P', { noremap = true, desc = 'Paste from system clipboard (before)' })
 -- delete/save buffers easily
 vim.keymap.set('n', '<leader>w', ':bd<cr>', { noremap = true, silent = true, desc = 'Delete current buffer' })
 vim.keymap.set('n', '<leader>s', ':w<cr>', { noremap = true, silent = true, desc = 'Save current buffer' })
+vim.keymap.set('n', '<leader>?', '/\\v(<c-r>=expand("<cword>")<cr>)/', { noremap = true, silent = true, desc = 'Start search matching current word' })
 
 -- Use tab for auto completion via LSP
 -- vim.keymap.set('i', '<Tab>', '<Cmd>if pumvisible() then<CR><C-n>else<CR><Tab>fi<CR>', { silent = true, expr = true })
@@ -53,12 +55,20 @@ vim.keymap.set('n', '<leader>xd', function() require('trouble').open('document_d
 vim.keymap.set('n', '<leader>xl', function() require('trouble').open('loclist') end, { noremap = true, silent = true, desc = 'Open loclist' })
 vim.keymap.set('n', '<leader>xq', function() require('trouble').open('quickfix') end, { noremap = true, silent = true, desc = 'Open quickfix' })
 
+-- Tabs
+vim.keymap.set('n', '<leader>tn', ':tabnext<cr>', { noremap = true, silent = true, desc = 'Next tab' })
+vim.keymap.set('n', '<leader>tp', ':tabprevious<cr>', { noremap = true, silent = true, desc = 'Previous tab' })
+vim.keymap.set('n', '<leader>tw', ':tabclose<cr>', { noremap = true, silent = true, desc = 'Close tab' })
+
+-- Quiet now (dismiss Noice messages)
+vim.keymap.set({ 'n', 'v' }, '<leader>q', ':NoiceDismiss<cr>', { silent = true, desc = 'Dismiss Noice messages' })
+
 -- Go to test for this file
 vim.keymap.set('n', 'gt', function ()
   local filename = vim.fn.expand('%')
-  if string.find(filename, '[tj]sx?$') and not string.find(filename, '\\.test\\.') then
+  if filename:find('[tj]sx?$') and not filename:find('\\.test\\.') then
     local extension = vim.fn.expand('%:e')
-    local basename = string.sub(filename, 1, string.len(filename) - string.len(extension))
+    local basename = filename:sub(1, filename:len() - extension:len())
 
     -- test file with same extension
     local testfile = string.format("%stest.%s", basename, extension)

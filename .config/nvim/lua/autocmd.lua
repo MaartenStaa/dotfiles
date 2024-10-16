@@ -7,7 +7,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 })
 
 -- Fix blade filetype not being set correctly.
-vim.api.nvim_create_autocmd('BufRead,BufNewFile', {
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   group = autosourcing,
   pattern = '*.blade.php',
   command = 'set filetype=blade'
@@ -56,9 +56,21 @@ vim.api.nvim_create_autocmd('FileType', {
 )
 vim.api.nvim_create_autocmd('FileType', {
   group = autosourcing,
+  pattern = '*.sh',
+  command = 'setlocal ts=2 sts=2 sw=2 expandtab' }
+)
+vim.api.nvim_create_autocmd('FileType', {
+  group = autosourcing,
   pattern = '*.vim',
   command = 'setlocal ts=4 sts=4 sw=4 expandtab' }
 )
+
+-- Treat BUILD.out as a Bazel file
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  group = autosourcing,
+  pattern = 'BUILD.out',
+  command = 'set filetype=bzl'
+})
 
 -- Never hide git commit messages and such
 vim.api.nvim_create_autocmd('FileType', {

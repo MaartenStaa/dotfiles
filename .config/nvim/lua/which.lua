@@ -1,47 +1,30 @@
 local wk = require("which-key")
 
--- <leader> keymaps
-wk.register({
-  b = 'Toggle file tree',
-  d = {
-    name = 'debugging',
-  },
-  e = {
-    name = 'edit',
-  },
-  f = {
-    name = 'find',
-  },
-  g = {
-    name = 'go to',
-  },
-  h = {
-    name = 'git hunks',
-    p = 'Previous hunk',
-    s = 'Stage hunk',
-    u = 'Undo hunk',
-  },
-  r = {
-    name = 'rename',
-  },
-  x = {
-    name = 'diagnostics',
-  },
-}, { prefix = '<leader>' })
+wk.add({
+  -- <leader> keymaps
+  { '<leader>b', desc = 'Toggle file tree' },
+  { '<leader>d', group = 'debugging' },
+  { '<leader>e', group = 'edit' },
+  { '<leader>f', group = 'find' },
+  { '<leader>g', group = 'go to' },
+  { '<leader>h', group = 'git hunks' },
+  { '<leader>hp', desc = 'Previous hunk' },
+  { '<leader>hs', desc = 'Stage hunk' },
+  { '<leader>hu', desc = 'Undo hunk' },
+  { '<leader>r', group = 'rename' },
+  { '<leader>t', group = 'tabs' },
+  { '<leader>x', group = 'diagnostics' },
 
--- g prefix
-wk.register({
-  c = 'Toggle comment',
-}, { prefix = 'g' })
+  -- g prefix
+  { 'gc', desc = 'Toggle comment' },
 
--- no prefix
-wk.register({
-  ['<leader>'] = { name = 'custom shortcuts' },
-  ['['] = { name = 'jump backward' },
-  [']'] = { name = 'jump forward' },
-  S = 'Leap backward to',
-  s = 'Leap forward to',
-  X = 'Leap backward until',
-  x = 'Leap forward until',
-  z = { name = 'folds' },
+  -- no prefix
+  { '<leader>', group = 'custom shortcuts' },
+  { '[', group = 'jump backward' },
+  { ']', group = 'jump forward' },
+  { 'S', desc = 'Leap backward to' },
+  { 's', desc = 'Leap forward to' },
+  { 'X', desc = 'Leap backward until' },
+  { 'x', desc = 'Leap forward until' },
+  { 'z', group = 'folds' },
 })

@@ -1,6 +1,6 @@
 -- Automatically bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.uv.fs_stat(lazypath) then
+if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     "git",
     "clone",
@@ -23,11 +23,53 @@ vim.opt.rtp:prepend(lazypath)
 return require('lazy').setup({
   -- Theming
   {
-    'navarasu/onedark.nvim',
+    'catppuccin/nvim',
     lazy = false,
+    name = 'catppuccin',
     priority = 1000,
     config = function()
-      vim.cmd([[colorscheme onedark]])
+      require'catppuccin'.setup({
+        flavour = 'macchiato',
+
+        -- Enable support for some plugins
+        fzf = true,
+        indent_blankline = {
+          enabled = true,
+        },
+        leap = true,
+        mason = true,
+        noice = true,
+        cmp = true,
+        dap = true,
+        dap_ui = true,
+        gitgutter = true,
+        native_lsp = {
+          enabled = true,
+          virtual_text = {
+            errors = { "italic" },
+            hints = { "italic" },
+            warnings = { "italic" },
+            information = { "italic" },
+            ok = { "italic" },
+          },
+          underlines = {
+            errors = { "underline" },
+            hints = { "underline" },
+            warnings = { "underline" },
+            information = { "underline" },
+            ok = { "underline" },
+          },
+          inlay_hints = {
+            background = true,
+          },
+        },
+        nvim_notify = true,
+        treesitter_context = true,
+        treesitter = true,
+        which_key = true,
+      })
+
+      vim.cmd.colorscheme('catppuccin')
     end
   },
   -- 'doums/darcula',
@@ -45,9 +87,12 @@ return require('lazy').setup({
   'sheerun/vim-polyglot',
 
   -- LSP & autocomplete
+  'andersevenrud/cmp-tmux',
   {
     'github/copilot.vim',
-    enabled = false,
+    config = function ()
+      vim.g.copilot_filetypes = { markdown = true, yaml = true }
+    end,
   },
   'hrsh7th/cmp-cmdline',
   'hrsh7th/cmp-nvim-lsp',
@@ -70,7 +115,6 @@ return require('lazy').setup({
   },
   'williamboman/mason.nvim',
   'williamboman/mason-lspconfig.nvim',
-  -- 'williamboman/nvim-lsp-installer',
 
   -- UI enhancements
   -- Highlight other uses of item under cursor
@@ -89,16 +133,13 @@ return require('lazy').setup({
   },
   'airblade/vim-gitgutter',
   {
-    'akinsho/toggleterm.nvim',
-    version = "*",
-    keys = '<A-t>',
+    'akinsho/git-conflict.nvim',
+    version = '*',
     opts = {
-      size = function()
-        return vim.opt.columns:get() / 3 * 2
-      end,
-      open_mapping = '<A-t>',
-      direction = 'vertical'
-    }
+      default_mappings = true,
+      default_commands = true,
+      list_opener = 'Trouble',
+    },
   },
   {
     'f-person/git-blame.nvim',
@@ -128,6 +169,7 @@ return require('lazy').setup({
         -- view = 'cmdline',
       },
       messages = {
+        enabled = false,
         view_search = false,
       },
     },
@@ -145,56 +187,39 @@ return require('lazy').setup({
   },
   {
     'folke/which-key.nvim',
+    dependencies = { 'echasnovski/mini.icons' },
      event = "VeryLazy",
      init = function()
        vim.o.timeout = true
        vim.o.timeoutlen = 500
      end,
-     opts = {},
+     opts = {
+       plugin = {
+         presets = {
+           motions = false,
+         },
+       },
+     },
   },
   'junegunn/goyo.vim', -- Distraction free mode
   {
     'karb94/neoscroll.nvim',
     config = true
   },
-  {
-    'nvim-tree/nvim-tree.lua',
-    dependencies = {
-      'nvim-tree/nvim-web-devicons'
-    },
-    tag = 'nightly', -- updated every week
-    keys = {
-      { '<Leader>b', '<cmd>NvimTreeFindFileToggle<CR>' }
-    },
-    config = function ()
-      require('nvim-tree').setup({
-        sync_root_with_cwd = true,
-        renderer = {
-          highlight_git = true,
-        },
-        update_focused_file = {
-          enable = true,
-        },
-        filesystem_watchers = {
-          ignore_dirs = {
-            ".*/node_modules/.*",
-          },
-        },
-      })
-    end
-  },
   'nvim-tree/nvim-web-devicons',
   {
     'lukas-reineke/indent-blankline.nvim',
+    main = 'ibl',
     config = function()
       vim.opt.list = true
       vim.opt.listchars:append "lead:⋅"
       vim.opt.listchars:append "trail:⋅"
       -- vim.opt.listchars:append "eol:↴"
-      require('indent_blankline').setup({
-        space_char_blankline = " ",
-        show_current_context = true,
-        show_current_context_start = true
+      require('ibl').setup({
+        indent = { char = '┊', }, -- can add: highlight = highlight, here too
+        -- space_char_blankline = " ",
+        -- show_current_context = true,
+        -- show_current_context_start = true
       })
     end
   },
@@ -205,32 +230,111 @@ return require('lazy').setup({
     config = function()
       require('treesitter-context').setup({
         enable = true,
-        max_lines = 0
+        max_lines = 8
       })
     end
   },
   {
     'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
-    opts = {
-      options = {
-        component_separators = { left = '', right = ''},
-        section_separators = { left = '', right = ''},
-      },
-      sections = {
-        lualine_c = { { 'filename', path = 1 } }
-      }
-    }
+    dependencies = {
+      { 'arkav/lualine-lsp-progress' },
+      { 'dokwork/lualine-ex' },
+      { 'nvim-lua/plenary.nvim' },
+      { 'nvim-tree/nvim-web-devicons', opt = true },
+    },
+    config = function ()
+      local function get_modified()
+        -- if utils.get_buf_option "mod" then
+        --   local mod = icons.git.Mod
+        --   return "%#WinBarFilename#" .. mod .. " " .. "%t" .. "%*"
+        -- end
+        return "%#WinBarFilename#" .. "%t" .. "%*"
+      end
+
+      local function get_winbar()
+        return "%#WinBarSeparator#" .. "%=" .. "" .. "%*" .. get_modified() .. "%#WinBarSeparator#" .. "" .. "%*"
+      end
+
+      local icons = require('nvim-web-devicons')
+      local cssmodules_icon, cssmodules_color = icons.get_icon_by_filetype('css')
+      local eslint_icon, eslint_color = icons.get_icon('.eslintrc')
+      local tsserver_icon, tsserver_color = icons.get_icon_by_filetype('typescript')
+
+      -- icon_data {
+      --   color = "#42a5f5",
+      --   cterm_color = "75",
+      --   icon = "",
+      --   name = "Css"
+      -- }
+      -- "DevIconCss"
+      local copilot_icon = ''
+      local copilot_color = { fg = '#a373f7' }
+
+      require('lualine').setup({
+        options = {
+          theme = 'catppuccin',
+          component_separators = { left = '', right = ''},
+          section_separators = { left = '', right = ''},
+          disabled_filetypes = {
+            winbar = {
+              'help',
+              'NvimTree',
+              'toggleterm',
+              'Trouble',
+            },
+          },
+        },
+        sections = {
+          lualine_c = {
+            { 'filename', path = 1 },
+            {
+              'ex.lsp.all',
+              only_attached = true,
+              icons = {
+                ["GitHub Copilot"] = { copilot_icon, color = copilot_color },
+                cssmodules_ls = { cssmodules_icon, color = cssmodules_color },
+                eslint = { eslint_icon, color = eslint_color },
+                tsserver = { tsserver_icon, color = tsserver_color },
+              }
+            },
+            'lsp_progress',
+          },
+        },
+        inactive_sections = {
+          lualine_c = { { 'filename', path = 1 } }
+        },
+        -- winbar = {
+        --   lualine_a = { 'diagnostics' },
+        --   lualine_b = { '%#WinBarSeparator#' .. '%*' .. '%#WinBarFilename#' .. '%t' .. '%*' .. '%#WinBarSeparator#' },
+        --   lualine_c = {},
+        --   lualine_x = {},
+        --   lualine_y = {},
+        --   lualine_z = {},
+        -- },
+        -- inactive_winbar = {
+        --   lualine_a = {},
+        --   lualine_b = {},
+        --   lualine_c = {},
+        --   lualine_x = {},
+        --   lualine_y = {},
+        --   lualine_z = {},
+        -- },
+      })
+    end
   },
   {
     'petertriho/nvim-scrollbar',
     config = true
   },
-  'romgrk/barbar.nvim',
+  -- 'romgrk/barbar.nvim',
   {
     'sindrets/diffview.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' }
   },
+  -- {
+  --   'yorickpeterse/nvim-pqf',
+  --   config = true
+  -- },
 
   -- Refactoring
   -- {
@@ -242,21 +346,11 @@ return require('lazy').setup({
   --   config = true
   -- }
 
-  -- Integration with GitHub/GHE
-  {
-    'pwntester/octo.nvim',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      -- 'nvim-telescope/telescope.nvim',
-      'nvim-tree/nvim-web-devicons',
-    },
-    opts = {
-      default_remote = { 'upstream', 'maartens', 'origin' },
-      picker = 'fzf-lua',
-    },
-  },
-
   -- For easy navigation
+  -- {
+  --   'Dkendal/nvim-treeclimber',
+  --   config = true,
+  -- },
   {
     'ggandor/leap.nvim',
     keys = { 's', 'S', 'gs', 'X' },
@@ -301,14 +395,96 @@ return require('lazy').setup({
     lazy = true,
     build = 'npm install --legacy-peer-deps && npm run compile && git checkout package-lock.json'
   }, -- For nvim-dap-vscode-js
-  'rcarriga/nvim-dap-ui',
+  { 'rcarriga/nvim-dap-ui', dependencies = { 'nvim-neotest/nvim-nio' } },
   {
     'theHamsta/nvim-dap-virtual-text',
     branch = 'inline-text',
     config = true,
   },
 
+  -- Productivity
+  -- {
+  --   "jake-stewart/multicursor.nvim",
+  --   branch = "1.0",
+  --   config = function()
+  --     local mc = require("multicursor-nvim")
+
+  --     mc.setup()
+
+  --     -- Add cursors above/below the main cursor.
+  --     vim.keymap.set({ "n", "v" }, "<up>", function() mc.addCursor("k") end)
+  --     vim.keymap.set({ "n", "v" }, "<down>", function() mc.addCursor("j") end)
+
+  --     -- Add a cursor and jump to the next word under cursor.
+  --     vim.keymap.set({ "n", "v" }, "<c-n>", function() mc.addCursor("*") end)
+
+  --     -- Jump to the next word under cursor but do not add a cursor.
+  --     vim.keymap.set({ "n", "v" }, "<c-s>", function() mc.skipCursor("*") end)
+
+  --     -- Rotate the main cursor.
+  --     vim.keymap.set({ "n", "v" }, "<left>", mc.nextCursor)
+  --     vim.keymap.set({ "n", "v" }, "<right>", mc.prevCursor)
+
+  --     -- Delete the main cursor.
+  --     vim.keymap.set({ "n", "v" }, "<leader>x", mc.deleteCursor)
+
+  --     -- Add and remove cursors with control + left click.
+  --     vim.keymap.set("n", "<c-leftmouse>", mc.handleMouse)
+
+  --     vim.keymap.set({ "n", "v" }, "<c-q>", function()
+  --       if mc.cursorsEnabled() then
+  --         -- Stop other cursors from moving.
+  --         -- This allows you to reposition the main cursor.
+  --         mc.disableCursors()
+  --       else
+  --         mc.addCursor()
+  --       end
+  --     end)
+
+  --     vim.keymap.set({ "n", "v" }, "<esc>", function()
+  --       print(mc.cursorsEnabled(), mc.hasCursors())
+  --       if not mc.cursorsEnabled() then
+  --         mc.enableCursors()
+  --       elseif mc.hasCursors() then
+  --         mc.clearCursors()
+  --       else
+  --         -- Default <esc> handler.
+  --       end
+  --     end)
+
+  --     -- Align cursor columns.
+  --     vim.keymap.set("n", "<leader>a", mc.alignCursors)
+
+  --     -- Split visual selections by regex.
+  --     vim.keymap.set("v", "S", mc.splitCursors)
+
+  --     -- Append/insert for each line of visual selections.
+  --     vim.keymap.set("v", "I", mc.insertVisual)
+  --     vim.keymap.set("v", "A", mc.appendVisual)
+
+  --     -- match new cursors within visual selections by regex.
+  --     vim.keymap.set("v", "M", mc.matchCursors)
+
+  --     -- Rotate visual selection contents.
+  --     vim.keymap.set("v", "<leader>t", function() mc.transposeCursors(1) end)
+  --     vim.keymap.set("v", "<leader>T", function() mc.transposeCursors(-1) end)
+
+  --     -- Customize how cursors look.
+  --     vim.api.nvim_set_hl(0, "MultiCursorCursor", { link = "Cursor" })
+  --     vim.api.nvim_set_hl(0, "MultiCursorVisual", { link = "Visual" })
+  --     vim.api.nvim_set_hl(0, "MultiCursorDisabledCursor", { link = "Visual" })
+  --     vim.api.nvim_set_hl(0, "MultiCursorDisabledVisual", { link = "Visual" })
+  --   end,
+  -- },
+
   -- Misc
+  {
+    -- Add/change/remove surrounding brackets
+    'kylechui/nvim-surround',
+    version = '*',
+    event = 'VeryLazy',
+    config = true,
+  },
   {
     -- Automatically track sessions per directory
     'Shatur/neovim-session-manager',
@@ -334,6 +510,7 @@ return require('lazy').setup({
         typescript = { 'typescript', 'js', 'nodejs' },
         typescriptreact = { 'typescript', 'js', 'react' },
         javascriptreact = { 'js', 'react' },
+        python = { 'python', 'python3' },
       },
     },
   },
@@ -364,7 +541,6 @@ return require('lazy').setup({
   'tpope/vim-commentary', -- Toggle comments
   'tpope/vim-repeat', -- Handles repeating plugin commands as a whole
   'tpope/vim-sensible', -- Set some sensible defaults
-  'tpope/vim-surround', -- Add/change/remove surrounding brackets
   -- 'tpope/vim-vinegar', -- Netrw enhancements
   {
     -- Automatically insert matching brackets, and jump over them when typing them

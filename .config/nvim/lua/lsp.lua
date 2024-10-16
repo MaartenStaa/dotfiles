@@ -40,12 +40,15 @@ local on_attach = function(client, bufnr)
   vim.keymap.set({'n', 'v'}, '[c', vim.diagnostic.goto_prev, vim.tbl_extend('error', opts, { desc = 'Jump to next error' }))
   vim.keymap.set({'n', 'v'}, ']c', vim.diagnostic.goto_next, vim.tbl_extend('error', opts, { desc = 'Jump to previous error' }))
   -- vim.keymap.set({'n', 'v'}, '<Leader>f', function() vim.lsp.buf.format({ async = true }) end, vim.tbl_extend('error', opts, { desc = 'Format buffer' }))
+  vim.keymap.set('n', '<Leader>i', function()
+    if vim.lsp.inlay_hint.is_enabled() then
+      vim.lsp.inlay_hint.enable(false)
+    else
+      vim.lsp.inlay_hint.enable(true)
+    end
+  end, vim.tbl_extend('error', opts, { desc = 'Toggle inlay hints' }))
 
   vim.keymap.set({'n', 'v'}, '<Leader>q', vim.diagnostic.setloclist, vim.tbl_extend('error', opts, { desc = 'Add buffer diagnostics to loclist' }))
-
-  if client.server_capabilities.inlayHintProvider then
-    vim.lsp.buf.inlay_hint(bufnr, true)
-  end
 end
 
 local function merge(a, b)
@@ -75,9 +78,31 @@ if not lsp_configs.relay then
     },
   }
 end
+if not lsp_configs.oxlint then
+  lsp_configs.oxlint = {
+    default_config = {
+      cmd = { 'oxc_vscode.sh' },
+      filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+      root_dir = function(fname)
+        local util = require('lspconfig.util')
+        return util.root_pattern('package.json', '.git')(fname)
+      end,
+      settings = {
+        run = 'onType',
+        enable = true,
+        trace = {
+          server = 'off',
+        },
+      }
+    },
+  }
+end
 
 local servers = {
   bashls = {},
+  clangd = {
+    cmd = { 'clangd', '--offset-encoding=utf-16'}
+  },
   cssls = {},
   cssmodules_ls = {},
   dockerls = {},
@@ -150,10 +175,11 @@ local servers = {
     },
   },
   marksman = {},
+  oxlint = {},
   -- relay = {},
   starlark_rust = {
-    cmd = { '/Users/maartens/repos/github/facebookexperimental/starlark-rust/target/debug/starlark', '--lsp'},
-    filetypes = { "star", "bzl", "BUILD.bazel", "WORKSPACE.bazel", "BUILD", "WORKSPACE" },
+    cmd = { '/Users/maartens/repos/github/facebookexperimental/starlark-rust/target/debug/starlark', '--lsp', '--bazel', '--eager'},
+    filetypes = { "star", "bzl", "BUILD.bazel", "MODULE.bazel", "WORKSPACE.bazel", "WORKSPACE.bzlmod", "BUILD", "MODULE", "WORKSPACE" },
   },
   rust_analyzer = {
     settings = {
@@ -173,7 +199,16 @@ local servers = {
       }
     }
   },
-  tsserver = {
+  sourcekit = {
+    capabilities = {
+      workspace = {
+        didChangeWatchedFiles = {
+          dynamicRegistration = true,
+        },
+      },
+    },
+  },
+  ts_ls = {
     settings = {
       typescript = {
         inlayHints = {
@@ -211,6 +246,7 @@ local servers = {
           '!Location mapping',
           '!HealthcheckConfig mapping',
           '!PathMatcher mapping',
+          '!ReWrite mapping',
           '!Vertical mapping',
           '!VerticalGroup mapping',
         }
