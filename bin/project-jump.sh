@@ -8,7 +8,7 @@ function main() {
   base_dir="/Users/$USER/repos/"
 
   local all_projects
-  all_projects=$(find $base_dir{,github} -type d -maxdepth 2 -depth 2 | sed -E "s#$base_dir##")
+  all_projects=$(find "$base_dir"{,github} -type d -maxdepth 2 -depth 2 | sed -E "s#$base_dir##")
 
   # Construct a command that will take one of the above items and give a preview
   # of the pane. This is the command that will be run when the user selects an
