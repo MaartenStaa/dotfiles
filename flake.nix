@@ -38,7 +38,7 @@
                 ./modules/git
                 ./modules/shell.nix
                 ./modules/kitty
-                # ./modules/karabiner
+                ./modules/karabiner
                 catppuccin.homeManagerModules.catppuccin
               ];
             };

@@ -1,0 +1,1 @@
+{"title":"Caps Lock to escape or control","rules":[{"description":"Caps Lock to escape or control","manipulators":[{"from":{"key_code":"caps_lock"},"to":[{"key_code":"left_control","modifiers":[]}],"to_if_alone":[{"key_code":"escape","modifiers":[]}],"type":"basic"}]}]}
