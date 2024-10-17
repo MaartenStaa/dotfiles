@@ -41,6 +41,7 @@
                   ./modules/darwin.nix
                   ./modules/pkgs.nix
                   ./modules/fzf.nix
+                  ./modules/fd
                   ./modules/tmux
                   ./modules/neovim
                   ./modules/git
@@ -77,6 +78,7 @@
                   ./modules/darwin.nix
                   ./modules/pkgs.nix
                   ./modules/fzf.nix
+                  ./modules/fd
                   ./modules/tmux
                   ./modules/neovim
                   ./modules/git

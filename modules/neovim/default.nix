@@ -69,7 +69,12 @@
     withPython3 = true;
   };
 
-  xdg.configFile."nvim" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/modules/neovim/config";
+  xdg.configFile = {
+    nvim = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/modules/neovim/config";
+    };
+    ideavimrc = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/modules/.ideavimrc";
+    };
   };
 }

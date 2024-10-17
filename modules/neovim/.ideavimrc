@@ -20,6 +20,8 @@ set commentary
 " Let { and } also match lines that only contain whitespace.
 set vim-paragraph-motion
 
+Plug 'justinmk/vim-sneak'
+
 " Leader shortcuts
 set mapleader = ","
 set incsearch
@@ -28,3 +30,5 @@ map <Leader><Space> :nohlsearch
 map <Space> <Action>(GotoNextError)
 map <S-Space> <Action>(GotoPreviousError)
 
+map H ^
+map L $

@@ -13,7 +13,6 @@
       diff-so-fancy
       exiftool
       eza
-      fd
       ffmpeg
       gnupg
       htop
