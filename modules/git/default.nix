@@ -36,6 +36,25 @@
       init = {
         defaultBranch = "main";
       };
+      url = {
+        "git@github.com:" = {
+          insteadOf = "https://github.com/";
+        };
+      };
+      filters = {
+        "lfs" = {
+          required = true;
+          clean = "git-lfs clean -- %f";
+          smudge = "git-lfs smudge -- %f";
+          process = "git-lfs filter-process";
+        };
+      };
+    };
+    aliases = {
+      fixup = "commit --amend --no-edit";
+      butd = "!git fetch origin && git rebase origin/master";
+      pf = "push --force-with-lease";
+      ptb = "!git push -u $(whoami) $(git branch --show-current)";
     };
   };
 }
