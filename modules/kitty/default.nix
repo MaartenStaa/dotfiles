@@ -15,8 +15,14 @@
       tab_bar_style = "powerline";
       tab_powerline_style = "round";
 
-      shell = "${pkgs.fish}/bin/fish";
+      shell = "${pkgs.fish}/bin/fish --login --interactive";
+      editor = "${pkgs.neovim}/bin/nvim";
+      env = ''
+        SHELL=${pkgs.fish}/bin/fish
+      '';
+
       term = "tmux-256color";
+      shell_integration = true;
     };
     themeFile = "Catppuccin-Macchiato";
   };
