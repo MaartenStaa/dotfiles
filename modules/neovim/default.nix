@@ -41,6 +41,7 @@
       marksman
       # mesonlsp
       nil
+      nixfmt-rfc-style
       nixpkgs-fmt
       # oxlint
       pylsp-mypy
