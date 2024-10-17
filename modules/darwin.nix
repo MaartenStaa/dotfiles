@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   # TODO: Parameterize this
   home.homeDirectory = "/Users/maartens";
 

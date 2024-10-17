@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   # TODO: Parameterize this.
   home.username = "maartens";
   home.stateVersion = "24.05";

@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   # https://mynixos.com/nixpkgs/options/programs.tmux
   programs.tmux = {
     enable = true;

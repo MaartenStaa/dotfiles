@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     gh
     git
@@ -14,7 +15,9 @@
     userName = "Maarten Staa";
     userEmail = "maartens@spotify.com";
     extraConfig = {
-      lfs = { enable = true; };
+      lfs = {
+        enable = true;
+      };
       core = {
         editor = "nvim";
         autocrlf = "input";

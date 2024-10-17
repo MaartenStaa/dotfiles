@@ -1,4 +1,5 @@
-{ pkgs, ... }:  {
+{ pkgs, ... }:
+{
   # Allow running of proprietary software (e.g. Obsidian)
   nixpkgs.config.allowUnfree = true;
 
@@ -6,7 +7,10 @@
   services.nix-daemon.enable = true;
   nix.useDaemon = true;
   nix.package = pkgs.nix;
-  nix.settings.trusted-users = [ "root" "maartens" ];
+  nix.settings.trusted-users = [
+    "root"
+    "maartens"
+  ];
   system.stateVersion = 5;
 
   # Storage management on upgrades

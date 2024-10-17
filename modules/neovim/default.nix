@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   home.packages =
     with pkgs;
     with pkgs.python312Packages;
