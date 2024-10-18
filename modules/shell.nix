@@ -2,6 +2,7 @@
 {
   imports = [
     ./fish
+    ./zsh
     ./bat.nix
   ];
 
