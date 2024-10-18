@@ -75,6 +75,7 @@
                 ];
               };
             }
+            ./modules/darwin-apps.nix
             nix-homebrew.darwinModules.nix-homebrew
             {
               nix-homebrew = {
@@ -118,6 +119,7 @@
                 ];
               };
             }
+            ./modules/darwin-apps.nix
             nix-homebrew.darwinModules.nix-homebrew
             {
               nix-homebrew = {
