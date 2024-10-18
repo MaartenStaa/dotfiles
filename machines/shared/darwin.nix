@@ -27,9 +27,6 @@
     brews = [
       "mas"
     ];
-    taps = [
-      "nikitabobko/tap"
-    ];
     casks = [
       "alfred"
       "arc"
@@ -50,9 +47,12 @@
     masApps = {
       "Consent-O-Matic" = 1606897889;
     };
-    onActivation.autoUpdate = true;
-    onActivation.upgrade = true;
-    onActivation.cleanup = "zap";
+    global = {
+      autoUpdate = false;
+    };
+    onActivation = {
+      cleanup = "zap";
+    };
   };
 
   # TODO: Add system defaults

@@ -14,6 +14,24 @@
 
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     nix-homebrew.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Homebrew taps
+    tap-homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    tap-homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
+    tap-homebrew-bundle = {
+      url = "github:homebrew/homebrew-bundle";
+      flake = false;
+    };
+    tap-nikitabobko-tap = {
+      url = "github:nikitabobko/homebrew-tap";
+      flake = false;
+    };
   };
 
   outputs =
@@ -22,6 +40,11 @@
       catppuccin,
       home-manager,
       nix-darwin,
+      nix-homebrew,
+      tap-homebrew-core,
+      tap-homebrew-cask,
+      tap-homebrew-bundle,
+      tap-nikitabobko-tap,
       ...
     }:
     {
@@ -52,13 +75,19 @@
                 ];
               };
             }
+            nix-homebrew.darwinModules.nix-homebrew
             {
-              options.custom.username = nixpkgs.lib.mkOption {
-                type = nixpkgs.lib.types.str;
-                description = "The username of the user";
+              nix-homebrew = {
+                enable = true;
+                user = "maartens";
+                taps = {
+                  "homebrew/homebrew-core" = tap-homebrew-core;
+                  "homebrew/homebrew-cask" = tap-homebrew-cask;
+                  "homebrew/homebrew-bundle" = tap-homebrew-bundle;
+                  "nikitabobko/homebrew-tap" = tap-nikitabobko-tap;
+                };
+                mutableTaps = false;
               };
-
-              config.custom.username = "maartens";
             }
           ];
         };
@@ -87,6 +116,20 @@
                   ./modules/karabiner
                   catppuccin.homeManagerModules.catppuccin
                 ];
+              };
+            }
+            nix-homebrew.darwinModules.nix-homebrew
+            {
+              nix-homebrew = {
+                enable = true;
+                user = "maartens";
+                taps = {
+                  "homebrew/homebrew-core" = tap-homebrew-core;
+                  "homebrew/homebrew-cask" = tap-homebrew-cask;
+                  "homebrew/homebrew-bundle" = tap-homebrew-bundle;
+                  "nikitabobko/homebrew-tap" = tap-nikitabobko-tap;
+                };
+                mutableTaps = false;
               };
             }
           ];
