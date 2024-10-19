@@ -1,9 +1,6 @@
-{ pkgs, ... }:
+{ ... }:
 {
-  home.packages = with pkgs; [
-    fzf
-  ];
-
+  # https://mynixos.com/home-manager/options/programs.fzf
   programs.fzf = {
     enable = true;
     enableFishIntegration = true;
