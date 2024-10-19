@@ -26,8 +26,6 @@
       tree
       tmux
       wget
-      zoxide
-      zsh
 
       # General software development
       cloc

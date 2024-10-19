@@ -1,11 +1,10 @@
-{ pkgs, ... }:
+{ ... }:
 {
   imports = [
     ./fish
     ./zsh
+    ./starship.nix
     ./bat.nix
+    ./zoxide.nix
   ];
-
-  programs.zoxide.enable = true;
-  # environment.shells = [ pkgs.fish ];
 }

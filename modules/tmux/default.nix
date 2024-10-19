@@ -5,7 +5,12 @@
     enable = true;
     baseIndex = 1;
     clock24 = true;
-    extraConfig = builtins.readFile ./tmux.conf;
+    extraConfig =
+      builtins.readFile ./tmux.conf
+      + ''
+        set-option -g default-shell ${pkgs.fish}/bin/fish
+        set-option -g default-command \$SHELL
+      '';
     historyLimit = 10000;
     keyMode = "vi";
     newSession = true;
