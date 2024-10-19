@@ -3,7 +3,7 @@
   imports = [
     ./fish
     ./zsh
-    ./starship.nix
+    ./starship
     ./bat.nix
     ./zoxide.nix
   ];
