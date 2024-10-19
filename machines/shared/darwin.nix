@@ -1,15 +1,14 @@
-{ pkgs, ... }:
+{ pkgs, username, ... }:
 {
   # Allow running of proprietary software (e.g. Obsidian)
   nixpkgs.config.allowUnfree = true;
 
-  # TODO: This doesn't work on macOS
   services.nix-daemon.enable = true;
   nix.useDaemon = true;
   nix.package = pkgs.nix;
   nix.settings.trusted-users = [
     "root"
-    "maartens"
+    username
   ];
   system.stateVersion = 5;
 
@@ -17,9 +16,9 @@
   nix.gc.automatic = true;
   nix.settings.auto-optimise-store = false;
 
-  users.users.maartens = {
-    name = "maartens";
-    home = "/Users/maartens";
+  users.users.${username} = {
+    name = username;
+    home = "/Users/${username}";
   };
 
   homebrew = {

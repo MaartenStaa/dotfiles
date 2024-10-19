@@ -1,7 +1,6 @@
-{ ... }:
+{ username, ... }:
 {
-  # TODO: Parameterize this
-  home.homeDirectory = "/Users/maartens";
+  home.homeDirectory = "/Users/${username}";
 
   catppuccin = {
     enable = true;

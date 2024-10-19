@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  username,
+  ...
+}:
 {
   environment.systemPackages = with pkgs; [
     mkalias
@@ -8,7 +13,7 @@
     let
       env = pkgs.buildEnv {
         name = "system-applications";
-        paths = config.home-manager.users."maartens".home.packages;
+        paths = config.home-manager.users.${username}.home.packages;
         pathsToLink = "/Applications";
       };
     in

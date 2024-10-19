@@ -49,93 +49,111 @@
     }:
     {
       darwinConfigurations = {
-        work-mbp = nix-darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-          modules = [
-            ./machines/work-mbp
-            home-manager.darwinModules.home-manager
-            {
-              home-manager.backupFileExtension = "backup";
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users."maartens" = {
-                imports = [
-                  ./modules/home.nix
-                  ./modules/darwin.nix
-                  ./modules/pkgs.nix
-                  ./modules/fzf.nix
-                  ./modules/fd
-                  ./modules/tmux
-                  ./modules/neovim
-                  ./modules/git
-                  ./modules/shell.nix
-                  ./modules/kitty
-                  ./modules/karabiner
-                  catppuccin.homeManagerModules.catppuccin
-                ];
-              };
-            }
-            ./modules/darwin-apps.nix
-            nix-homebrew.darwinModules.nix-homebrew
-            {
-              nix-homebrew = {
-                enable = true;
-                user = "maartens";
-                taps = {
-                  "homebrew/homebrew-core" = tap-homebrew-core;
-                  "homebrew/homebrew-cask" = tap-homebrew-cask;
-                  "homebrew/homebrew-bundle" = tap-homebrew-bundle;
-                  "nikitabobko/homebrew-tap" = tap-nikitabobko-tap;
+        work-mbp =
+          let
+            args = {
+              username = "maartens";
+              email = "maartens@spotify.com";
+            };
+          in
+          nix-darwin.lib.darwinSystem {
+            system = "aarch64-darwin";
+            specialArgs = args;
+            modules = with args; [
+              ./machines/work-mbp
+              home-manager.darwinModules.home-manager
+              {
+                home-manager.backupFileExtension = "backup";
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.extraSpecialArgs = args;
+                home-manager.users.${username} = {
+                  imports = [
+                    ./modules/home.nix
+                    ./modules/darwin.nix
+                    ./modules/pkgs.nix
+                    ./modules/fzf.nix
+                    ./modules/fd
+                    ./modules/tmux
+                    ./modules/neovim
+                    ./modules/git
+                    ./modules/shell.nix
+                    ./modules/kitty
+                    ./modules/karabiner
+                    catppuccin.homeManagerModules.catppuccin
+                  ];
                 };
-                mutableTaps = false;
-              };
-            }
-          ];
-        };
-        private-mbp = {
-          system = "x86_64-darwin";
-          nixpkgs.hostPlatform = "x86_64-darwin";
-          modules = [
-            ./machines/private-mbp
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.backupFileExtension = "backup";
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.maarten = {
-                imports = [
-                  ./modules/home.nix
-                  ./modules/darwin.nix
-                  ./modules/pkgs.nix
-                  ./modules/fzf.nix
-                  ./modules/fd
-                  ./modules/tmux
-                  ./modules/neovim
-                  ./modules/git
-                  ./modules/shell.nix
-                  ./modules/kitty
-                  ./modules/karabiner
-                  catppuccin.homeManagerModules.catppuccin
-                ];
-              };
-            }
-            ./modules/darwin-apps.nix
-            nix-homebrew.darwinModules.nix-homebrew
-            {
-              nix-homebrew = {
-                enable = true;
-                user = "maartens";
-                taps = {
-                  "homebrew/homebrew-core" = tap-homebrew-core;
-                  "homebrew/homebrew-cask" = tap-homebrew-cask;
-                  "homebrew/homebrew-bundle" = tap-homebrew-bundle;
-                  "nikitabobko/homebrew-tap" = tap-nikitabobko-tap;
+              }
+              ./modules/darwin-apps.nix
+              nix-homebrew.darwinModules.nix-homebrew
+              {
+                nix-homebrew = {
+                  enable = true;
+                  user = username;
+                  taps = {
+                    "homebrew/homebrew-core" = tap-homebrew-core;
+                    "homebrew/homebrew-cask" = tap-homebrew-cask;
+                    "homebrew/homebrew-bundle" = tap-homebrew-bundle;
+                    "nikitabobko/homebrew-tap" = tap-nikitabobko-tap;
+                  };
+                  mutableTaps = false;
                 };
-                mutableTaps = false;
-              };
-            }
-          ];
-        };
+              }
+            ];
+          };
+        private-mbp =
+          let
+            args = {
+              username = "maarten";
+              email = "maarten@staa.dev";
+            };
+          in
+          nix-darwin.lib.darwinSystem {
+            system = "x86_64-darwin";
+            nixpkgs.hostPlatform = "x86_64-darwin";
+            specialArgs = args;
+            modules = with args; [
+              ./machines/private-mbp
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.backupFileExtension = "backup";
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.extraSpecialArgs = args;
+                home-manager.users.${username} = {
+                  imports = [
+                    ./modules/home.nix
+                    ./modules/darwin.nix
+                    ./modules/pkgs.nix
+                    ./modules/fzf.nix
+                    ./modules/fd
+                    ./modules/tmux
+                    ./modules/neovim
+                    ./modules/git
+                    ./modules/shell.nix
+                    ./modules/kitty
+                    ./modules/karabiner
+                    catppuccin.homeManagerModules.catppuccin
+                  ];
+                };
+              }
+              ./modules/darwin-apps.nix
+              nix-homebrew.darwinModules.nix-homebrew
+              {
+                nix-homebrew = {
+                  enable = true;
+                  user = username;
+                  taps = {
+                    "homebrew/homebrew-core" = tap-homebrew-core;
+                    "homebrew/homebrew-cask" = tap-homebrew-cask;
+                    "homebrew/homebrew-bundle" = tap-homebrew-bundle;
+                    "nikitabobko/homebrew-tap" = tap-nikitabobko-tap;
+                  };
+                  mutableTaps = false;
+                };
+              }
+            ];
+          };
       };
 
       formatter = {

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ email, pkgs, ... }:
 {
   home.packages = with pkgs; [
     gh
@@ -13,7 +13,7 @@
       enable = true;
     };
     userName = "Maarten Staa";
-    userEmail = "maartens@spotify.com";
+    userEmail = email;
     extraConfig = {
       lfs = {
         enable = true;

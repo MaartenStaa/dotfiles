@@ -1,7 +1,6 @@
-{ ... }:
+{ username, ... }:
 {
-  # TODO: Parameterize this.
-  home.username = "maartens";
+  home.username = username;
   home.stateVersion = "24.05";
 
   # Let Home Manager install and manage itself.
