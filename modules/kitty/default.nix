@@ -2,14 +2,15 @@
 {
   programs.kitty = {
     enable = true;
+    environment = {
+      SHELL = "${pkgs.fish}/bin/fish";
+    };
+    font = {
+      name = "JetBrainsMono Nerd Font Mono Light";
+      package = with pkgs; (nerdfonts.override { fonts = [ "JetBrainsMono" ]; });
+      size = 14;
+    };
     settings = {
-      font_family = "JetBrainsMono Nerd Font Mono Light";
-      bold_font = "JetBrainsMono Nerd Font Mono Bold";
-      italic_font = "JetBrainsMono Nerd Font Mono Light Italic";
-      bold_italic_font = "JetBrainsMono Nerd Font Mono Bold Italic";
-
-      font_size = 14;
-
       enabled_layouts = "all";
 
       tab_bar_style = "powerline";
@@ -17,12 +18,12 @@
 
       shell = "${pkgs.fish}/bin/fish --login --interactive";
       editor = "${pkgs.neovim}/bin/nvim";
-      env = ''
-        SHELL=${pkgs.fish}/bin/fish
-      '';
 
       term = "tmux-256color";
       shell_integration = true;
+    };
+    shellIntegration = {
+      enableFishIntegration = true;
     };
     themeFile = "Catppuccin-Macchiato";
   };

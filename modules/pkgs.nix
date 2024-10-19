@@ -41,9 +41,6 @@
       kitty
       obsidian
       slack
-
-      # Fonts
-      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
 
   fonts.fontconfig.enable = true;
