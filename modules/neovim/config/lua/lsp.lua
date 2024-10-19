@@ -222,6 +222,7 @@ local servers = {
       },
     },
   },
+  taplo = {},
   ts_ls = {
     settings = {
       typescript = {

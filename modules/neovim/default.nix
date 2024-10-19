@@ -54,6 +54,7 @@
       starlark-rust
       # swift-mesonlsp
       # swiftlint
+      taplo
       # vim-language-server TODO: Fix
       vscode-langservers-extracted
       yaml-language-server
