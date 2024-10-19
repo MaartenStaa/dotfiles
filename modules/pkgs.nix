@@ -19,6 +19,7 @@
       inetutils
       jq
       neovim-remote
+      proximity-sort
       reattach-to-user-namespace
       ripgrep
       silver-searcher
