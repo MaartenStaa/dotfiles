@@ -19,6 +19,6 @@ else
   elif [ -n "${PANE_ZOOMED}" ]; then
     tmux select-pane -t:.-
   else
-    tmux resize-pane -Z -t0
+    tmux resize-pane -Z -t1
   fi
 fi

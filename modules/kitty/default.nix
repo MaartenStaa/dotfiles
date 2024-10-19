@@ -21,6 +21,8 @@
 
       term = "tmux-256color";
       shell_integration = true;
+
+      macos_option_as_alt = true;
     };
     shellIntegration = {
       enableFishIntegration = true;
