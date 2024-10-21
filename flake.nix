@@ -80,6 +80,7 @@
                     ./modules/shell.nix
                     ./modules/kitty
                     ./modules/karabiner
+                    ./modules/bazel.nix
                     catppuccin.homeManagerModules.catppuccin
                   ];
                 };
