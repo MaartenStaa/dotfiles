@@ -81,6 +81,7 @@
                     ./modules/kitty
                     ./modules/karabiner
                     ./modules/bazel.nix
+                    ./modules/gcloud.nix
                     catppuccin.homeManagerModules.catppuccin
                   ];
                 };

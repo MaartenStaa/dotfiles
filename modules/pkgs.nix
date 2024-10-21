@@ -30,7 +30,6 @@
 
       # General software development
       cloc
-      google-cloud-sdk
       snyk
 
       # Smart home
