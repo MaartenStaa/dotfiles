@@ -1,5 +1,37 @@
 {
   "nodes": {
+    "asdf-nodejs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1722354271,
+        "narHash": "sha256-zj+QVsMM0vUOSxiEcCXOSu4zgx9HRaG3V1meY9qtqQc=",
+        "owner": "asdf-vm",
+        "repo": "asdf-nodejs",
+        "rev": "c36e6f065d31437786e587de50f32c85b4972188",
+        "type": "github"
+      },
+      "original": {
+        "owner": "asdf-vm",
+        "repo": "asdf-nodejs",
+        "type": "github"
+      }
+    },
+    "asdf-python": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1726271002,
+        "narHash": "sha256-lyVGjWyzynsHVj1zH7Nd9I3MXrgCufYd1rCr6g3475o=",
+        "owner": "danhper",
+        "repo": "asdf-python",
+        "rev": "a3a01856098d6d2b9642e382f5b38e70275726d1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "danhper",
+        "repo": "asdf-python",
+        "type": "github"
+      }
+    },
     "brew-src": {
       "flake": false,
       "locked": {
@@ -162,6 +194,8 @@
     },
     "root": {
       "inputs": {
+        "asdf-nodejs": "asdf-nodejs",
+        "asdf-python": "asdf-python",
         "catppuccin": "catppuccin",
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",

@@ -1,0 +1,23 @@
+diff --git a/bin/utils.sh b/bin/utils.sh
+index 038a447..4ef1575 100755
+--- a/bin/utils.sh
++++ b/bin/utils.sh
+@@ -23,11 +23,16 @@ update_python_build() {
+ }
+ 
+ pyenv_path() {
+-  echo "$(dirname $(dirname $0))/pyenv"
++  echo "$(runtime_data_path)/pyenv"
+ }
+ 
+ pyenv_update_timestamp_path() {
+-  echo "$(dirname $(dirname "$0"))/pyenv_last_update"
++  echo "$(runtime_data_path)/pyenv_last_update"
++}
++
++runtime_data_path() {
++  repo_base=$(dirname "$(dirname "$0")")
++  echo "${ASDF_PYTHON_DATA_DIR:-$repo_base}"
+ }
+ 
+ pyenv_should_update() {

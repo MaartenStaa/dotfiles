@@ -32,10 +32,20 @@
       url = "github:nikitabobko/homebrew-tap";
       flake = false;
     };
+
+    # ASDF version manager plugins
+    asdf-python = {
+      url = "github:danhper/asdf-python";
+      flake = false;
+    };
+    asdf-nodejs = {
+      url = "github:asdf-vm/asdf-nodejs";
+      flake = false;
+    };
   };
 
   outputs =
-    {
+    inputs@{
       nixpkgs,
       catppuccin,
       home-manager,
@@ -66,7 +76,9 @@
                 home-manager.backupFileExtension = "backup";
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
-                home-manager.extraSpecialArgs = args;
+                home-manager.extraSpecialArgs = {
+                  inherit username email inputs;
+                };
                 home-manager.users.${username} = {
                   imports = [
                     ./modules/home.nix
@@ -76,6 +88,7 @@
                     ./modules/fd
                     ./modules/tmux
                     ./modules/neovim
+                    ./modules/asdf
                     ./modules/git
                     ./modules/shell.nix
                     ./modules/kitty
@@ -121,7 +134,9 @@
                 home-manager.backupFileExtension = "backup";
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
-                home-manager.extraSpecialArgs = args;
+                home-manager.extraSpecialArgs = {
+                  inherit username email inputs;
+                };
                 home-manager.users.${username} = {
                   imports = [
                     ./modules/home.nix
@@ -131,6 +146,7 @@
                     ./modules/fd
                     ./modules/tmux
                     ./modules/neovim
+                    ./modules/asdf
                     ./modules/git
                     ./modules/shell.nix
                     ./modules/kitty

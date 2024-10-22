@@ -11,6 +11,9 @@
         description = "Print comments for all open PRs for the current user";
       };
     };
+    loginShellInit = ''
+      source "${pkgs.asdf-vm}/share/asdf-vm/asdf.fish"
+    '';
     plugins = with pkgs.fishPlugins; [
       {
         name = "bass";
