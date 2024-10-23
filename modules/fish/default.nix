@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   # https://mynixos.com/home-manager/options/programs.fish
   programs.fish = {
@@ -25,12 +25,7 @@
       }
       {
         name = "nvm";
-        src = pkgs.fetchFromGitHub {
-          owner = "jorgebucaran";
-          repo = "nvm.fish";
-          rev = "2.2.16";
-          sha256 = "sha256-GTEkCm+OtxMS3zJI5gnFvvObkrpepq1349/LcEPQRDo=";
-        };
+        src = inputs.fish-plugin-nvm;
       }
     ];
     shellAbbrs = {

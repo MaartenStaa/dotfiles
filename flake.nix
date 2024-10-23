@@ -33,6 +33,12 @@
       flake = false;
     };
 
+    # Fish plugins
+    fish-plugin-nvm = {
+      url = "github:jorgebucaran/nvm.fish";
+      flake = false;
+    };
+
     # ASDF version manager plugins
     asdf-python = {
       url = "github:danhper/asdf-python";
