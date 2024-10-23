@@ -6,7 +6,7 @@
       SHELL = "${pkgs.fish}/bin/fish";
     };
     font = {
-      name = "JetBrainsMono Nerd Font Mono Light";
+      name = "JetBrainsMono Nerd Font Mono";
       package = with pkgs; (nerdfonts.override { fonts = [ "JetBrainsMono" ]; });
       size = 14;
     };
