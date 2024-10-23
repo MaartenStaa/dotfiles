@@ -40,11 +40,11 @@
     };
 
     # ASDF version manager plugins
-    asdf-python = {
+    asdf-plugin-python = {
       url = "github:danhper/asdf-python";
       flake = false;
     };
-    asdf-nodejs = {
+    asdf-plugin-nodejs = {
       url = "github:asdf-vm/asdf-nodejs";
       flake = false;
     };

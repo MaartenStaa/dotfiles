@@ -5,12 +5,12 @@ let
     "nodejs"
   ];
   pluginSources = {
-    asdf-nodejs = inputs."asdf-nodejs";
+    nodejs = inputs."asdf-plugin-nodejs";
     # Path asdf-python to allow setting the runtime data dir to somewhere we can write
-    asdf-python = pkgs.stdenv.mkDerivation {
-      name = "asdf-python";
-      version = "${inputs.asdf-python.rev}-patched";
-      src = inputs."asdf-python";
+    python = pkgs.stdenv.mkDerivation {
+      name = "asdf-plugin-python";
+      version = "${inputs.asdf-plugin-python.rev}-patched";
+      src = inputs."asdf-plugin-python";
       phases = [
         "unpackPhase"
         "patchPhase"
@@ -30,7 +30,7 @@ in
     builtins.map (plugin: {
       name = ".asdf/plugins/${plugin}";
       value = {
-        source = pluginSources."asdf-${plugin}";
+        source = pluginSources.${plugin};
       };
     }) plugins
   );

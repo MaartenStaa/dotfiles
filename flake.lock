@@ -1,6 +1,6 @@
 {
   "nodes": {
-    "asdf-nodejs": {
+    "asdf-plugin-nodejs": {
       "flake": false,
       "locked": {
         "lastModified": 1722354271,
@@ -16,7 +16,7 @@
         "type": "github"
       }
     },
-    "asdf-python": {
+    "asdf-plugin-python": {
       "flake": false,
       "locked": {
         "lastModified": 1726271002,
@@ -210,8 +210,8 @@
     },
     "root": {
       "inputs": {
-        "asdf-nodejs": "asdf-nodejs",
-        "asdf-python": "asdf-python",
+        "asdf-plugin-nodejs": "asdf-plugin-nodejs",
+        "asdf-plugin-python": "asdf-plugin-python",
         "catppuccin": "catppuccin",
         "fish-plugin-nvm": "fish-plugin-nvm",
         "home-manager": "home-manager",
