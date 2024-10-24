@@ -91,7 +91,4 @@ rebuild: result
 
 result: $(shell find . -iname '*.nix')
 result: flake.lock
-	# TODO: Pass as input
-	darwin-rebuild build --flake .#work-mbp
-
-# end
+	darwin-rebuild build --flake ./#$$MACHINE_NAME
