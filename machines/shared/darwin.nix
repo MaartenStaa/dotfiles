@@ -4,17 +4,20 @@
   nixpkgs.config.allowUnfree = true;
 
   services.nix-daemon.enable = true;
-  nix.useDaemon = true;
-  nix.package = pkgs.nix;
-  nix.settings.trusted-users = [
-    "root"
-    username
-  ];
-  system.stateVersion = 5;
+  nix = {
+    useDaemon = true;
+    package = pkgs.nix;
+    settings.trusted-users = [
+      "root"
+      username
+    ];
 
-  # Storage management on upgrades
-  nix.gc.automatic = true;
-  nix.settings.auto-optimise-store = false;
+    # Storage management on upgrades
+    gc.automatic = true;
+    settings.auto-optimise-store = false;
+  };
+
+  system.stateVersion = 5;
 
   users.users.${username} = {
     name = username;

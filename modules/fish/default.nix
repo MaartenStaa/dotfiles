@@ -26,11 +26,11 @@
     plugins = with pkgs.fishPlugins; [
       {
         name = "bass";
-        src = bass.src;
+        inherit (bass) src;
       }
       {
         name = "fzf-fish";
-        src = fzf-fish.src;
+        inherit (fzf-fish) src;
       }
       {
         name = "nvm";

@@ -1,4 +1,4 @@
-{ ... }:
+_:
 {
   # https://mynixos.com/home-manager/options/programs.starship
   programs.starship = {

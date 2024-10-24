@@ -79,30 +79,32 @@
               ./machines/work-mbp
               home-manager.darwinModules.home-manager
               {
-                home-manager.backupFileExtension = "backup";
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.extraSpecialArgs = {
-                  inherit username email inputs;
-                };
-                home-manager.users.${username} = {
-                  imports = [
-                    ./modules/home.nix
-                    ./modules/darwin.nix
-                    ./modules/pkgs.nix
-                    ./modules/fzf.nix
-                    ./modules/fd
-                    ./modules/tmux
-                    ./modules/neovim
-                    ./modules/asdf
-                    ./modules/git
-                    ./modules/shell.nix
-                    ./modules/kitty
-                    ./modules/karabiner
-                    ./modules/bazel.nix
-                    ./modules/gcloud.nix
-                    catppuccin.homeManagerModules.catppuccin
-                  ];
+                home-manager = {
+                  backupFileExtension = "backup";
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  extraSpecialArgs = {
+                    inherit username email inputs;
+                  };
+                  users.${username} = {
+                    imports = [
+                      ./modules/home.nix
+                      ./modules/darwin.nix
+                      ./modules/pkgs.nix
+                      ./modules/fzf.nix
+                      ./modules/fd
+                      ./modules/tmux
+                      ./modules/neovim
+                      ./modules/asdf
+                      ./modules/git
+                      ./modules/shell.nix
+                      ./modules/kitty
+                      ./modules/karabiner
+                      ./modules/bazel.nix
+                      ./modules/gcloud.nix
+                      catppuccin.homeManagerModules.catppuccin
+                    ];
+                  };
                 };
               }
               ./modules/darwin-apps.nix
@@ -137,28 +139,30 @@
               ./machines/private-mbp
               home-manager.nixosModules.home-manager
               {
-                home-manager.backupFileExtension = "backup";
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.extraSpecialArgs = {
-                  inherit username email inputs;
-                };
-                home-manager.users.${username} = {
-                  imports = [
-                    ./modules/home.nix
-                    ./modules/darwin.nix
-                    ./modules/pkgs.nix
-                    ./modules/fzf.nix
-                    ./modules/fd
-                    ./modules/tmux
-                    ./modules/neovim
-                    ./modules/asdf
-                    ./modules/git
-                    ./modules/shell.nix
-                    ./modules/kitty
-                    ./modules/karabiner
-                    catppuccin.homeManagerModules.catppuccin
-                  ];
+                home-manager = {
+                  backupFileExtension = "backup";
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  extraSpecialArgs = {
+                    inherit username email inputs;
+                  };
+                  users.${username} = {
+                    imports = [
+                      ./modules/home.nix
+                      ./modules/darwin.nix
+                      ./modules/pkgs.nix
+                      ./modules/fzf.nix
+                      ./modules/fd
+                      ./modules/tmux
+                      ./modules/neovim
+                      ./modules/asdf
+                      ./modules/git
+                      ./modules/shell.nix
+                      ./modules/kitty
+                      ./modules/karabiner
+                      catppuccin.homeManagerModules.catppuccin
+                    ];
+                  };
                 };
               }
               ./modules/darwin-apps.nix
