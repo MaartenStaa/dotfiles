@@ -15,6 +15,7 @@ switch:
 .PHONY: switch
 
 ## Upgrade the system (update, commit, switch)
+## @param MACHINE_NAME=work-mbp The name of the machine to build for
 upgrade:
 upgrade: update switch
 .PHONY: upgrade
@@ -49,12 +50,7 @@ update: is_clean
 .PHONY: update
 
 is_clean:
-	@
-	if test -n "$$(git status --porcelain)"
-	then
-		echo "The repository is not clean. First commit or stash your prior changes."
-		exit 2
-	fi
+	@if test -n "$$(git status --porcelain)"; then echo "The repository is not clean. First commit or stash your prior changes."; exit 2; fi
 .PHONY: is_clean
 
 
