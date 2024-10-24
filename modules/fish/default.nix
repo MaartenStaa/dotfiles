@@ -10,6 +10,15 @@
         '';
         description = "Print comments for all open PRs for the current user";
       };
+      gh_pr_share = {
+        body = ''
+          set pr $(gh pr status --json 'url,title' | jq '.currentBranch')
+          set text ":gh-pr-open: $(echo $pr | jq '.url' --raw-output | cut -d '/' -f 4-5) [$(echo $pr | jq '.title' --raw-output)]($(echo $pr | jq '.url' --raw-output))"
+          echo "$text" | pbcopy
+          echo -e "\x1b[32mCopied to clipboard:\x1b[0m $text"
+        '';
+        description = "Share the current PR";
+      };
     };
     loginShellInit = ''
       source "${pkgs.asdf-vm}/share/asdf-vm/asdf.fish"
