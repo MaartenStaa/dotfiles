@@ -70,17 +70,7 @@ commit: rebuild prompt
 
 
 prompt:
-	@
-	echo "Here is the summary of channges:"
-	echo
-	nix store diff-closures  /nix/var/nix/profiles/system ./result
-	echo
-	read -p "Do you want to continue? [y/N] " answer
-	if [ "$${answer}" != "y" ]
-	then
-		echo "Aborting."
-		exit 1
-	fi
+	@echo "Here is the summary of changes:"; echo; nix store diff-closures  /nix/var/nix/profiles/system ./result; echo; read -p "Do you want to continue? [y/N] " answer; if [ "$${answer}" != "y" ]; then echo "Aborting."; exit 1; fi
 .PHONY: prompt
 
 ## Rebuild the system without switching
