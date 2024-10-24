@@ -5,24 +5,27 @@
     enable = true;
     functions = {
       gh_pr_comments = {
-        body = ''
-          gh pr list -A $(id -un) -s open --json number --jq ".[].number" | xargs -I {} gh pr view {} --comments --json title,comments --jq '.comments |= map(select(.author.login | test("bot|ci") | not)) | .comments |= map(.body) | .title,.comments' | bat
-        '';
+        body = # fish
+          ''
+            gh pr list -A $(id -un) -s open --json number --jq ".[].number" | xargs -I {} gh pr view {} --comments --json title,comments --jq '.comments |= map(select(.author.login | test("bot|ci") | not)) | .comments |= map(.body) | .title,.comments' | bat
+          '';
         description = "Print comments for all open PRs for the current user";
       };
       gh_pr_share = {
-        body = ''
-          set pr $(gh pr status --json 'url,title' | jq '.currentBranch')
-          set text ":gh-pr-open: $(echo $pr | jq '.url' --raw-output | cut -d '/' -f 4-5) [$(echo $pr | jq '.title' --raw-output)]($(echo $pr | jq '.url' --raw-output))"
-          echo "$text" | pbcopy
-          echo -e "\x1b[32mCopied to clipboard:\x1b[0m $text"
-        '';
+        body = # fish
+          ''
+            set pr $(gh pr status --json 'url,title' | jq '.currentBranch')
+            set text ":gh-pr-open: $(echo $pr | jq '.url' --raw-output | cut -d '/' -f 4-5) [$(echo $pr | jq '.title' --raw-output)]($(echo $pr | jq '.url' --raw-output))"
+            echo "$text" | pbcopy
+            echo -e "\x1b[32mCopied to clipboard:\x1b[0m $text"
+          '';
         description = "Share the current PR";
       };
     };
-    loginShellInit = ''
-      source "${pkgs.asdf-vm}/share/asdf-vm/asdf.fish"
-    '';
+    loginShellInit = # fish
+      ''
+        source "${pkgs.asdf-vm}/share/asdf-vm/asdf.fish"
+      '';
     plugins = with pkgs.fishPlugins; [
       {
         name = "bass";

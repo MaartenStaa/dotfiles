@@ -36,8 +36,9 @@ in
   );
 
   # Work around permission problems with asdf
-  programs.fish.loginShellInit = ''
-    export ASDF_NODEJS_NODEBUILD_HOME="$HOME/.asdf/build/node-build";
-    export ASDF_PYTHON_DATA_DIR="$HOME/.asdf/build/python";
-  '';
+  programs.fish.loginShellInit = # fish
+    ''
+      export ASDF_NODEJS_NODEBUILD_HOME="$HOME/.asdf/build/node-build";
+      export ASDF_PYTHON_DATA_DIR="$HOME/.asdf/build/python";
+    '';
 }
