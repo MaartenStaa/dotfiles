@@ -5,6 +5,7 @@
     with pkgs.python312Packages;
     with pkgs.luajitPackages;
     [
+      neovim
       ctags
       tree-sitter
 
@@ -62,13 +63,13 @@
     ];
 
   # https://mynixos.com/nixpkgs/options/programs.neovim
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
-    withPython3 = true;
-  };
+  # programs.neovim = {
+  #   enable = true;
+  #   defaultEditor = true;
+  #   viAlias = true;
+  #   vimAlias = true;
+  #   withPython3 = true;
+  # };
 
   xdg.configFile = {
     nvim = {
