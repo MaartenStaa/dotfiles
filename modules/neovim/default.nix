@@ -23,6 +23,7 @@
       uv
       # Rust
       cargo
+      clippy
       rustc
       rustfmt
 
