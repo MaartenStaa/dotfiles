@@ -7,6 +7,7 @@
     [
       # Command line tools
       ack
+      ansifilter
       bat
       coreutils
       curl

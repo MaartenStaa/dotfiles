@@ -60,6 +60,7 @@ commit: rebuild prompt
 	nix store diff-closures \
 		/nix/var/nix/profiles/system \
 		./result \
+	| ansifilter \
 	>> $(template)
 	git add .
 	git commit --file=$(template) --edit
