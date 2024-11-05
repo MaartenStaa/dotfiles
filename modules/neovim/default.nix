@@ -17,6 +17,7 @@
       lua
       # JavaScript
       nodejs
+      yarn
       # Python
       python3
       ruff
