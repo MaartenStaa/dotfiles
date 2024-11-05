@@ -38,6 +38,7 @@
       "docker"
       "firefox@developer-edition"
       "karabiner-elements"
+      "kitty"
       "home-assistant"
       "iina"
       "moom"
