@@ -528,7 +528,7 @@ return require('lazy').setup({
         args = { '-', '--max-line-length', '100' },
         stdin = 1,
       }
-      vim.g.neoformat_enabled_python = { 'autopep8' }
+      vim.g.neoformat_enabled_python = {  'black', 'autopep8' }
 
       local augroup = vim.api.nvim_create_augroup('fmt', { clear = true })
       vim.api.nvim_create_autocmd('BufWritePre', {
