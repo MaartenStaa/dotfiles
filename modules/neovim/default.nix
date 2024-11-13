@@ -16,6 +16,7 @@
       # Lua
       lua
       # JavaScript
+      corepack
       nodejs
       yarn
       # Python
