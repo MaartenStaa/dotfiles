@@ -20,6 +20,7 @@
       nodejs
       yarn
       # Python
+      black
       python3
       ruff
       uv
