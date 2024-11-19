@@ -84,7 +84,6 @@ return require('lazy').setup({
   'fladson/vim-kitty',
   { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
   'qnighy/lalrpop.vim',
-  'sheerun/vim-polyglot',
 
   -- LSP & autocomplete
   'andersevenrud/cmp-tmux',
@@ -113,8 +112,6 @@ return require('lazy').setup({
     config = true,
     enabled = false,
   },
-  -- 'williamboman/mason.nvim',
-  -- 'williamboman/mason-lspconfig.nvim',
 
   -- UI enhancements
   -- Highlight other uses of item under cursor
@@ -201,11 +198,6 @@ return require('lazy').setup({
        },
      },
   },
-  'junegunn/goyo.vim', -- Distraction free mode
-  {
-    'karb94/neoscroll.nvim',
-    config = true
-  },
   'nvim-tree/nvim-web-devicons',
   {
     'lukas-reineke/indent-blankline.nvim',
@@ -243,30 +235,11 @@ return require('lazy').setup({
       { 'nvim-tree/nvim-web-devicons', opt = true },
     },
     config = function ()
-      local function get_modified()
-        -- if utils.get_buf_option "mod" then
-        --   local mod = icons.git.Mod
-        --   return "%#WinBarFilename#" .. mod .. " " .. "%t" .. "%*"
-        -- end
-        return "%#WinBarFilename#" .. "%t" .. "%*"
-      end
-
-      local function get_winbar()
-        return "%#WinBarSeparator#" .. "%=" .. "" .. "%*" .. get_modified() .. "%#WinBarSeparator#" .. "" .. "%*"
-      end
-
       local icons = require('nvim-web-devicons')
       local cssmodules_icon, cssmodules_color = icons.get_icon_by_filetype('css')
       local eslint_icon, eslint_color = icons.get_icon('.eslintrc')
       local tsserver_icon, tsserver_color = icons.get_icon_by_filetype('typescript')
 
-      -- icon_data {
-      --   color = "#42a5f5",
-      --   cterm_color = "75",
-      --   icon = "",
-      --   name = "Css"
-      -- }
-      -- "DevIconCss"
       local copilot_icon = ''
       local copilot_color = { fg = '#a373f7' }
 
@@ -303,22 +276,6 @@ return require('lazy').setup({
         inactive_sections = {
           lualine_c = { { 'filename', path = 1 } }
         },
-        -- winbar = {
-        --   lualine_a = { 'diagnostics' },
-        --   lualine_b = { '%#WinBarSeparator#' .. '%*' .. '%#WinBarFilename#' .. '%t' .. '%*' .. '%#WinBarSeparator#' },
-        --   lualine_c = {},
-        --   lualine_x = {},
-        --   lualine_y = {},
-        --   lualine_z = {},
-        -- },
-        -- inactive_winbar = {
-        --   lualine_a = {},
-        --   lualine_b = {},
-        --   lualine_c = {},
-        --   lualine_x = {},
-        --   lualine_y = {},
-        --   lualine_z = {},
-        -- },
       })
     end
   },
@@ -331,10 +288,6 @@ return require('lazy').setup({
     'sindrets/diffview.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' }
   },
-  -- {
-  --   'yorickpeterse/nvim-pqf',
-  --   config = true
-  -- },
 
   -- Refactoring
   -- {
@@ -402,81 +355,6 @@ return require('lazy').setup({
     config = true,
   },
 
-  -- Productivity
-  -- {
-  --   "jake-stewart/multicursor.nvim",
-  --   branch = "1.0",
-  --   config = function()
-  --     local mc = require("multicursor-nvim")
-
-  --     mc.setup()
-
-  --     -- Add cursors above/below the main cursor.
-  --     vim.keymap.set({ "n", "v" }, "<up>", function() mc.addCursor("k") end)
-  --     vim.keymap.set({ "n", "v" }, "<down>", function() mc.addCursor("j") end)
-
-  --     -- Add a cursor and jump to the next word under cursor.
-  --     vim.keymap.set({ "n", "v" }, "<c-n>", function() mc.addCursor("*") end)
-
-  --     -- Jump to the next word under cursor but do not add a cursor.
-  --     vim.keymap.set({ "n", "v" }, "<c-s>", function() mc.skipCursor("*") end)
-
-  --     -- Rotate the main cursor.
-  --     vim.keymap.set({ "n", "v" }, "<left>", mc.nextCursor)
-  --     vim.keymap.set({ "n", "v" }, "<right>", mc.prevCursor)
-
-  --     -- Delete the main cursor.
-  --     vim.keymap.set({ "n", "v" }, "<leader>x", mc.deleteCursor)
-
-  --     -- Add and remove cursors with control + left click.
-  --     vim.keymap.set("n", "<c-leftmouse>", mc.handleMouse)
-
-  --     vim.keymap.set({ "n", "v" }, "<c-q>", function()
-  --       if mc.cursorsEnabled() then
-  --         -- Stop other cursors from moving.
-  --         -- This allows you to reposition the main cursor.
-  --         mc.disableCursors()
-  --       else
-  --         mc.addCursor()
-  --       end
-  --     end)
-
-  --     vim.keymap.set({ "n", "v" }, "<esc>", function()
-  --       print(mc.cursorsEnabled(), mc.hasCursors())
-  --       if not mc.cursorsEnabled() then
-  --         mc.enableCursors()
-  --       elseif mc.hasCursors() then
-  --         mc.clearCursors()
-  --       else
-  --         -- Default <esc> handler.
-  --       end
-  --     end)
-
-  --     -- Align cursor columns.
-  --     vim.keymap.set("n", "<leader>a", mc.alignCursors)
-
-  --     -- Split visual selections by regex.
-  --     vim.keymap.set("v", "S", mc.splitCursors)
-
-  --     -- Append/insert for each line of visual selections.
-  --     vim.keymap.set("v", "I", mc.insertVisual)
-  --     vim.keymap.set("v", "A", mc.appendVisual)
-
-  --     -- match new cursors within visual selections by regex.
-  --     vim.keymap.set("v", "M", mc.matchCursors)
-
-  --     -- Rotate visual selection contents.
-  --     vim.keymap.set("v", "<leader>t", function() mc.transposeCursors(1) end)
-  --     vim.keymap.set("v", "<leader>T", function() mc.transposeCursors(-1) end)
-
-  --     -- Customize how cursors look.
-  --     vim.api.nvim_set_hl(0, "MultiCursorCursor", { link = "Cursor" })
-  --     vim.api.nvim_set_hl(0, "MultiCursorVisual", { link = "Visual" })
-  --     vim.api.nvim_set_hl(0, "MultiCursorDisabledCursor", { link = "Visual" })
-  --     vim.api.nvim_set_hl(0, "MultiCursorDisabledVisual", { link = "Visual" })
-  --   end,
-  -- },
-
   -- Misc
   {
     -- Add/change/remove surrounding brackets
@@ -541,7 +419,6 @@ return require('lazy').setup({
   'tpope/vim-commentary', -- Toggle comments
   'tpope/vim-repeat', -- Handles repeating plugin commands as a whole
   'tpope/vim-sensible', -- Set some sensible defaults
-  -- 'tpope/vim-vinegar', -- Netrw enhancements
   {
     -- Automatically insert matching brackets, and jump over them when typing them
     'windwp/nvim-autopairs',
