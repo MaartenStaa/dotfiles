@@ -78,25 +78,25 @@ if not lsp_configs.relay then
     },
   }
 end
-if not lsp_configs.oxlint then
-  lsp_configs.oxlint = {
-    default_config = {
-      cmd = { 'oxc_vscode.sh' },
-      filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
-      root_dir = function(fname)
-        local util = require('lspconfig.util')
-        return util.root_pattern('package.json', '.git')(fname)
-      end,
-      settings = {
-        run = 'onType',
-        enable = true,
-        trace = {
-          server = 'off',
-        },
-      }
-    },
-  }
-end
+-- if not lsp_configs.oxlint then
+--   lsp_configs.oxlint = {
+--     default_config = {
+--       cmd = { 'oxc_vscode.sh' },
+--       filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+--       root_dir = function(fname)
+--         local util = require('lspconfig.util')
+--         return util.root_pattern('package.json', '.git')(fname)
+--       end,
+--       settings = {
+--         run = 'onType',
+--         enable = true,
+--         trace = {
+--           server = 'off',
+--         },
+--       }
+--     },
+--   }
+-- end
 
 local servers = {
   bashls = {},
@@ -189,7 +189,7 @@ local servers = {
       },
     },
   },
-  oxlint = {},
+  -- oxlint = {},
   -- relay = {},
   starlark_rust = {
     cmd = { '/Users/maartens/repos/github/facebookexperimental/starlark-rust/target/debug/starlark', '--lsp', '--bazel', '--eager'},

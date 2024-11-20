@@ -28,6 +28,7 @@
       tree
       tmux
       wget
+      yazi
 
       # General software development
       cloc
