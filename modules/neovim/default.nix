@@ -60,6 +60,7 @@
       # swift-mesonlsp
       # swiftlint
       taplo
+      typescript-language-server
       # vim-language-server TODO: Fix
       vscode-langservers-extracted
       yaml-language-server
