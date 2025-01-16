@@ -15,6 +15,8 @@
       buildozer
       # Lua
       lua
+      # Go
+      go
       # JavaScript
       corepack
       nodejs
@@ -52,6 +54,7 @@
       # oxlint
       pylsp-mypy
       pylsp-rope
+      pyright
       python-lsp-ruff
       python-lsp-server
       rust-analyzer

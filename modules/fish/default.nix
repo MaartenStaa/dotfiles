@@ -22,10 +22,6 @@
         description = "Share the current PR";
       };
     };
-    loginShellInit = # fish
-      ''
-        source "${pkgs.asdf-vm}/share/asdf-vm/asdf.fish"
-      '';
     plugins = with pkgs.fishPlugins; [
       {
         name = "bass";
@@ -74,9 +70,12 @@
     };
     shellInitLast =
       builtins.readFile ./config.fish
-      + ''
-        export EDITOR=${pkgs.neovim}/bin/nvim
-        export VISUAL=${pkgs.neovim}/bin/nvim
-      '';
+      +
+        # fish
+        ''
+          source "${pkgs.asdf-vm}/share/asdf-vm/asdf.fish"
+          export EDITOR=${pkgs.neovim}/bin/nvim
+          export VISUAL=${pkgs.neovim}/bin/nvim
+        '';
   };
 }
