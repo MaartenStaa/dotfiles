@@ -19,18 +19,33 @@
       lua-language-server
       luacheck
       # Go
+      delve
       go
+      gofumpt
+      gomodifytags
       gopls
+      gotools
+      impl
       # Java
       jdt-language-server
-      # JavaScript
+      # vscode-extensions.vscjava.vscode-java-debug # TODO: This doesn't actually provide the right executable
+      # vscode-extensions.vscjava.vscode-java-test # TODO: This doesn't actually provide the right executable
+      # JavaScript / TypeScript
       corepack
       dockerfile-language-server-nodejs
       # eslintd
       nodejs
       # oxlint
+      # typescript-language-server # TODO: Remove? Replaced by vtsls?
+      vscode-js-debug
+      vtsls
       yarn
+      # Kotlin
+      ktlint
+      ktfmt
       # Markdown
+      # markdown-toc # TODO: This npm package doesn't exist
+      markdownlint-cli2
       marksman
       # Nix
       nil
@@ -44,6 +59,7 @@
       pylsp-mypy
       pylsp-rope
       pyright
+      pytest
       python-lsp-ruff
       python-lsp-server
       python3
@@ -55,6 +71,7 @@
       rust-analyzer
       rustc
       rustfmt
+      # vscode-extensions.vadimcn.vscode-lldb # TODO: This is currently broken, and doesn't provide the right executable
       # Shell scripts
       bash-language-server
       shellcheck
@@ -65,8 +82,6 @@
       swiftformat
       # TOML
       taplo
-      # TypeScript
-      typescript-language-server
       # YAML
       yaml-language-server
       yamllint
