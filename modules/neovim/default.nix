@@ -59,6 +59,7 @@
       python-lsp-server
       rust-analyzer
       shellcheck
+      shfmt
       starlark-rust
       # swift-mesonlsp
       # swiftlint
