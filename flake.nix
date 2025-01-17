@@ -91,6 +91,7 @@
                       ./modules/home.nix
                       ./modules/darwin.nix
                       ./modules/pkgs.nix
+                      ./modules/development.nix
                       ./modules/fzf.nix
                       ./modules/fd
                       ./modules/tmux
@@ -151,6 +152,7 @@
                       ./modules/home.nix
                       ./modules/darwin.nix
                       ./modules/pkgs.nix
+                      ./modules/development.nix
                       ./modules/fzf.nix
                       ./modules/fd
                       ./modules/tmux
