@@ -54,6 +54,7 @@
       # Python
       autopep8
       black
+      debugpy
       flake8
       jedi-language-server
       pylsp-mypy
