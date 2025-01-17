@@ -73,9 +73,9 @@
       +
         # fish
         ''
-          source "${pkgs.asdf-vm}/share/asdf-vm/asdf.fish"
           export EDITOR=${pkgs.neovim}/bin/nvim
           export VISUAL=${pkgs.neovim}/bin/nvim
         '';
+    # source "${pkgs.asdf-vm}/share/asdf-vm/asdf.fish"
   };
 }
