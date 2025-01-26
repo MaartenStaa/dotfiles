@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 {
   home.packages = with pkgs; [
+    luarocks
     neovim
     ctags
     tree-sitter

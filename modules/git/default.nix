@@ -55,6 +55,7 @@
       butd = "!git fetch origin && git rebase origin/master";
       pf = "push --force-with-lease";
       ptb = "!git push -u $(whoami) $(git branch --show-current)";
+      uncommit = "reset --soft HEAD~";
     };
   };
 }

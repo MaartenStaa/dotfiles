@@ -48,6 +48,7 @@
       brewu = "brew update && brew upgrade";
       gb = "git branch";
       dcsh = "docker compose exec app ash";
+      gf = "git fetch";
       giA = "git add -p";
       gia = "git add";
       gwd = "git diff --no-ext-diff";
@@ -55,6 +56,7 @@
       gl = "git log";
       gcn = "git commit --no-edit";
       gp = "git push";
+      gpr = "git push --prune";
       ll = "eza -hal";
       gpf = "git push --force-with-lease";
       gs = "git status";

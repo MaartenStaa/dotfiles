@@ -41,8 +41,11 @@
       vtsls
       yarn
       # Kotlin
+      detekt
       ktlint
       ktfmt
+      # Lua
+      stylua
       # Markdown
       # markdown-toc # TODO: This npm package doesn't exist
       markdownlint-cli2
