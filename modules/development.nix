@@ -32,6 +32,7 @@
       # vscode-extensions.vscjava.vscode-java-test # TODO: This doesn't actually provide the right executable
       # JavaScript / TypeScript
       corepack
+      deno
       dockerfile-language-server-nodejs
       # eslintd
       nodejs
