@@ -31,6 +31,7 @@
       "mas"
     ];
     casks = [
+      "aerospace"
       "alfred"
       "arc"
       "betterdisplay"
@@ -38,12 +39,12 @@
       "deskpad"
       "docker"
       "firefox@developer-edition"
-      "karabiner-elements"
-      "kitty"
       "home-assistant"
       "iina"
+      "karabiner-elements"
+      "kitty"
       "moom"
-      "aerospace"
+      "neovide"
       "sublime-merge"
       "sublime-text"
       "todoist"
