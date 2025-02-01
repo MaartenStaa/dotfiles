@@ -23,6 +23,10 @@
       shell_integration = true;
 
       macos_option_as_alt = true;
+
+      cursor_trail = 10;
+      cursor_trail_start_threshold = 2;
+      cursor_trail_decay = "0.1 0.4";
     };
     shellIntegration = {
       enableFishIntegration = true;
