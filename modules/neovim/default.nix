@@ -5,6 +5,7 @@
     neovim
     ctags
     tree-sitter
+    python312Packages.pynvim
   ];
 
   # https://mynixos.com/nixpkgs/options/programs.neovim
