@@ -68,4 +68,12 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = { ensure_installed = { "starlark" } },
   },
+  {
+    "mfussenegger/nvim-lint",
+    opts = {
+      linters_by_ft = {
+        bzl = { "buildifier" },
+      },
+    },
+  },
 }
