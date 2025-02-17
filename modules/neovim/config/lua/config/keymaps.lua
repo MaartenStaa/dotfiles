@@ -61,3 +61,50 @@ vim.keymap.set("n", "gt", function()
   end
   print("not found")
 end, { noremap = true, silent = true, desc = "Jump to test file" })
+
+if vim.g.neovide then
+  vim.keymap.set("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
+  vim.keymap.set("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+  vim.keymap.set("t", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+  vim.keymap.set("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+
+  local function guifontscale(n)
+    if type(n) ~= "number" then
+      return
+    end
+
+    local gfa = {}
+    for c in vim.gsplit(vim.o.guifont, ":") do
+      table.insert(gfa, c)
+    end
+    local buildnewgf = ""
+    local fweight = ""
+    for _, v in ipairs(gfa) do
+      if v:find("h", 1, true) == 1 then
+        fweight = ""
+        for w in vim.gsplit(v, "h") do
+          local wn = tonumber(w)
+          if wn ~= nil then
+            wn = wn + n
+            fweight = fweight .. tostring(wn)
+          end
+        end
+
+        buildnewgf = buildnewgf .. "h" .. fweight .. ":"
+      else
+        v = string.gsub(v, " ", "_")
+        buildnewgf = buildnewgf .. v .. ":"
+      end
+    end
+
+    local setcmd = "set guifont=" .. buildnewgf
+    vim.cmd(setcmd)
+  end
+
+  vim.keymap.set("n", "<D-=>", function()
+    guifontscale(1)
+  end, { noremap = true, desc = "Increase font size" })
+  vim.keymap.set("n", "<D-->", function()
+    guifontscale(-1)
+  end, { noremap = true, desc = "Decrease font size" })
+end
