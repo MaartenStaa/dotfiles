@@ -19,9 +19,7 @@ fish_add_path $USER/.fig/bin
 fish_add_path /opt/homebrew/bin
 
 # SPT CONFIG BEGIN
-function spt
-    fish -c "cd '$(git rev-parse --show-toplevel)' && ./tools/sptcli/sptcli_wrapper.py $argv"
-end
+fish_add_path ~/.local/bin
 # SPT CONFIG END
 
 if status is-interactive; and test $TERM != dumb

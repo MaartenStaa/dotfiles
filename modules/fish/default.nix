@@ -41,6 +41,7 @@
       dc = "docker compose";
       dce = "docker compose run app";
       dcb = "docker compose build";
+      gbn = "git checkout -b maartens/";
       gc = "git commit";
       gco = "git checkout";
       yup = "yarn submodules && yarn install --frozen-lockfile";
