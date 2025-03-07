@@ -41,7 +41,10 @@
       dc = "docker compose";
       dce = "docker compose run app";
       dcb = "docker compose build";
-      gbn = "git checkout -b maartens/";
+      gbn = {
+        expansion = "git checkout -b maartens/%";
+        setCursor = true;
+      };
       gc = "git commit";
       gco = "git checkout";
       yup = "yarn submodules && yarn install --frozen-lockfile";
