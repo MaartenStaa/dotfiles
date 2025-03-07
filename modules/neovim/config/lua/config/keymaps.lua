@@ -65,7 +65,7 @@ end, { noremap = true, silent = true, desc = "Jump to test file" })
 if vim.g.neovide then
   vim.keymap.set("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
   vim.keymap.set("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
-  vim.keymap.set("t", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+  vim.keymap.set("t", "<D-v>", '<C-\\><C-n>"+pa', { noremap = true, silent = true })
   vim.keymap.set("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
 
   local function guifontscale(n)
@@ -107,4 +107,9 @@ if vim.g.neovide then
   vim.keymap.set("n", "<D-->", function()
     guifontscale(-1)
   end, { noremap = true, desc = "Decrease font size" })
+
+  local initial_guifont = vim.o.guifont
+  vim.keymap.set("n", "<D-0>", function()
+    vim.o.guifont = initial_guifont
+  end, { noremap = true, desc = "Reset font size" })
 end
