@@ -4,9 +4,7 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.flake.setNixPath = true;
 
-  services.nix-daemon.enable = true;
   nix = {
-    useDaemon = true;
     package = pkgs.nix;
     settings.trusted-users = [
       "root"
@@ -62,7 +60,7 @@
 
   # TODO: Add system defaults
   security = {
-    pam.enableSudoTouchIdAuth = true;
+    pam.services.sudo_local.touchIdAuth = true;
   };
   system.defaults = {
     dock = {
