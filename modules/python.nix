@@ -18,6 +18,6 @@ let
 in
 {
   home.sessionVariables = {
-    PTYTHONPATH = "${python-with-packages}/${python-with-packages.sitePackages}";
+    PYTHONPATH = "${python-with-packages}/${python-with-packages.sitePackages}";
   };
 }
