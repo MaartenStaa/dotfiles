@@ -1,9 +1,7 @@
 { pkgs, ... }:
 {
-
   home.packages =
     with pkgs;
-    with pkgs.python312Packages;
     with pkgs.luajitPackages;
     [
       # Programming languages, language servers, and formatters
@@ -56,18 +54,8 @@
       nixfmt-rfc-style
       nixpkgs-fmt
       # Python
-      autopep8
-      black
-      debugpy
-      flake8
-      jedi-language-server
-      pylsp-mypy
-      pylsp-rope
       pyright
-      pytest
-      python-lsp-ruff
-      python-lsp-server
-      python3
+      python312
       ruff
       uv
       # Rust

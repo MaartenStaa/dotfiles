@@ -103,6 +103,7 @@
                       ./modules/karabiner
                       ./modules/bazel.nix
                       ./modules/gcloud.nix
+                      ./modules/python.nix
                       catppuccin.homeManagerModules.catppuccin
                     ];
                   };
@@ -162,6 +163,7 @@
                       ./modules/shell.nix
                       ./modules/kitty
                       ./modules/karabiner
+                      ./modules/python.nix
                       catppuccin.homeManagerModules.catppuccin
                     ];
                   };

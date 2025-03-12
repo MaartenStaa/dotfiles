@@ -2,7 +2,6 @@
 {
   home.packages =
     with pkgs;
-    with pkgs.python312Packages;
     with pkgs.luajitPackages;
     [
       # Command line tools
