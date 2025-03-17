@@ -24,6 +24,10 @@
 
       macos_option_as_alt = true;
 
+      # aim for 120fps
+      repaint_delay = 1000 / 120;
+      sync_to_monitor = false;
+
       cursor_trail = 10;
       cursor_trail_start_threshold = 2;
       cursor_trail_decay = "0.1 0.4";

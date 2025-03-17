@@ -5,8 +5,8 @@ set -g fish_greeting
 fish_vi_key_bindings
 
 # Keybindings
-bind -k nul -M insert end-of-line
-bind \cF -M insert nextd-or-forward-word
+bind ctrl-space -M insert end-of-line
+bind ctrl-f -M insert nextd-or-forward-word
 
 # Set $PATH variable.
 fish_add_path -m /run/current-system/sw/bin
