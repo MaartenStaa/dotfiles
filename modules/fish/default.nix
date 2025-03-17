@@ -60,7 +60,7 @@
       gl = "git log";
       gcn = "git commit --no-edit";
       gp = "git push";
-      gpr = "git push --prune";
+      gpr = "git pull --prune";
       ll = "eza -hal";
       gpf = "git push --force-with-lease";
       gs = "git status";
