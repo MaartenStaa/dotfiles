@@ -1,0 +1,3 @@
+[spotify-homebrew-sptaps]
+src.git = "git@ghe.spotify.net:shared/homebrew-spotify.git"
+fetch.git = "git@ghe.spotify.net:shared/homebrew-spotify.git"

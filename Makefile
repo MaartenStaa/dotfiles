@@ -43,6 +43,11 @@ collect-garbage:
 	nix store optimise
 .PHONY: collect-garbage
 
+## Update ad-hoc sources
+update-sources:
+	nix run nixpkgs#nvfetcher
+.PHONY: update-sources
+
 ## Update the flake inputs
 update:
 update: is_clean
