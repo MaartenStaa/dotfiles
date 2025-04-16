@@ -71,9 +71,22 @@
               username = "maartens";
               email = "maartens@spotify.com";
             };
+            system = "aarch64-darwin";
+            pkgs = import nixpkgs {
+              inherit system;
+            };
+            fetchers = {
+              inherit (pkgs)
+                fetchgit
+                fetchurl
+                fetchFromGitHub
+                dockerTools
+                ;
+            };
+            _sources = import ./_sources/generated.nix fetchers;
           in
           nix-darwin.lib.darwinSystem {
-            system = "aarch64-darwin";
+            system = system;
             specialArgs = args;
             modules = with args; [
               ./machines/work-mbp
@@ -120,6 +133,7 @@
                     "homebrew/homebrew-cask" = tap-homebrew-cask;
                     "homebrew/homebrew-bundle" = tap-homebrew-bundle;
                     "nikitabobko/homebrew-tap" = tap-nikitabobko-tap;
+                    "spotify/homebrew-sptaps" = _sources.spotify-homebrew-sptaps.src;
                   };
                   mutableTaps = false;
                 };
