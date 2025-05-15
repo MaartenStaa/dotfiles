@@ -37,6 +37,7 @@
       "deskpad"
       "docker"
       "firefox@developer-edition"
+      "ghostty"
       "home-assistant"
       "iina"
       "karabiner-elements"

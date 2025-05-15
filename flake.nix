@@ -113,6 +113,7 @@
                       ./modules/git
                       ./modules/shell.nix
                       ./modules/kitty
+                      ./modules/ghostty
                       ./modules/karabiner
                       ./modules/bazel.nix
                       ./modules/gcloud.nix
@@ -176,6 +177,7 @@
                       ./modules/git
                       ./modules/shell.nix
                       ./modules/kitty
+                      ./modules/ghostty
                       ./modules/karabiner
                       ./modules/python.nix
                       catppuccin.homeModules.catppuccin
