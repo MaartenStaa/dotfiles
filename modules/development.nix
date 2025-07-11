@@ -80,5 +80,9 @@
       yamllint
       # Various
       vscode-langservers-extracted
+
+      # Utilities
+      # AI
+      claude-code
     ];
 }
