@@ -11,7 +11,7 @@ help:
 switch:
 switch: rebuild commit
 switch:
-	darwin-rebuild switch --flake .#$$MACHINE_NAME
+	sudo darwin-rebuild switch --flake .#$$MACHINE_NAME
 .PHONY: switch
 
 ## Upgrade the system (update, commit, switch)
