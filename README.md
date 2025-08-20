@@ -43,6 +43,15 @@ the new configuration using `darwin-rebuild`:
 darwin-rebuild switch --flake ~/.dotfiles/#<machine-name>
 ```
 
+### Non-flake inputs
+
+This repository uses [nv-fetcher] to manage inputs that aren't flakes. These
+inputs are defined in `nvfetcher.toml`. They can be updated like this:
+
+```sh
+nix run nixpkgs#nvfetcher
+```
+
 ### Upgrading Nix
 
 As mentioned in the [nix-installer] readme, you can run the following command to
@@ -63,6 +72,7 @@ mentioned above.
 - It is currently not possible to symlink directly to a file or directory using
   `mkOutOfStoreSymlink`, as the symlink will point into the Nix store, rather
   than to `~/.dotfiles/...` as expected. As such, instead of
+
   ```nix
   xdg.configFile."program" = {
     source = config.lib.file.mkOutOfStoreSymlink ./config;
@@ -78,3 +88,4 @@ mentioned above.
   ```
 
 [nix-installer]: https://github.com/DeterminateSystems/nix-installer?tab=readme-ov-file
+[nv-fetcher]: https://github.com/berberman/nvfetcher
