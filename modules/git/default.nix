@@ -58,5 +58,8 @@
       pt = "!git push -u origin $(git branch --show-current)";
       uncommit = "reset --soft HEAD~";
     };
+    includes = [
+      { path = "local.conf"; }
+    ];
   };
 }

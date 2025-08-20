@@ -18,9 +18,9 @@ fish_add_path $USER/.local/bin
 fish_add_path $USER/.fig/bin
 fish_add_path /opt/homebrew/bin
 
-# SPT CONFIG BEGIN
-fish_add_path ~/.local/bin
-# SPT CONFIG END
+if test -f ~/.config/fish/local.fish
+    source ~/.config/fish/local.fish
+end
 
 if status is-interactive; and test $TERM != dumb
     # Transient prompt with starship
