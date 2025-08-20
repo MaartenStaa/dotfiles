@@ -29,6 +29,19 @@
                     }
                 ]
             },
+            "devices": [
+                {
+                    "identifiers": {
+                        "is_game_pad": true,
+                        "is_keyboard": true,
+                        "is_pointing_device": true,
+                        "product_id": 1360,
+                        "vendor_id": 13869
+                    },
+                    "ignore": false,
+                    "manipulate_caps_lock_led": false
+                }
+            ],
             "name": "Default profile",
             "selected": true,
             "virtual_hid_keyboard": {
