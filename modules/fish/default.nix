@@ -42,7 +42,7 @@
       dce = "docker compose run app";
       dcb = "docker compose build";
       gbn = {
-        expansion = "git checkout -b maartens/%";
+        expansion = "git checkout -b maartens/% origin/master";
         setCursor = true;
       };
       gc = "git commit";
