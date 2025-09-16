@@ -2,10 +2,8 @@
 let
   plugins = [
     "python"
-    "nodejs"
   ];
   pluginSources = {
-    nodejs = inputs."asdf-plugin-nodejs";
     # Path asdf-python to allow setting the runtime data dir to somewhere we can write
     python = pkgs.stdenv.mkDerivation {
       name = "asdf-plugin-python";

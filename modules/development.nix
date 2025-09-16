@@ -38,7 +38,6 @@
       # typescript-language-server # TODO: Remove? Replaced by vtsls?
       vscode-js-debug
       vtsls
-      yarn
       # Kotlin
       detekt
       ktlint
