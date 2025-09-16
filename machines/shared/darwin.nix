@@ -46,7 +46,6 @@
       "neovide"
       "sublime-merge"
       "sublime-text"
-      "todoist"
     ];
     masApps = {
       "Consent-O-Matic" = 1606897889;
