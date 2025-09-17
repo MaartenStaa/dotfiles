@@ -49,6 +49,7 @@
     ];
     masApps = {
       "Consent-O-Matic" = 1606897889;
+      "Things 3" = 904280696;
     };
     global = {
       autoUpdate = false;
