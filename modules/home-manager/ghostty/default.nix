@@ -3,7 +3,7 @@
   xdg.configFile = {
     ghostty-link = {
       target = "ghostty/config";
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/modules/ghostty/config";
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/modules/home-manager/ghostty/config";
     };
 
     ghostty-nix = {

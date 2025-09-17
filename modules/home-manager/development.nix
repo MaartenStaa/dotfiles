@@ -31,7 +31,7 @@
       # JavaScript / TypeScript
       corepack
       deno
-      dockerfile-language-server-nodejs
+      dockerfile-language-server
       # eslintd
       nodejs
       # oxlint

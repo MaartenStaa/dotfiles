@@ -1,9 +1,5 @@
 { pkgs, username, ... }:
 {
-  # Allow running of proprietary software (e.g. Obsidian)
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.flake.setNixPath = true;
-
   nix = {
     package = pkgs.nix;
     settings.trusted-users = [
@@ -12,7 +8,6 @@
     ];
 
     # Storage management on upgrades
-    gc.automatic = true;
     settings.auto-optimise-store = false;
   };
 
