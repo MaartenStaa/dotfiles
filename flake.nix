@@ -117,6 +117,7 @@
                       ./modules/bazel.nix
                       ./modules/gcloud.nix
                       ./modules/python.nix
+                      ./modules/zed
                       catppuccin.homeModules.catppuccin
                     ];
                   };
@@ -179,6 +180,7 @@
                       ./modules/ghostty
                       ./modules/karabiner
                       ./modules/python.nix
+                      ./modules/zed
                       catppuccin.homeModules.catppuccin
                     ];
                   };

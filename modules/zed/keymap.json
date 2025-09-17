@@ -1,0 +1,48 @@
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-b": "workspace::ToggleRightDock",
+      "alt-t": "terminal_panel::ToggleFocus"
+    }
+  },
+  {
+    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
+    "bindings": {
+      // Navigate between files and buffers
+      "space space": "pane::AlternateFile",
+      "space ,": "tab_switcher::ToggleAll",
+      // Manage buffers
+      "space b d": "pane::CloseActiveItem",
+      "space b o": "pane::CloseOtherItems",
+      // LSP
+      "g r": "editor::FindAllReferences",
+      // Code
+      "space c r": "editor::Rename",
+      "space c a": "editor::ToggleCodeActions",
+      // Search
+      "space s w": "project_search::SearchInNew",
+
+      // Other
+      "[ f": "vim::PreviousMethodStart",
+      "] f": "vim::NextMethodStart",
+      "K": "editor::Hover",
+      "L": "vim::EndOfLine",
+      "H": "vim::FirstNonWhitespace"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual && !VimWaiting && !menu",
+    "bindings": {
+      "K": "editor::MoveLineUp",
+      "J": "editor::MoveLineDown"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-space": ["terminal::SendKeystroke", "ctrl-space"],
+      "alt-t": "workspace::ToggleBottomDock"
+    }
+  }
+]
