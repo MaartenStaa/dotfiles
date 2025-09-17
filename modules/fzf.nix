@@ -1,5 +1,4 @@
-_:
-{
+_: {
   # https://mynixos.com/home-manager/options/programs.fzf
   programs.fzf = {
     enable = true;

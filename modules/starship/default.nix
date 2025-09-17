@@ -1,5 +1,4 @@
-_:
-{
+_: {
   # https://mynixos.com/home-manager/options/programs.starship
   programs.starship = {
     enable = true;

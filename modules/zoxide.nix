@@ -1,5 +1,4 @@
-_:
-{
+_: {
   # https://mynixos.com/home-manager/options/programs.zoxide
   programs.zoxide = {
     enable = true;
