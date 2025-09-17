@@ -105,7 +105,8 @@
               ./machines/work-mbp
               ./modules/nix-darwin/determinate.nix
               ./modules/nix-darwin/darwin-apps.nix
-              ./modules/shared/nixpkgs.nix
+              ./modules/nix-darwin/pkgs.nix
+              ./modules/shared/config.nix
 
               {
                 nix-homebrew = {
@@ -135,7 +136,8 @@
               ./machines/private-mbp
               ./modules/nix-darwin/determinate.nix
               ./modules/nix-darwin/darwin-apps.nix
-              ./modules/shared/nixpkgs.nix
+              ./modules/nix-darwin/pkgs.nix
+              ./modules/shared/config.nix
 
               {
                 nix-homebrew = {
@@ -163,7 +165,41 @@
               inherit username email inputs;
             };
             modules = [
-              ./modules/shared/nixpkgs.nix
+              ./modules/shared/config.nix
+
+              ./modules/home-manager/asdf
+              ./modules/home-manager/bazel.nix
+              ./modules/home-manager/darwin.nix
+              ./modules/home-manager/development.nix
+              ./modules/home-manager/fd
+              ./modules/home-manager/fzf.nix
+              ./modules/home-manager/gcloud.nix
+              ./modules/home-manager/ghostty
+              ./modules/home-manager/git
+              ./modules/home-manager/home.nix
+              ./modules/home-manager/karabiner
+              ./modules/home-manager/kitty
+              ./modules/home-manager/neovim
+              ./modules/home-manager/pkgs.nix
+              ./modules/home-manager/python.nix
+              ./modules/home-manager/shell.nix
+              ./modules/home-manager/tmux
+              ./modules/home-manager/zed
+
+              catppuccin.homeModules.catppuccin
+            ];
+          };
+
+        private-mbp =
+          with personal;
+          home-manager.lib.homeManagerConfiguration {
+            pkgs = nixpkgs.legacyPackages."${arch}";
+            extraSpecialArgs = {
+              inherit username email inputs;
+            };
+            modules = [
+              ./modules/shared/config.nix
+
               ./modules/home-manager/home.nix
               ./modules/home-manager/darwin.nix
               ./modules/home-manager/pkgs.nix
@@ -178,38 +214,9 @@
               ./modules/home-manager/kitty
               ./modules/home-manager/ghostty
               ./modules/home-manager/karabiner
-              ./modules/home-manager/bazel.nix
-              ./modules/home-manager/gcloud.nix
               ./modules/home-manager/python.nix
               ./modules/home-manager/zed
-              catppuccin.homeModules.catppuccin
-            ];
-          };
 
-        private-mbp =
-          with personal;
-          home-manager.lib.homeManagerConfiguration {
-            pkgs = nixpkgs.legacyPackages."${arch}";
-            extraSpecialArgs = {
-              inherit username email inputs;
-            };
-            modules = [
-              ./modules/home.nix
-              ./modules/darwin.nix
-              ./modules/pkgs.nix
-              ./modules/development.nix
-              ./modules/fzf.nix
-              ./modules/fd
-              ./modules/tmux
-              ./modules/neovim
-              ./modules/asdf
-              ./modules/git
-              ./modules/shell.nix
-              ./modules/kitty
-              ./modules/ghostty
-              ./modules/karabiner
-              ./modules/python.nix
-              ./modules/home-manager/zed
               catppuccin.homeModules.catppuccin
             ];
           };

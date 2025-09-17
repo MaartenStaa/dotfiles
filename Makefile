@@ -9,16 +9,32 @@ help:
 ## Rebuild with nix-darwin, then switch
 ## @param MACHINE_NAME=work-mbp The name of the machine to build for
 switch:
-switch: rebuild commit
+switch: rebuild-nix-darwin commit
 switch:
 	sudo darwin-rebuild switch --flake .#$$MACHINE_NAME
+	home-manager switch --flake .#$$MACHINE_NAME
 .PHONY: switch
 
 ## Upgrade the system (update, commit, switch)
 ## @param MACHINE_NAME=work-mbp The name of the machine to build for
 upgrade:
-upgrade: update switch
+upgrade: update update-sources switch
 .PHONY: upgrade
+
+## @section Granular switching
+
+## Rebuild and switch the active nix-darwin configuration
+## @param MACHINE_NAME=work-mbp The name of the machine to build for
+switch-nix-darwin:
+switch-nix-darwin: rebuild-nix-darwin
+switch-nix-darwin:
+	sudo darwin-rebuild switch --flake .#$$MACHINE_NAME
+
+## Rebuild and switch the active Home Manager configuration
+## @param MACHINE_NAME=work-mbp The name of the machine to build for
+switch-home-manager:
+switch-home-manager:
+	home-manager switch --flake .#$$MACHINE_NAME
 
 ## @section Utilities
 
@@ -60,7 +76,7 @@ is_clean:
 
 
 commit: template := $(shell mktemp)
-commit: rebuild prompt
+commit: rebuild-nix-darwin prompt
 	printf "Upgrade\n\n" > $(template)
 	nix store diff-closures \
 		/nix/var/nix/profiles/system \
@@ -79,9 +95,9 @@ prompt:
 .PHONY: prompt
 
 ## Rebuild the system without switching
-rebuild:
-rebuild: result
-.PHONY: rebuild
+rebuild-nix-darwin:
+rebuild-nix-darwin: result
+.PHONY: rebuild-nix-darwin
 
 
 result: $(shell find . -iname '*.nix')
