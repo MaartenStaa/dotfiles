@@ -75,24 +75,29 @@
       };
     in
     {
-      darwinConfigurations = {
+      darwinConfigurations = with work; {
         work-mbp =
           let
             args = {
-              username = work.username;
-              email = work.email;
+              username = username;
+              email = email;
             };
-            system = work.arch;
+            system = arch;
             pkgs = import nixpkgs {
               inherit system;
             };
+            sshAgentSock = builtins.getEnv "SSH_AUTH_SOCK";
             fetchers = {
               inherit (pkgs)
-                fetchgit
                 fetchurl
                 fetchFromGitHub
                 dockerTools
                 ;
+              fetchgit =
+                args:
+                (pkgs.fetchgit args).overrideAttrs (_: {
+                  GIT_SSH_COMMAND = "${pkgs.openssh}/bin/ssh -o IdentityAgent=\"${sshAgentSock}\" -o StrictHostKeyChecking=accept-new -vvv";
+                });
             };
             _sources = import ./_sources/generated.nix fetchers;
           in
