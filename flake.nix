@@ -110,7 +110,6 @@
 
               ./machines/work-mbp
               ./modules/nix-darwin/determinate.nix
-              ./modules/nix-darwin/darwin-apps.nix
               ./modules/nix-darwin/pkgs.nix
               ./modules/shared/config.nix
 
@@ -141,7 +140,6 @@
 
               ./machines/private-mbp
               ./modules/nix-darwin/determinate.nix
-              ./modules/nix-darwin/darwin-apps.nix
               ./modules/nix-darwin/pkgs.nix
               ./modules/shared/config.nix
 
@@ -185,6 +183,7 @@
               ./modules/home-manager/home.nix
               ./modules/home-manager/karabiner
               ./modules/home-manager/kitty
+              ./modules/home-manager/macos-apps.nix
               ./modules/home-manager/neovim
               ./modules/home-manager/pkgs.nix
               ./modules/home-manager/python.nix
@@ -218,6 +217,7 @@
               ./modules/home-manager/git
               ./modules/home-manager/shell.nix
               ./modules/home-manager/kitty
+              ./modules/home-manager/macos-apps.nix
               ./modules/home-manager/ghostty
               ./modules/home-manager/karabiner
               ./modules/home-manager/python.nix
