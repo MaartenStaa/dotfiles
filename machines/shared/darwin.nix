@@ -74,5 +74,9 @@
     finder = {
       AppleShowAllExtensions = true;
     };
+    NSGlobalDomain = {
+      NSStatusItemSpacing = 4;
+      NSStatusItemSelectionPadding = 2;
+    };
   };
 }
