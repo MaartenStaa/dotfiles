@@ -30,7 +30,7 @@
       "betterdisplay"
       "dash"
       "deskpad"
-      "docker"
+      "docker-desktop"
       "firefox@developer-edition"
       "ghostty"
       "home-assistant"
@@ -38,7 +38,7 @@
       "karabiner-elements"
       "kitty"
       "moom"
-      "neovide"
+      "neovide-app"
       "sublime-merge"
       "sublime-text"
     ];
