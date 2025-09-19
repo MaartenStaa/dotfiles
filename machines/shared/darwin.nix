@@ -44,7 +44,13 @@
     ];
     masApps = {
       "Consent-O-Matic" = 1606897889;
+      "Craft" = 1487937127;
+      "Home Assistant" = 1099568401;
+      "LanguageTool" = 1534275760;
+      "Spark Mail" = 6445813049;
       "Things 3" = 904280696;
+      "WhatsApp" = 310633997;
+      "Wireguard" = 1451685025;
     };
     global = {
       autoUpdate = false;
