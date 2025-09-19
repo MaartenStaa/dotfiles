@@ -108,11 +108,6 @@
             modules = with args; [
               nix-homebrew.darwinModules.nix-homebrew
 
-              ./machines/work-mbp
-              ./modules/nix-darwin/determinate.nix
-              ./modules/nix-darwin/pkgs.nix
-              ./modules/shared/config.nix
-
               {
                 nix-homebrew = {
                   enable = true;
@@ -127,6 +122,12 @@
                   mutableTaps = false;
                 };
               }
+
+              ./machines/work-mbp
+              ./modules/nix-darwin/determinate.nix
+              ./modules/nix-darwin/homebrew.nix
+              ./modules/nix-darwin/pkgs.nix
+              ./modules/shared/config.nix
             ];
           };
         private-mbp =
@@ -137,11 +138,6 @@
             specialArgs = args;
             modules = with args; [
               nix-homebrew.darwinModules.nix-homebrew
-
-              ./machines/private-mbp
-              ./modules/nix-darwin/determinate.nix
-              ./modules/nix-darwin/pkgs.nix
-              ./modules/shared/config.nix
 
               {
                 nix-homebrew = {
@@ -156,6 +152,12 @@
                   mutableTaps = false;
                 };
               }
+
+              ./machines/private-mbp
+              ./modules/nix-darwin/determinate.nix
+              ./modules/nix-darwin/homebrew.nix
+              ./modules/nix-darwin/pkgs.nix
+              ./modules/shared/config.nix
             ];
           };
       };
