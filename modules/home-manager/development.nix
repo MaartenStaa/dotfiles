@@ -58,11 +58,7 @@
       ruff
       uv
       # Rust
-      cargo
-      clippy
-      rust-analyzer
-      rustc
-      rustfmt
+      rustup
       # vscode-extensions.vadimcn.vscode-lldb # TODO: This is currently broken, and doesn't provide the right executable
       # Shell scripts
       bash-language-server
