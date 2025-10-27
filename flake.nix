@@ -171,10 +171,13 @@
               inherit username email inputs;
             };
             modules = [
+              catppuccin.homeModules.catppuccin
+
               ./modules/shared/config.nix
 
               ./modules/home-manager/asdf
               ./modules/home-manager/bazel.nix
+              ./modules/home-manager/catppuccin.nix
               ./modules/home-manager/darwin.nix
               ./modules/home-manager/development.nix
               ./modules/home-manager/fd
@@ -192,8 +195,6 @@
               ./modules/home-manager/shell.nix
               ./modules/home-manager/tmux
               ./modules/home-manager/zed
-
-              catppuccin.homeModules.catppuccin
             ];
           };
 
@@ -205,27 +206,28 @@
               inherit username email inputs;
             };
             modules = [
+              catppuccin.homeModules.catppuccin
+
               ./modules/shared/config.nix
 
-              ./modules/home-manager/home.nix
-              ./modules/home-manager/darwin.nix
-              ./modules/home-manager/pkgs.nix
-              ./modules/home-manager/development.nix
-              ./modules/home-manager/fzf.nix
-              ./modules/home-manager/fd
-              ./modules/home-manager/tmux
-              ./modules/home-manager/neovim
               ./modules/home-manager/asdf
+              ./modules/home-manager/catppuccin.nix
+              ./modules/home-manager/darwin.nix
+              ./modules/home-manager/development.nix
+              ./modules/home-manager/fd
+              ./modules/home-manager/fzf.nix
+              ./modules/home-manager/ghostty
               ./modules/home-manager/git
-              ./modules/home-manager/shell.nix
+              ./modules/home-manager/home.nix
+              ./modules/home-manager/karabiner
               ./modules/home-manager/kitty
               ./modules/home-manager/macos-apps.nix
-              ./modules/home-manager/ghostty
-              ./modules/home-manager/karabiner
+              ./modules/home-manager/neovim
+              ./modules/home-manager/pkgs.nix
               ./modules/home-manager/python.nix
+              ./modules/home-manager/shell.nix
+              ./modules/home-manager/tmux
               ./modules/home-manager/zed
-
-              catppuccin.homeModules.catppuccin
             ];
           };
       };
