@@ -12,9 +12,11 @@
     lfs = {
       enable = true;
     };
-    userName = "Maarten Staa";
-    userEmail = email;
-    extraConfig = {
+    settings = {
+      user = {
+        name = "Maarten Staa";
+        email = email;
+      };
       lfs = {
         enable = true;
       };
@@ -49,14 +51,14 @@
           process = "git-lfs filter-process";
         };
       };
-    };
-    aliases = {
-      fixup = "commit --amend --no-edit";
-      butd = "!git fetch origin && git rebase origin/master";
-      pf = "push --force-with-lease";
-      ptb = "!git push -u $(whoami) $(git branch --show-current)";
-      pt = "!git push -u origin $(git branch --show-current)";
-      uncommit = "reset --soft HEAD~";
+      alias = {
+        fixup = "commit --amend --no-edit";
+        butd = "!git fetch origin && git rebase origin/master";
+        pf = "push --force-with-lease";
+        ptb = "!git push -u $(whoami) $(git branch --show-current)";
+        pt = "!git push -u origin $(git branch --show-current)";
+        uncommit = "reset --soft HEAD~";
+      };
     };
     includes = [
       { path = "local.conf"; }
