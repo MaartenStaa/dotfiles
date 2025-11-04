@@ -81,7 +81,7 @@
       ''
         export EDITOR=${pkgs.neovim}/bin/nvim
         export VISUAL=${pkgs.neovim}/bin/nvim
-        export NIX_PATH=${inputs.nixpkgs.outPath}
+        export NIX_PATH=nixpkgs=${inputs.nixpkgs.outPath}
       '';
     # source "${pkgs.asdf-vm}/share/asdf-vm/asdf.fish"
   };
