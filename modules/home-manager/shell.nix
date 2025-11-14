@@ -2,6 +2,7 @@
 {
   imports = [
     ./fish
+    ./nushell
     ./zsh
     ./starship
     ./bat.nix
