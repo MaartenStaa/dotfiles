@@ -1,4 +1,16 @@
 { inputs, pkgs, ... }:
+with builtins;
+let
+  inputNames = attrNames inputs;
+  paths = map (
+    input:
+    let
+      path = getAttr input inputs;
+    in
+    "${input}=${path.outPath}"
+  ) inputNames;
+  nixPath = concatStringsSep ":" paths;
+in
 {
   # https://mynixos.com/home-manager/options/programs.fish
   programs.fish = {
@@ -81,7 +93,7 @@
       ''
         export EDITOR=${pkgs.neovim}/bin/nvim
         export VISUAL=${pkgs.neovim}/bin/nvim
-        export NIX_PATH=nixpkgs=${inputs.nixpkgs.outPath}
+        export NIX_PATH=${nixPath}
       '';
     # source "${pkgs.asdf-vm}/share/asdf-vm/asdf.fish"
   };
