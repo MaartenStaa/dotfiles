@@ -57,6 +57,7 @@
     };
     onActivation = {
       cleanup = "zap";
+      upgrade = true;
     };
   };
 
