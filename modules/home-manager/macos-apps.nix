@@ -15,7 +15,7 @@
       env = pkgs.buildEnv {
         name = "hm-applications";
         paths = config.home.packages;
-        pathsToLink = "/Applications";
+        pathsToLink = [ "/Applications" ];
       };
     in
     lib.hm.dag.entryAfter [ "writeBoundary" "linkGeneration" ]

@@ -29,7 +29,6 @@
       # vscode-extensions.vscjava.vscode-java-debug # TODO: This doesn't actually provide the right executable
       # vscode-extensions.vscjava.vscode-java-test # TODO: This doesn't actually provide the right executable
       # JavaScript / TypeScript
-      corepack
       deno
       dockerfile-language-server
       # eslintd
@@ -50,11 +49,11 @@
       marksman
       # Nix
       nil
-      nixfmt-rfc-style
+      nixfmt
       nixpkgs-fmt
       # Python
       pyright
-      python312
+      python313
       ruff
       uv
       # Rust

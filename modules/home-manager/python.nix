@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  python-with-packages = pkgs.python312.withPackages (
+  python-with-packages = pkgs.python313.withPackages (
     pp: with pp; [
       autopep8
       black
