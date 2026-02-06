@@ -169,12 +169,29 @@
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
         "nixpkgs": "nixpkgs",
+        "tap-asheshgoplani-tap": "tap-asheshgoplani-tap",
         "tap-homebrew-bundle": "tap-homebrew-bundle",
         "tap-homebrew-cask": "tap-homebrew-cask",
         "tap-homebrew-core": "tap-homebrew-core",
         "tap-jira-cli": "tap-jira-cli",
         "tap-mattt-tap": "tap-mattt-tap",
         "tap-nikitabobko-tap": "tap-nikitabobko-tap"
+      }
+    },
+    "tap-asheshgoplani-tap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1770341875,
+        "narHash": "sha256-C5wJzb6vffbSePBXEGGJnos9TOwFGLbBMM010vb+oIc=",
+        "owner": "asheshgoplani",
+        "repo": "homebrew-tap",
+        "rev": "bb06cba85e3655af632c81e2909b92abbb6cfbd0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "asheshgoplani",
+        "repo": "homebrew-tap",
+        "type": "github"
       }
     },
     "tap-homebrew-bundle": {

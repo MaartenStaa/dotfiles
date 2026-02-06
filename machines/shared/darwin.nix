@@ -21,6 +21,7 @@
   homebrew = {
     enable = true;
     brews = [
+      "agent-deck"
       "mas"
     ];
     casks = [

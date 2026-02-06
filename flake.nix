@@ -16,16 +16,20 @@
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
 
     # Homebrew taps
-    tap-homebrew-core = {
-      url = "github:homebrew/homebrew-core";
+    tap-asheshgoplani-tap = {
+      url = "github:asheshgoplani/homebrew-tap";
+      flake = false;
+    };
+    tap-homebrew-bundle = {
+      url = "github:homebrew/homebrew-bundle";
       flake = false;
     };
     tap-homebrew-cask = {
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
-    tap-homebrew-bundle = {
-      url = "github:homebrew/homebrew-bundle";
+    tap-homebrew-core = {
+      url = "github:homebrew/homebrew-core";
       flake = false;
     };
     tap-jira-cli = {
@@ -65,9 +69,10 @@
       home-manager,
       nix-darwin,
       nix-homebrew,
-      tap-homebrew-core,
-      tap-homebrew-cask,
+      tap-asheshgoplani-tap,
       tap-homebrew-bundle,
+      tap-homebrew-cask,
+      tap-homebrew-core,
       tap-jira-cli,
       tap-mattt-tap,
       tap-nikitabobko-tap,
@@ -124,9 +129,10 @@
                   user = username;
                   taps = {
                     "ankitpokhrel/homebrew-jira-cli" = tap-jira-cli;
-                    "homebrew/homebrew-core" = tap-homebrew-core;
-                    "homebrew/homebrew-cask" = tap-homebrew-cask;
+                    "asheshgoplani/homebrew-tap" = tap-asheshgoplani-tap;
                     "homebrew/homebrew-bundle" = tap-homebrew-bundle;
+                    "homebrew/homebrew-cask" = tap-homebrew-cask;
+                    "homebrew/homebrew-core" = tap-homebrew-core;
                     "mattt/homebrew-tap" = tap-mattt-tap;
                     "nikitabobko/homebrew-tap" = tap-nikitabobko-tap;
                     "spotify/homebrew-sptaps" = _sources.spotify-homebrew-sptaps.src;
@@ -156,9 +162,10 @@
                   enable = true;
                   user = username;
                   taps = {
-                    "homebrew/homebrew-core" = tap-homebrew-core;
-                    "homebrew/homebrew-cask" = tap-homebrew-cask;
+                    "asheshgoplani/homebrew-tap" = tap-asheshgoplani-tap;
                     "homebrew/homebrew-bundle" = tap-homebrew-bundle;
+                    "homebrew/homebrew-cask" = tap-homebrew-cask;
+                    "homebrew/homebrew-core" = tap-homebrew-core;
                     "nikitabobko/homebrew-tap" = tap-nikitabobko-tap;
                   };
                   mutableTaps = false;
