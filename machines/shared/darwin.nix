@@ -22,6 +22,7 @@
     enable = true;
     brews = [
       "agent-deck"
+      "beads"
       "mas"
     ];
     casks = [
