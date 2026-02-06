@@ -28,6 +28,10 @@
       url = "github:homebrew/homebrew-bundle";
       flake = false;
     };
+    tap-jira-cli = {
+      url = "github:ankitpokhrel/homebrew-jira-cli";
+      flake = false;
+    };
     tap-mattt-tap = {
       url = "github:mattt/homebrew-tap";
       flake = false;
@@ -64,6 +68,7 @@
       tap-homebrew-core,
       tap-homebrew-cask,
       tap-homebrew-bundle,
+      tap-jira-cli,
       tap-mattt-tap,
       tap-nikitabobko-tap,
       ...
@@ -118,6 +123,7 @@
                   enable = true;
                   user = username;
                   taps = {
+                    "ankitpokhrel/homebrew-jira-cli" = tap-jira-cli;
                     "homebrew/homebrew-core" = tap-homebrew-core;
                     "homebrew/homebrew-cask" = tap-homebrew-cask;
                     "homebrew/homebrew-bundle" = tap-homebrew-bundle;

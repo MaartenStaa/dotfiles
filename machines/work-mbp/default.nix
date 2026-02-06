@@ -6,6 +6,7 @@
 
   homebrew = {
     brews = [
+      "jira-cli"
       "sptcli"
     ];
   };

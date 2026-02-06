@@ -172,6 +172,7 @@
         "tap-homebrew-bundle": "tap-homebrew-bundle",
         "tap-homebrew-cask": "tap-homebrew-cask",
         "tap-homebrew-core": "tap-homebrew-core",
+        "tap-jira-cli": "tap-jira-cli",
         "tap-mattt-tap": "tap-mattt-tap",
         "tap-nikitabobko-tap": "tap-nikitabobko-tap"
       }
@@ -221,6 +222,22 @@
       "original": {
         "owner": "homebrew",
         "repo": "homebrew-core",
+        "type": "github"
+      }
+    },
+    "tap-jira-cli": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1756630290,
+        "narHash": "sha256-FaA5NRgEFsoqBiCT+GLlb5pOpKnra+YdRLoJjV0rNOI=",
+        "owner": "ankitpokhrel",
+        "repo": "homebrew-jira-cli",
+        "rev": "e9a0a4593e1756da3ec02cf3cd63cc3066330d1f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ankitpokhrel",
+        "repo": "homebrew-jira-cli",
         "type": "github"
       }
     },
