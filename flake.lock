@@ -172,6 +172,7 @@
         "tap-homebrew-bundle": "tap-homebrew-bundle",
         "tap-homebrew-cask": "tap-homebrew-cask",
         "tap-homebrew-core": "tap-homebrew-core",
+        "tap-mattt-tap": "tap-mattt-tap",
         "tap-nikitabobko-tap": "tap-nikitabobko-tap"
       }
     },
@@ -220,6 +221,22 @@
       "original": {
         "owner": "homebrew",
         "repo": "homebrew-core",
+        "type": "github"
+      }
+    },
+    "tap-mattt-tap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1760009931,
+        "narHash": "sha256-ltyfq9k97HQ6Yx8HZiUpiyXFx6lWmQi0ClM/G5XnSmA=",
+        "owner": "mattt",
+        "repo": "homebrew-tap",
+        "rev": "c7021af616217419ca12c926d05e9dadc58d4b22",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mattt",
+        "repo": "homebrew-tap",
         "type": "github"
       }
     },

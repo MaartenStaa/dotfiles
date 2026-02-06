@@ -28,6 +28,10 @@
       url = "github:homebrew/homebrew-bundle";
       flake = false;
     };
+    tap-mattt-tap = {
+      url = "github:mattt/homebrew-tap";
+      flake = false;
+    };
     tap-nikitabobko-tap = {
       url = "github:nikitabobko/homebrew-tap";
       flake = false;
@@ -60,6 +64,7 @@
       tap-homebrew-core,
       tap-homebrew-cask,
       tap-homebrew-bundle,
+      tap-mattt-tap,
       tap-nikitabobko-tap,
       ...
     }:
@@ -116,6 +121,7 @@
                     "homebrew/homebrew-core" = tap-homebrew-core;
                     "homebrew/homebrew-cask" = tap-homebrew-cask;
                     "homebrew/homebrew-bundle" = tap-homebrew-bundle;
+                    "mattt/homebrew-tap" = tap-mattt-tap;
                     "nikitabobko/homebrew-tap" = tap-nikitabobko-tap;
                     "spotify/homebrew-sptaps" = _sources.spotify-homebrew-sptaps.src;
                   };

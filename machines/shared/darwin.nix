@@ -35,6 +35,7 @@
       "ghostty"
       "home-assistant"
       "iina"
+      "iMCP"
       "karabiner-elements"
       "kitty"
       "moom"
