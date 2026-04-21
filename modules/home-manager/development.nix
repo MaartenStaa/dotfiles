@@ -22,7 +22,6 @@
       gofumpt
       gomodifytags
       gopls
-      gotools
       impl
       # Java
       jdt-language-server

@@ -12,6 +12,9 @@
     lfs = {
       enable = true;
     };
+    signing = {
+      format = null;
+    };
     settings = {
       user = {
         name = "Maarten Staa";
