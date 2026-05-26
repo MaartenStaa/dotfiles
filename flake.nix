@@ -95,8 +95,8 @@
         work-mbp =
           let
             args = {
-              username = username;
-              email = email;
+              inherit username;
+              inherit email;
             };
             system = arch;
             pkgs = import nixpkgs {
@@ -118,7 +118,7 @@
             _sources = import ./_sources/generated.nix fetchers;
           in
           nix-darwin.lib.darwinSystem {
-            system = system;
+            inherit system;
             specialArgs = args;
             modules = with args; [
               nix-homebrew.darwinModules.nix-homebrew

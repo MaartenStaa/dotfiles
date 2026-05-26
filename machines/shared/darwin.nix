@@ -11,7 +11,24 @@
     settings.auto-optimise-store = false;
   };
 
-  system.stateVersion = 5;
+  system = {
+    stateVersion = 5;
+    primaryUser = username;
+    defaults = {
+      dock = {
+        autohide = true;
+        autohide-delay = 0.0;
+        autohide-time-modifier = 0.4;
+      };
+      finder = {
+        AppleShowAllExtensions = true;
+      };
+      NSGlobalDomain = {
+        NSStatusItemSpacing = 4;
+        NSStatusItemSelectionPadding = 2;
+      };
+    };
+  };
 
   users.users.${username} = {
     name = username;
@@ -69,20 +86,5 @@
     reattach = true;
     touchIdAuth = true;
     watchIdAuth = true;
-  };
-  system.primaryUser = username;
-  system.defaults = {
-    dock = {
-      autohide = true;
-      autohide-delay = 0.0;
-      autohide-time-modifier = 0.4;
-    };
-    finder = {
-      AppleShowAllExtensions = true;
-    };
-    NSGlobalDomain = {
-      NSStatusItemSpacing = 4;
-      NSStatusItemSelectionPadding = 2;
-    };
   };
 }

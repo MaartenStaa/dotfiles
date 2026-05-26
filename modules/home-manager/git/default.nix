@@ -18,7 +18,7 @@
     settings = {
       user = {
         name = "Maarten Staa";
-        email = email;
+        inherit email;
       };
       lfs = {
         enable = true;
