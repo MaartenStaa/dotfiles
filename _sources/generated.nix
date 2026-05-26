@@ -8,16 +8,16 @@
 {
   spotify-homebrew-sptaps = {
     pname = "spotify-homebrew-sptaps";
-    version = "a1592111704c0735706707975cf1aa64f7c1a72b";
+    version = "0999d2c2cd1ba5025168857993653558e3d489b2";
     src = fetchgit {
       url = "git@ghe.spotify.net:shared/homebrew-spotify.git";
-      rev = "a1592111704c0735706707975cf1aa64f7c1a72b";
+      rev = "0999d2c2cd1ba5025168857993653558e3d489b2";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-HUSVkWNjm4jW4PfOVgu8GaFMBsvIAC0rApSzkrQhEhQ=";
+      sha256 = "sha256-+ysWEQsRtGigJcv2JinvL6NEP/qeKqzi0Ry1tjSfork=";
     };
-    date = "2026-04-21";
+    date = "2026-05-25";
   };
 }
