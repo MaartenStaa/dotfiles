@@ -50,7 +50,9 @@
       nil
       nixfmt
       nixpkgs-fmt
+      statix
       # Python
+      pyrefly
       pyright
       python313
       ruff
