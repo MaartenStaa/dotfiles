@@ -22,7 +22,6 @@
       proximity-sort
       reattach-to-user-namespace
       ripgrep
-      silver-searcher
       tldr
       tree
       tmux
