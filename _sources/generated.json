@@ -1,7 +1,7 @@
 {
     "spotify-homebrew-sptaps": {
         "cargoLock": null,
-        "date": "2026-06-09",
+        "date": "2026-06-30",
         "extract": null,
         "name": "spotify-homebrew-sptaps",
         "passthru": null,
@@ -11,12 +11,12 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "ace7710063adcd83e755805ef9f39f9fbb8b4359",
-            "sha256": "sha256-O6gkOKeXtaJcjNAGY+Cb8VPNrtewgdlAUE9a4VgObGo=",
+            "rev": "5fa9fead461288f880b37238e2992a096db5d712",
+            "sha256": "sha256-k0lMdiaNmTo4gv55yghlQq8k/Q4WLU+NKds4uVOC+48=",
             "sparseCheckout": [],
             "type": "git",
             "url": "git@ghe.spotify.net:shared/homebrew-spotify.git"
         },
-        "version": "ace7710063adcd83e755805ef9f39f9fbb8b4359"
+        "version": "5fa9fead461288f880b37238e2992a096db5d712"
     }
 }
