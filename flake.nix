@@ -137,6 +137,12 @@
                     "nikitabobko/homebrew-tap" = tap-nikitabobko-tap;
                     "spotify/homebrew-sptaps" = _sources.spotify-homebrew-sptaps.src;
                   };
+                  trust.taps = [
+                    "asheshgoplani/homebrew-tap"
+                    "mattt/tap"
+                    "nikitabobko/tap"
+                    "spotify/sptaps"
+                  ];
                   mutableTaps = false;
                 };
               }
