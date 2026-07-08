@@ -210,6 +210,7 @@
               ./modules/home-manager/gcloud.nix
               ./modules/home-manager/ghostty
               ./modules/home-manager/git
+              ./modules/home-manager/herdr.nix
               ./modules/home-manager/home.nix
               ./modules/home-manager/karabiner
               ./modules/home-manager/kitty
@@ -243,6 +244,7 @@
               ./modules/home-manager/fzf.nix
               ./modules/home-manager/ghostty
               ./modules/home-manager/git
+              ./modules/home-manager/herdr.nix
               ./modules/home-manager/home.nix
               ./modules/home-manager/karabiner
               ./modules/home-manager/kitty
