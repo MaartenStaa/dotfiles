@@ -99,7 +99,7 @@ commit-all: rebuild-nix-darwin rebuild-home-manager
 	@echo; read -p "Do you want to continue? [y/N] " answer; \
 	if [ "$${answer}" != "y" ]; then echo "Aborting."; exit 1; fi
 
-	printf "Upgrade\n\n" > $(template)
+	printf "chore: upgrade flake inputs\n\n" > $(template)
 	printf "nix-darwin:\n\n" >> $(template)
 	nix store diff-closures $(NIX_DARWIN_PROFILE) ./result-nix-darwin \
 	| ansifilter >> $(template)
