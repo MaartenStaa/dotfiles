@@ -11,12 +11,12 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "cf787c044b3194c83e91f717303bf19359b1af82",
-            "sha256": "sha256-I5D2EZKNYufLawu4yhsEsJ0sZTCKv0uAhP9Eu8aMAFE=",
+            "rev": "8f1204a1dc984e459f3d9dc3306dd732f30265fa",
+            "sha256": "sha256-ujmCeQ4NhlCikvWB46S4d5XqYCbfHofgfQYxHag0T9k=",
             "sparseCheckout": [],
             "type": "git",
             "url": "git@ghe.spotify.net:shared/homebrew-spotify.git"
         },
-        "version": "cf787c044b3194c83e91f717303bf19359b1af82"
+        "version": "8f1204a1dc984e459f3d9dc3306dd732f30265fa"
     }
 }
