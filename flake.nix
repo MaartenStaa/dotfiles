@@ -259,8 +259,8 @@
           };
       };
 
-      formatter = {
-        aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt-rfc-style;
-      };
+      formatter = nixpkgs.lib.genAttrs [ work.arch personal.arch ] (
+        system: nixpkgs.legacyPackages.${system}.nixfmt-tree
+      );
     };
 }

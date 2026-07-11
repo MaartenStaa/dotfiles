@@ -15,7 +15,7 @@ let
         "buildPhase"
       ];
       patches = [ ./asdf-python.patch ];
-      buildPhase = ''cp -r . $out'';
+      buildPhase = "cp -r . $out";
     };
   };
 in
