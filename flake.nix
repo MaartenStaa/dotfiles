@@ -45,6 +45,9 @@
       flake = false;
     };
 
+    herdr.url = "github:MaartenStaa/herdr/issue/1169-undercurl-color-not-rendered";
+    herdr.inputs.nixpkgs.follows = "nixpkgs";
+
     # Fish plugins
     fish-plugin-nvm = {
       url = "github:jorgebucaran/nvm.fish";
@@ -194,6 +197,7 @@
             pkgs = nixpkgs.legacyPackages."${arch}";
             extraSpecialArgs = {
               inherit username email inputs;
+              system = arch;
             };
             modules = [
               catppuccin.homeModules.catppuccin
@@ -230,6 +234,7 @@
             pkgs = nixpkgs.legacyPackages."${arch}";
             extraSpecialArgs = {
               inherit username email inputs;
+              system = arch;
             };
             modules = [
               catppuccin.homeModules.catppuccin

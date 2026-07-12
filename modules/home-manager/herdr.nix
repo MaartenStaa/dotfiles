@@ -1,6 +1,8 @@
-_: {
+{ inputs, system, ... }:
+{
   programs.herdr = {
     enable = true;
+    package = inputs.herdr.packages.${system}.default;
     settings = {
       update.version_check = false;
       keys = {
