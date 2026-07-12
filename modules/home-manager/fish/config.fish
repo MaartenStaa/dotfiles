@@ -26,3 +26,10 @@ if status is-interactive; and test $TERM != dumb
     # Transient prompt with starship
     enable_transience
 end
+
+# if in herdr and TERM is xterm-256color, set TERM to xterm-ghostty
+# herdr uses libghostty, so this is more accurate, and provides better capability
+# detection for programs like neovim.
+if test "$HERDR_ENV" = 1 -a "$TERM" = xterm-256color
+    set -gx TERM xterm-ghostty
+end
