@@ -93,17 +93,51 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1783792906,
-        "narHash": "sha256-Ub2il8QVY25GXKJlsOB3Yxjeo/7wa8sLDLL+prAcHE0=",
+        "lastModified": 1784202777,
+        "narHash": "sha256-6LUpZ0erMmXTfoR9nWJ8V8zUU2yk8tw9s6T8hQCOLkY=",
         "owner": "MaartenStaa",
         "repo": "herdr",
-        "rev": "2e57530ca457393f6a6c4e8493d8934052add5c8",
+        "rev": "780e5be8dd07c4698839d7b3f3e4fa66035a7f46",
         "type": "github"
       },
       "original": {
         "owner": "MaartenStaa",
         "ref": "issue/1169-undercurl-color-not-rendered",
         "repo": "herdr",
+        "type": "github"
+      }
+    },
+    "herdr-plugin-command-palette": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1782738461,
+        "narHash": "sha256-A43Dl365S/5w2wrttV1RnQ1g7YRJmsD3tb5EUUZcQQY=",
+        "owner": "JanTvrdik",
+        "repo": "herdr-command-palette",
+        "rev": "eab940018c2135ac23718efa11e23e9dddcd2a75",
+        "type": "github"
+      },
+      "original": {
+        "owner": "JanTvrdik",
+        "repo": "herdr-command-palette",
+        "rev": "eab940018c2135ac23718efa11e23e9dddcd2a75",
+        "type": "github"
+      }
+    },
+    "herdr-plugin-plus": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1783270948,
+        "narHash": "sha256-++Un8povVFqkKhqLCx/DPYRxLTvkDTwWHVzFGk0exSU=",
+        "owner": "cloudmanic",
+        "repo": "herdr-plus",
+        "rev": "f32b0825f12543c1d03e54fb10d1741c40d66cdc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cloudmanic",
+        "repo": "herdr-plus",
+        "rev": "f32b0825f12543c1d03e54fb10d1741c40d66cdc",
         "type": "github"
       }
     },
@@ -188,6 +222,8 @@
         "catppuccin": "catppuccin",
         "fish-plugin-nvm": "fish-plugin-nvm",
         "herdr": "herdr",
+        "herdr-plugin-command-palette": "herdr-plugin-command-palette",
+        "herdr-plugin-plus": "herdr-plugin-plus",
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",

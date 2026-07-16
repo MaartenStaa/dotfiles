@@ -48,6 +48,16 @@
     herdr.url = "github:MaartenStaa/herdr/issue/1169-undercurl-color-not-rendered";
     herdr.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Herdr plugins
+    herdr-plugin-plus = {
+      url = "github:cloudmanic/herdr-plus/f32b0825f12543c1d03e54fb10d1741c40d66cdc";
+      flake = false;
+    };
+    herdr-plugin-command-palette = {
+      url = "github:JanTvrdik/herdr-command-palette/eab940018c2135ac23718efa11e23e9dddcd2a75";
+      flake = false;
+    };
+
     # Fish plugins
     fish-plugin-nvm = {
       url = "github:jorgebucaran/nvm.fish";
@@ -92,33 +102,40 @@
         email = "maarten@staa.dev";
         arch = "x86_64-darwin";
       };
+      mkSources =
+        pkgs:
+        import ./_sources/generated.nix {
+          inherit (pkgs)
+            fetchurl
+            fetchFromGitHub
+            dockerTools
+            ;
+          fetchgit =
+            args:
+            (pkgs.fetchgit args).overrideAttrs (old: {
+              GIT_SSH_COMMAND = "${pkgs.openssh}/bin/ssh -o StrictHostKeyChecking=accept-new";
+              impureEnvVars = (old.impureEnvVars or [ ]) ++ [ "SSH_AUTH_SOCK" ];
+              preFetch = ''
+                export GIT_SSH_COMMAND
+              '';
+            });
+        };
     in
     {
       darwinConfigurations = with work; {
         work-mbp =
           let
-            args = {
-              inherit username;
-              inherit email;
-            };
             system = arch;
             pkgs = import nixpkgs {
               inherit system;
             };
-            sshAgentSock = builtins.getEnv "SSH_AUTH_SOCK";
-            fetchers = {
-              inherit (pkgs)
-                fetchurl
-                fetchFromGitHub
-                dockerTools
+            _sources = mkSources pkgs;
+            args = {
+              inherit
+                username
+                email
                 ;
-              fetchgit =
-                args:
-                (pkgs.fetchgit args).overrideAttrs (_: {
-                  GIT_SSH_COMMAND = "${pkgs.openssh}/bin/ssh -o IdentityAgent=\"${sshAgentSock}\" -o StrictHostKeyChecking=accept-new -vvv";
-                });
             };
-            _sources = import ./_sources/generated.nix fetchers;
           in
           nix-darwin.lib.darwinSystem {
             inherit system;
@@ -193,10 +210,19 @@
       homeConfigurations = {
         work-mbp =
           with work;
-          home-manager.lib.homeManagerConfiguration {
+          let
             pkgs = nixpkgs.legacyPackages."${arch}";
+            _sources = mkSources pkgs;
+          in
+          home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
             extraSpecialArgs = {
-              inherit username email inputs;
+              inherit
+                username
+                email
+                inputs
+                _sources
+                ;
               system = arch;
             };
             modules = [
@@ -214,7 +240,7 @@
               ./modules/home-manager/gcloud.nix
               ./modules/home-manager/ghostty
               ./modules/home-manager/git
-              ./modules/home-manager/herdr.nix
+              ./modules/home-manager/herdr
               ./modules/home-manager/home.nix
               ./modules/home-manager/karabiner
               ./modules/home-manager/kitty
@@ -249,7 +275,7 @@
               ./modules/home-manager/fzf.nix
               ./modules/home-manager/ghostty
               ./modules/home-manager/git
-              ./modules/home-manager/herdr.nix
+              ./modules/home-manager/herdr
               ./modules/home-manager/home.nix
               ./modules/home-manager/karabiner
               ./modules/home-manager/kitty

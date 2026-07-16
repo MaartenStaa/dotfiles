@@ -1,4 +1,36 @@
-{ inputs, system, ... }:
+{
+  inputs,
+  system,
+  pkgs,
+  ...
+}:
+let
+  pluginDefs = import ./plugins.nix { inherit pkgs inputs; };
+
+  sessions = [
+    "default"
+    "admin"
+    "open-source"
+  ];
+
+  pluginsJsonForSession =
+    session:
+    let
+      relevant = builtins.filter (p: builtins.elem session p._sessions) pluginDefs;
+      cleaned = map (p: builtins.removeAttrs p [ "_sessions" ]) relevant;
+    in
+    builtins.toJSON cleaned;
+
+  pluginJsonFiles = builtins.listToAttrs (
+    map (session: {
+      name =
+        if session == "default" then "herdr/plugins.json" else "herdr/sessions/${session}/plugins.json";
+      value = {
+        text = pluginsJsonForSession session;
+      };
+    }) sessions
+  );
+in
 {
   programs.herdr = {
     enable = true;
@@ -6,6 +38,7 @@
     settings = {
       onboarding = false;
       update.version_check = false;
+      worktrees.directory = "~/src/worktrees/";
       keys = {
         prefix = "ctrl+a";
         split_vertical = "prefix+\\";
@@ -25,17 +58,23 @@
             command = "~/.dotfiles/bin/herdr-toggle-lazygit.sh";
             description = "toggle a tab running lazygit";
           }
+          {
+            key = "ctrl+shift+p";
+            type = "plugin_action";
+            command = "jt.command-palette.open";
+            description = "Command palette";
+          }
         ];
       };
       terminal.default_shell = "fish";
       experimental.pane_history = true;
       session.resume_agents_on_restore = true;
       theme.custom = {
-        panel_bg = "#24273a"; # Base
-        accent = "#8aadf4"; # Blue
-        green = "#a6da95"; # Green
-        red = "#ed8796"; # Red
-        yellow = "#eed49f"; # Yellow
+        panel_bg = "#24273a";
+        accent = "#8aadf4";
+        green = "#a6da95";
+        red = "#ed8796";
+        yellow = "#eed49f";
       };
       ui = {
         agent_panel_sort = "priority";
@@ -44,4 +83,6 @@
       };
     };
   };
+
+  xdg.configFile = pluginJsonFiles;
 }
