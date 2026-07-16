@@ -3,6 +3,7 @@
   home.packages = with pkgs; [
     gh
     git
+    git-absorb
     git-lfs
     lazygit
   ];
