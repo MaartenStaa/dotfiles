@@ -4,6 +4,7 @@
     enable = true;
     package = inputs.herdr.packages.${system}.default;
     settings = {
+      onboarding = false;
       update.version_check = false;
       keys = {
         prefix = "ctrl+a";
