@@ -15,6 +15,9 @@
 
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
 
+    oyui.url = "github:emilien-jegou/oyui";
+    oyui.inputs.nixpkgs.follows = "nixpkgs";
+
     # Homebrew taps
     tap-asheshgoplani-tap = {
       url = "github:asheshgoplani/homebrew-tap";
@@ -82,6 +85,7 @@
       home-manager,
       nix-darwin,
       nix-homebrew,
+      oyui,
       tap-asheshgoplani-tap,
       tap-homebrew-bundle,
       tap-homebrew-cask,
@@ -218,9 +222,11 @@
             inherit pkgs;
             extraSpecialArgs = {
               inherit
+                arch
                 username
                 email
                 inputs
+                oyui
                 _sources
                 ;
               system = arch;
@@ -242,6 +248,7 @@
               ./modules/home-manager/git
               ./modules/home-manager/herdr
               ./modules/home-manager/home.nix
+              ./modules/home-manager/jj
               ./modules/home-manager/karabiner
               ./modules/home-manager/kitty
               ./modules/home-manager/macos-apps.nix

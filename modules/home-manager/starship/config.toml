@@ -5,9 +5,7 @@ format = """
 $username\
 $hostname\
 $directory\
-$git_branch\
-$git_state\
-$git_status\
+${custom.jj}\
 $line_break\
 $python\
 $character
@@ -31,10 +29,12 @@ error_symbol = "[❯](red)"
 vimcmd_symbol = "[❮](purple)"
 
 [git_branch]
+disabled = true
 format = "[$branch]($style)"
 style = "bright-black"
 
 [git_status]
+disabled = true
 format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind)]($style)"
 style = "cyan"
 conflicted = "​"
@@ -45,9 +45,21 @@ renamed = "​"
 deleted = "​"
 
 [git_state]
+disabled = true
 format = '\([$state( $progress_current/$progress_total)]($style)\) '
 style = 'bright-black'
 
 [python]
 format = "[$virtualenv]($style)"
 style = "bright-black"
+
+[custom.jj]
+when = "jj-starship detect"
+shell = [
+  "jj-starship",
+  "--strip-bookmark-prefix",
+  "maartens/",
+  "--jj-symbol",
+  " ",
+]
+format = "$output "

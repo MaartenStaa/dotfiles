@@ -6,6 +6,7 @@
     git-absorb
     git-lfs
     lazygit
+    mergiraf
   ];
 
   programs.git = {
@@ -32,6 +33,10 @@
       grep = {
         extendRegexp = true;
         lineNumber = true;
+      };
+      merge.mergiraf = {
+        name = "mergiraf";
+        driver = "${pkgs.mergiraf}/bin/mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L";
       };
       rerere = {
         enabled = true;
@@ -64,6 +69,9 @@
         uncommit = "reset --soft HEAD~";
       };
     };
+    attributes = [
+      "* merge=mergiraf"
+    ];
     includes = [
       { path = "local.conf"; }
     ];

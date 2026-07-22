@@ -1,0 +1,4 @@
+pub fn config() {
+  // https://github.com/emilien-jegou/oyui/tree/main/docs/themes.md
+  theme::set("catppuccin-macchiato");
+}

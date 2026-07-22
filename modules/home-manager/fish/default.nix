@@ -76,6 +76,12 @@ in
       ll = "eza -hal";
       gpf = "git push --force-with-lease";
       gs = "git status";
+      js = "jj status";
+      jl = "jj log";
+      jd = "jj describe";
+      jn = "jj new";
+      jb = "jj bookmark";
+      jsq = "jj squash";
       ls = "eza";
       psi = "pnpm submodules && pnpm install --frozen-lockfile";
       vim = "nvim";
