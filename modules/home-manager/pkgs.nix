@@ -20,7 +20,6 @@
       jq
       neovim-remote
       proximity-sort
-      reattach-to-user-namespace
       ripgrep
       tldr
       tree

@@ -1,8 +1,9 @@
 {
-  description = "Maarten's macOS Flakes with nix-darwin and home-manager";
+  description = "Maarten's Nix Flakes with nix-darwin, NixOS, and home-manager";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
 
     catppuccin.url = "github:catppuccin/nix";
     catppuccin.inputs.nixpkgs.follows = "nixpkgs";
@@ -90,6 +91,7 @@
   outputs =
     inputs@{
       nixpkgs,
+      nixpkgs-stable,
       catppuccin,
       home-manager,
       nix-darwin,
@@ -114,6 +116,11 @@
         username = "maarten";
         email = "maarten@staa.dev";
         arch = "x86_64-darwin";
+      };
+      desktop = {
+        username = "maarten";
+        email = "maarten@staa.dev";
+        arch = "x86_64-linux";
       };
       mkSources =
         pkgs:
@@ -306,7 +313,57 @@
           };
       };
 
-      formatter = nixpkgs.lib.genAttrs [ work.arch personal.arch ] (
+      nixosConfigurations = {
+        maarten-pc =
+          with desktop;
+          let
+            args = {
+              inherit arch username email;
+            };
+          in
+          nixpkgs-stable.lib.nixosSystem {
+            system = arch;
+            specialArgs = args;
+            modules = [
+              ./machines/desktop-pc
+              ./modules/shared/config.nix
+
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = false;
+                home-manager.useUserPackages = true;
+                home-manager.extraSpecialArgs = {
+                  inherit inputs;
+                  inherit (args) arch username email;
+                  system = arch;
+                };
+                home-manager.users.${username}.imports = [
+                  catppuccin.homeModules.catppuccin
+
+                  ./modules/shared/config.nix
+
+                  ./modules/home-manager/catppuccin.nix
+                  ./modules/home-manager/development.nix
+                  ./modules/home-manager/fd
+                  ./modules/home-manager/fzf.nix
+                  ./modules/home-manager/ghostty
+                  ./modules/home-manager/git
+                  ./modules/home-manager/herdr
+                  ./modules/home-manager/home.nix
+                  ./modules/home-manager/jj
+                  ./modules/home-manager/linux.nix
+                  ./modules/home-manager/neovim
+                  ./modules/home-manager/pkgs.nix
+                  ./modules/home-manager/python.nix
+                  ./modules/home-manager/shell.nix
+                  ./modules/home-manager/tmux
+                ];
+              }
+            ];
+          };
+      };
+
+      formatter = nixpkgs.lib.genAttrs [ work.arch personal.arch desktop.arch ] (
         system: nixpkgs.legacyPackages.${system}.nixfmt-tree
       );
     };
