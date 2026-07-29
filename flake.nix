@@ -15,8 +15,11 @@
 
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
 
-    oyui.url = "github:emilien-jegou/oyui";
-    oyui.inputs.nixpkgs.follows = "nixpkgs";
+    oyui = {
+      url = "github:emilien-jegou/oyui";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.follows = "rust-overlay";
+    };
 
     # Homebrew taps
     tap-asheshgoplani-tap = {
@@ -47,9 +50,11 @@
       url = "github:nikitabobko/homebrew-tap";
       flake = false;
     };
-
-    herdr.url = "github:MaartenStaa/herdr/issue/1169-undercurl-color-not-rendered";
-    herdr.inputs.nixpkgs.follows = "nixpkgs";
+    herdr = {
+      url = "github:MaartenStaa/herdr/issue/1169-undercurl-color-not-rendered";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.follows = "rust-overlay";
+    };
 
     # Herdr plugins
     herdr-plugin-plus = {
@@ -76,6 +81,10 @@
       url = "github:asdf-vm/asdf-nodejs";
       flake = false;
     };
+
+    # Dependency of some flake inputs; lift here so we can deduplicate and follow nixpkgs
+    rust-overlay.url = "github:oxalica/rust-overlay";
+    rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
