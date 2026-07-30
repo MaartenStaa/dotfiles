@@ -282,7 +282,13 @@
           home-manager.lib.homeManagerConfiguration {
             pkgs = nixpkgs.legacyPackages."${arch}";
             extraSpecialArgs = {
-              inherit username email inputs;
+              inherit
+                arch
+                username
+                email
+                inputs
+                oyui
+                ;
               system = arch;
             };
             modules = [
