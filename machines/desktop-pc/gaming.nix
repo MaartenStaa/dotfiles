@@ -10,4 +10,9 @@
     discord
     heroic
   ];
+
+  services.sunshine = {
+    enable = true;
+    openFirewall = true;
+  };
 }
