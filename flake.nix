@@ -353,27 +353,33 @@
                     system = arch;
                   };
 
-                  users.${username}.imports = [
-                    catppuccin.homeModules.catppuccin
+                  users.${username} = {
+                    # This is what makes Home Manager actually use the unstable nixpkgs input,
+                    # rather than defaulting to the stable NixOS one (even with `useGlobalPkgs
+                    # = false`).
+                    _module.args.pkgsPath = inputs.nixpkgs;
 
-                    ./modules/shared/config.nix
+                    imports = [
+                      catppuccin.homeModules.catppuccin
+                      ./modules/shared/config.nix
 
-                    ./modules/home-manager/catppuccin.nix
-                    ./modules/home-manager/development.nix
-                    ./modules/home-manager/fd
-                    ./modules/home-manager/fzf.nix
-                    ./modules/home-manager/ghostty
-                    ./modules/home-manager/git
-                    ./modules/home-manager/herdr
-                    ./modules/home-manager/home.nix
-                    ./modules/home-manager/jj
-                    ./modules/home-manager/linux.nix
-                    ./modules/home-manager/neovim
-                    ./modules/home-manager/pkgs.nix
-                    ./modules/home-manager/python.nix
-                    ./modules/home-manager/shell.nix
-                    ./modules/home-manager/tmux
-                  ];
+                      ./modules/home-manager/catppuccin.nix
+                      ./modules/home-manager/development.nix
+                      ./modules/home-manager/fd
+                      ./modules/home-manager/fzf.nix
+                      ./modules/home-manager/ghostty
+                      ./modules/home-manager/git
+                      ./modules/home-manager/herdr
+                      ./modules/home-manager/home.nix
+                      ./modules/home-manager/jj
+                      ./modules/home-manager/linux.nix
+                      ./modules/home-manager/neovim
+                      ./modules/home-manager/pkgs.nix
+                      ./modules/home-manager/python.nix
+                      ./modules/home-manager/shell.nix
+                      ./modules/home-manager/tmux
+                    ];
+                  };
                 };
               }
             ];
