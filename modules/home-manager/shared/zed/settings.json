@@ -7,48 +7,64 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "cli_default_open_behavior": "new_window",
+  "outline_panel": {
+    "dock": "left"
+  },
+  "agent": {
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "git_panel": {
+    "dock": "left"
+  },
   "icon_theme": "Catppuccin Macchiato",
   "base_keymap": "SublimeText",
   "theme": "Catppuccin Macchiato",
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
   "terminal": {
     "detect_venv": {
       "on": {
-        "activate_script": "fish"
-      }
+        "activate_script": "fish",
+      },
     },
     "shell": {
-      "program": "fish"
-    }
+      "program": "fish",
+    },
   },
   "vim_mode": true,
   "vim": {
-    "use_system_clipboard": "never"
+    "use_system_clipboard": "never",
   },
   "ui_font_size": 16,
   "buffer_font_size": 14,
   "buffer_font_family": "JetBrainsMono Nerd Font Mono",
-  "relative_line_numbers": true,
+  "relative_line_numbers": "enabled",
   "git": {
     "inline_blame": {
       "delay_ms": 150,
-      "min_column": 100
-    }
+      "min_column": 100,
+    },
   },
   "inlay_hints": {
-    "enabled": true
+    "enabled": true,
   },
   "collaboration_panel": {
     "button": false,
-    "dock": "right"
+    "dock": "right",
   },
   "project_panel": {
-    "dock": "right"
+    "hide_gitignore": false,
+    "dock": "right",
   },
   "languages": {
+    "Nix": {
+      "language_servers": ["nil"],
+    },
     "Python": {
       "formatter": [
         {
@@ -59,39 +75,33 @@
               "--select=I",
               "--fix",
               "--stdin-filename",
-              "{buffer_path}"
-            ]
-          }
+              "{buffer_path}",
+            ],
+          },
         },
         {
           "external": {
             "command": "ruff",
-            "arguments": ["format", "--stdin-filename", "{buffer_path}"]
-          }
+            "arguments": ["format", "--stdin-filename", "{buffer_path}"],
+          },
           // "language_server": {
           //   "name": "ruff"
           // }
-        }
+        },
       ],
-      "language_servers": [
-        "ruff",
-        "basedpyright",
-        "pyrefly",
-        "!pylsp",
-        "!pyright"
-      ]
+      "language_servers": ["ruff", "basedpyright", "pyrefly"],
     },
     "Starlark": {
       "formatter": {
         "external": {
           "command": "buildifier",
-          "arguments": ["-mode=fix", "-path={buffer_path}"]
-        }
-      }
+          "arguments": ["-mode=fix", "-path={buffer_path}"],
+        },
+      },
     },
     "YAML": {
-      "formatter": "language_server"
-    }
+      "formatter": "language_server",
+    },
   },
   "lsp": {
     "basedpyright": {
@@ -100,9 +110,9 @@
         "arguments": [
           "--from=basedpyright",
           "basedpyright-langserver",
-          "--stdio"
-        ]
-      }
+          "--stdio",
+        ],
+      },
     },
     "json-language-server": {
       "settings": {
@@ -110,41 +120,54 @@
           "schemas": [
             {
               "fileMatch": ["pyrightconfig.json"],
-              "url": "https://raw.githubusercontent.com/microsoft/pyright/main/packages/vscode-pyright/schemas/pyrightconfig.schema.json"
-            }
-          ]
-        }
-      }
+              "url": "https://raw.githubusercontent.com/microsoft/pyright/main/packages/vscode-pyright/schemas/pyrightconfig.schema.json",
+            },
+          ],
+        },
+      },
     },
     "nil": {
       "settings": {
         "nix": {
           "flake": {
             "autoArchive": true,
-            "autoEvalInputs": true
-          }
-        }
-      }
+            "autoEvalInputs": true,
+          },
+        },
+      },
     },
     "pyrefly": {
       "binary": {
         "path": "uvx",
-        "arguments": ["pyrefly", "lsp"]
-      }
+        "arguments": ["pyrefly", "lsp"],
+      },
     },
     "starpls": {
       "binary": {
         "path": "/Users/maartens/repos/github/facebookexperimental/starlark-rust/target/release/starlark",
-        "arguments": ["--lsp", "--bazel", "--eager"]
-      }
+        "arguments": ["--lsp", "--bazel", "--eager"],
+      },
     },
     "rust-analyzer": {
-      "binary": {
-        "path": "/etc/profiles/per-user/maartens/bin/rust-analyzer"
-      },
+      // "binary": {
+      //   "path": "/Users/maartens/.nix-profile/bin/rust-analyzer"
+      // },
       "initialization_options": {
         "check": {
-          "command": "clippy"
+          "command": "clippy",
+        },
+        "inlayHints": {
+          // "bindingModeHints": { "enable": true },
+          "chainingHints": { "enable": true },
+          "closingBraceHints": { "enable": true },
+          "closureCaptureHints": { "enable": true },
+          "discriminantHints": { "enable": true },
+          // "expressionAdjustmentHints": { "enable": true },
+          "genericParameterHints": {
+            "const": { "enable": true },
+            "lifetime": { "enable": true },
+            "type": { "enable": true },
+          },
         },
         "completion": {
           "snippets": {
@@ -153,57 +176,57 @@
                 "postfix": "arc",
                 "body": ["Arc::new(${receiver})"],
                 "requires": "std::sync::Arc",
-                "scope": "expr"
+                "scope": "expr",
               },
               "Some": {
                 "postfix": "some",
                 "body": ["Some(${receiver})"],
-                "scope": "expr"
+                "scope": "expr",
               },
               "Ok": {
                 "postfix": "ok",
                 "body": ["Ok(${receiver})"],
-                "scope": "expr"
+                "scope": "expr",
               },
               "Rc::new": {
                 "postfix": "rc",
                 "body": ["Rc::new(${receiver})"],
                 "requires": "std::rc::Rc",
-                "scope": "expr"
+                "scope": "expr",
               },
               "Box::pin": {
                 "postfix": "boxpin",
                 "body": ["Box::pin(${receiver})"],
                 "requires": "std::boxed::Box",
-                "scope": "expr"
+                "scope": "expr",
               },
               "vec!": {
                 "postfix": "vec",
                 "body": ["vec![${receiver}]"],
                 "description": "vec![]",
-                "scope": "expr"
-              }
-            }
-          }
-        }
-      }
+                "scope": "expr",
+              },
+            },
+          },
+        },
+      },
     },
     "yaml-language-server": {
       "settings": {
         "yaml": {
           "format": {
             "printWidth": 100,
-            "singleQuote": false
+            "singleQuote": false,
           },
           "schemas": {
-            "/Users/maartens/repos/client/client/tools/sptcli/tasks_schema.json": "tools/sptcli/tasks/**/*.yaml"
-          }
-        }
-      }
-    }
+            "/Users/maartens/repos/client/client/tools/sptcli/tasks_schema.json": "tools/sptcli/tasks/**/*.yaml",
+          },
+        },
+      },
+    },
   },
   "file_types": {
     "Starlark": ["BUILD", "WORKSPACE", "bazel", "bzl", "star", "starlark"],
-    "JSON": ["json", ".swcrc"]
-  }
+    "JSON": ["json", ".swcrc"],
+  },
 }

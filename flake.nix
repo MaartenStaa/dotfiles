@@ -79,16 +79,6 @@
       flake = false;
     };
 
-    # ASDF version manager plugins
-    asdf-plugin-python = {
-      url = "github:danhper/asdf-python";
-      flake = false;
-    };
-    asdf-plugin-nodejs = {
-      url = "github:asdf-vm/asdf-nodejs";
-      flake = false;
-    };
-
     # Dependency of some flake inputs; lift here so we can deduplicate and follow nixpkgs
     rust-overlay.url = "github:oxalica/rust-overlay";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
@@ -199,7 +189,7 @@
               ./modules/shared/config.nix
             ];
           };
-        private-mbp =
+        personal-mbp =
           with personal;
           nix-darwin.lib.darwinSystem {
             system = arch;
@@ -223,7 +213,7 @@
                 };
               }
 
-              ./machines/private-mbp
+              ./machines/personal-mbp
               ./modules/nix-darwin/determinate.nix
               ./modules/nix-darwin/homebrew.nix
               ./modules/nix-darwin/pkgs.nix
@@ -252,36 +242,14 @@
               system = arch;
             };
             modules = [
-              catppuccin.homeModules.catppuccin
-
               ./modules/shared/config.nix
-
-              ./modules/home-manager/asdf
-              ./modules/home-manager/bazel.nix
-              ./modules/home-manager/catppuccin.nix
-              ./modules/home-manager/darwin.nix
-              ./modules/home-manager/development.nix
-              ./modules/home-manager/fd
-              ./modules/home-manager/fzf.nix
-              ./modules/home-manager/gcloud.nix
-              ./modules/home-manager/ghostty
-              ./modules/home-manager/git
-              ./modules/home-manager/herdr
-              ./modules/home-manager/home.nix
-              ./modules/home-manager/jj
-              ./modules/home-manager/karabiner
-              ./modules/home-manager/kitty
-              ./modules/home-manager/macos-apps.nix
-              ./modules/home-manager/neovim
-              ./modules/home-manager/pkgs.nix
-              ./modules/home-manager/python.nix
-              ./modules/home-manager/shell.nix
-              ./modules/home-manager/tmux
-              ./modules/home-manager/zed
+              ./modules/home-manager/shared
+              ./modules/home-manager/darwin/shared
+              ./modules/home-manager/darwin/work
             ];
           };
 
-        private-mbp =
+        personal-mbp =
           with personal;
           home-manager.lib.homeManagerConfiguration {
             pkgs = nixpkgs.legacyPackages."${arch}";
@@ -295,29 +263,10 @@
               system = arch;
             };
             modules = [
-              catppuccin.homeModules.catppuccin
-
               ./modules/shared/config.nix
-
-              ./modules/home-manager/asdf
-              ./modules/home-manager/catppuccin.nix
-              ./modules/home-manager/darwin.nix
-              ./modules/home-manager/development.nix
-              ./modules/home-manager/fd
-              ./modules/home-manager/fzf.nix
-              ./modules/home-manager/ghostty
-              ./modules/home-manager/git
-              ./modules/home-manager/herdr
-              ./modules/home-manager/home.nix
-              ./modules/home-manager/karabiner
-              ./modules/home-manager/kitty
-              ./modules/home-manager/macos-apps.nix
-              ./modules/home-manager/neovim
-              ./modules/home-manager/pkgs.nix
-              ./modules/home-manager/python.nix
-              ./modules/home-manager/shell.nix
-              ./modules/home-manager/tmux
-              ./modules/home-manager/zed
+              ./modules/home-manager/shared
+              ./modules/home-manager/darwin/shared
+              ./modules/home-manager/darwin/personal
             ];
           };
       };
@@ -360,24 +309,9 @@
                     _module.args.pkgsPath = inputs.nixpkgs;
 
                     imports = [
-                      catppuccin.homeModules.catppuccin
                       ./modules/shared/config.nix
-
-                      ./modules/home-manager/catppuccin.nix
-                      ./modules/home-manager/development.nix
-                      ./modules/home-manager/fd
-                      ./modules/home-manager/fzf.nix
-                      ./modules/home-manager/ghostty
-                      ./modules/home-manager/git
-                      ./modules/home-manager/herdr
-                      ./modules/home-manager/home.nix
-                      ./modules/home-manager/jj
-                      ./modules/home-manager/linux.nix
-                      ./modules/home-manager/neovim
-                      ./modules/home-manager/pkgs.nix
-                      ./modules/home-manager/python.nix
-                      ./modules/home-manager/shell.nix
-                      ./modules/home-manager/tmux
+                      ./modules/home-manager/shared
+                      ./modules/home-manager/linux
                     ];
                   };
                 };

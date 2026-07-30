@@ -1,37 +1,5 @@
 {
   "nodes": {
-    "asdf-plugin-nodejs": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1771940719,
-        "narHash": "sha256-0zesVEQJ1s/NV/19TyMu2mKbSUg21GfsL6PXzGrz7xE=",
-        "owner": "asdf-vm",
-        "repo": "asdf-nodejs",
-        "rev": "779c8dc84b3bdab38c2c80622d315c2c3267f74b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "asdf-vm",
-        "repo": "asdf-nodejs",
-        "type": "github"
-      }
-    },
-    "asdf-plugin-python": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1772717631,
-        "narHash": "sha256-zZBzT+JSp8NmdehrB0wZC5vL8cV0hnD0Cnc1Ds9YHhc=",
-        "owner": "danhper",
-        "repo": "asdf-python",
-        "rev": "abc2a03863e4d569b4f9de0d0efc1a88d96c2c12",
-        "type": "github"
-      },
-      "original": {
-        "owner": "danhper",
-        "repo": "asdf-python",
-        "type": "github"
-      }
-    },
     "brew-src": {
       "flake": false,
       "locked": {
@@ -277,8 +245,6 @@
     },
     "root": {
       "inputs": {
-        "asdf-plugin-nodejs": "asdf-plugin-nodejs",
-        "asdf-plugin-python": "asdf-plugin-python",
         "catppuccin": "catppuccin",
         "fish-plugin-nvm": "fish-plugin-nvm",
         "herdr": "herdr",

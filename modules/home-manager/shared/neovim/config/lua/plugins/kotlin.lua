@@ -1,27 +1,24 @@
 local parser = nil
 local function parse_detekt_output(...)
   if parser == nil then
-    parser = require("lint.parser").from_errorformat(
-      [[%f:%l:%c: %m]],
-      {
-        source = "detekt",
-        severity = vim.diagnostic.severity.ERROR,
-      }
-    )
+    parser = require("lint.parser").from_errorformat([[%f:%l:%c: %m]], {
+      source = "detekt",
+      severity = vim.diagnostic.severity.ERROR,
+    })
   end
 
   return parser(...)
 end
 
 return {
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        kotlin_language_server = {},
-      },
-    },
-  },
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   opts = {
+  --     servers = {
+  --       kotlin_language_server = {},
+  --     },
+  --   },
+  -- },
   {
     "mfussenegger/nvim-lint",
     opts = {
