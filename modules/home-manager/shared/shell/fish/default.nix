@@ -101,6 +101,5 @@ in
         export VISUAL=${pkgs.neovim}/bin/nvim
         export NIX_PATH=${nixPath}
       '';
-    # source "${pkgs.asdf-vm}/share/asdf-vm/asdf.fish"
   };
 }
