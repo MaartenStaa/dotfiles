@@ -39,6 +39,14 @@
     ];
   };
 
+  services.keyd = {
+    enable = true;
+    keyboards.default = {
+      ids = [ "*" ];
+      settings.main.capslock = "overload(control, esc)";
+    };
+  };
+
   nix.settings = {
     extra-experimental-features = [
       "flakes"
