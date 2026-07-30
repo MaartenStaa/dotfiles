@@ -37,13 +37,22 @@
     packages = with pkgs; [
       tree
     ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEh+kH+aVLCemzWOyaJNLgt3s6sBitPI1aoJx8RJM4KN"
+    ];
   };
 
-  services.keyd = {
-    enable = true;
-    keyboards.default = {
-      ids = [ "*" ];
-      settings.main.capslock = "overload(control, esc)";
+  services = {
+    keyd = {
+      enable = true;
+      keyboards.default = {
+        ids = [ "*" ];
+        settings.main.capslock = "overload(control, esc)";
+      };
+    };
+
+    openssh = {
+      enable = true;
     };
   };
 
