@@ -4,12 +4,7 @@
 
   programs.ghostty = {
     enable = true;
-    # ghostty installation is broken on macOS; let home manager handle configuration,
-    # but not installation by setting a null package
-    package = null;
-    enableFishIntegration = true;
-    # requires a package set
-    # installBatSyntax = true;
+    installBatSyntax = true;
     settings = {
       font-family = "JetBrainsMono Nerd Font Mono Light";
 
