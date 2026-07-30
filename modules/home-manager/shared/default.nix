@@ -3,14 +3,19 @@
   imports = [
     inputs.catppuccin.homeModules.catppuccin
 
+    ./bat.nix
+    ./catppuccin.nix
     ./development.nix
     ./fd
+    ./fzf.nix
     ./ghostty
     ./git
+    ./herdr
     ./jj
     ./kitty
     ./neovim
     ./pkgs.nix
+    ./python.nix
     ./shell
     ./tmux
     ./zed
