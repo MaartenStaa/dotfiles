@@ -1,20 +1,14 @@
 {
-  lib,
   stdenv,
-  fetchFromGitHub,
   kernel,
+  src,
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation {
   pname = "rtw89-8922au";
-  version = "unstable-2026-07-28";
+  version = src.shortRev or "unstable";
 
-  src = fetchFromGitHub {
-    owner = "morrownr";
-    repo = "rtw89";
-    rev = "08b8d326937a200a706ec9c501374eec15835b5a";
-    hash = "sha256-tBW2TJjqwJRyxqfLAlqHtV9h6oLIBbU+10o57sJK4Sc=";
-  };
+  inherit src;
 
   nativeBuildInputs = kernel.moduleBuildDependencies;
 

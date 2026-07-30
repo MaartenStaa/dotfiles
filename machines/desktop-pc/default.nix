@@ -2,6 +2,7 @@
   config,
   pkgs,
   username,
+  inputs,
   ...
 }:
 {
@@ -15,7 +16,7 @@
 
   # WiFi dongle driver
   boot.extraModulePackages = [
-    (config.boot.kernelPackages.callPackage ./rtw89-8922au.nix { })
+    (config.boot.kernelPackages.callPackage ./rtw89-8922au.nix { src = inputs.rtw89-src; })
   ];
   boot.kernelModules = [ "rtw89_8922au" ];
 

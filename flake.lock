@@ -290,6 +290,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
         "oyui": "oyui",
+        "rtw89": "rtw89",
         "rust-overlay": "rust-overlay",
         "tap-asheshgoplani-tap": "tap-asheshgoplani-tap",
         "tap-homebrew-bundle": "tap-homebrew-bundle",
@@ -298,6 +299,22 @@
         "tap-jira-cli": "tap-jira-cli",
         "tap-mattt-tap": "tap-mattt-tap",
         "tap-nikitabobko-tap": "tap-nikitabobko-tap"
+      }
+    },
+    "rtw89": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1784031054,
+        "narHash": "sha256-tBW2TJjqwJRyxqfLAlqHtV9h6oLIBbU+10o57sJK4Sc=",
+        "owner": "morrownr",
+        "repo": "rtw89",
+        "rev": "08b8d326937a200a706ec9c501374eec15835b5a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "morrownr",
+        "repo": "rtw89",
+        "type": "github"
       }
     },
     "rust-overlay": {

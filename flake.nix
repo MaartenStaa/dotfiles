@@ -73,6 +73,12 @@
       flake = false;
     };
 
+    # Kernel modules
+    rtw89 = {
+      url = "github:morrownr/rtw89";
+      flake = false;
+    };
+
     # ASDF version manager plugins
     asdf-plugin-python = {
       url = "github:danhper/asdf-python";
@@ -321,7 +327,12 @@
           with desktop;
           let
             args = {
-              inherit arch username email;
+              inherit
+                arch
+                username
+                email
+                inputs
+                ;
             };
           in
           nixpkgs-stable.lib.nixosSystem {
