@@ -4,7 +4,6 @@
 {
   config,
   lib,
-  pkgs,
   modulesPath,
   ...
 }:
@@ -14,71 +13,75 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = [
-    "nvme"
-    "xhci_pci"
-    "ahci"
-    "usbhid"
-    "usb_storage"
-    "sd_mod"
-  ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
-
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/d834c9cb-c6bb-430a-849d-0eb6c8356f10";
-    fsType = "btrfs";
-    options = [
-      "subvol=@"
-      "noatime"
-      "compress=zstd"
+  boot = {
+    initrd.availableKernelModules = [
+      "nvme"
+      "xhci_pci"
+      "ahci"
+      "usbhid"
+      "usb_storage"
+      "sd_mod"
     ];
+    initrd.kernelModules = [ ];
+    kernelModules = [ "kvm-amd" ];
+    extraModulePackages = [ ];
   };
 
-  fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/d834c9cb-c6bb-430a-849d-0eb6c8356f10";
-    fsType = "btrfs";
-    options = [
-      "subvol=@home"
-      "noatime"
-      "compress=zstd"
-    ];
-  };
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-uuid/d834c9cb-c6bb-430a-849d-0eb6c8356f10";
+      fsType = "btrfs";
+      options = [
+        "subvol=@"
+        "noatime"
+        "compress=zstd"
+      ];
+    };
 
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/d834c9cb-c6bb-430a-849d-0eb6c8356f10";
-    fsType = "btrfs";
-    options = [
-      "subvol=@nix"
-      "noatime"
-      "compress=zstd"
-    ];
-  };
+    "/home" = {
+      device = "/dev/disk/by-uuid/d834c9cb-c6bb-430a-849d-0eb6c8356f10";
+      fsType = "btrfs";
+      options = [
+        "subvol=@home"
+        "noatime"
+        "compress=zstd"
+      ];
+    };
 
-  fileSystems."/var/log" = {
-    device = "/dev/disk/by-uuid/d834c9cb-c6bb-430a-849d-0eb6c8356f10";
-    fsType = "btrfs";
-    options = [
-      "subvol=@log"
-      "noatime"
-      "compress=zstd"
-    ];
-  };
+    "/nix" = {
+      device = "/dev/disk/by-uuid/d834c9cb-c6bb-430a-849d-0eb6c8356f10";
+      fsType = "btrfs";
+      options = [
+        "subvol=@nix"
+        "noatime"
+        "compress=zstd"
+      ];
+    };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/F243-0FB2";
-    fsType = "vfat";
-  };
+    "/var/log" = {
+      device = "/dev/disk/by-uuid/d834c9cb-c6bb-430a-849d-0eb6c8356f10";
+      fsType = "btrfs";
+      options = [
+        "subvol=@log"
+        "noatime"
+        "compress=zstd"
+      ];
+    };
 
-  fileSystems."/mnt/games" = {
-    device = "/dev/disk/by-uuid/8E8804CC8804B52D";
-    fsType = "ntfs3";
-    options = [
-      "rw"
-      "uid=1000"
-      "gid=100"
-    ];
+    "/boot" = {
+      device = "/dev/disk/by-uuid/F243-0FB2";
+      fsType = "vfat";
+    };
+
+    "/mnt/games" = {
+      device = "/dev/disk/by-uuid/8E8804CC8804B52D";
+      fsType = "ntfs3";
+      options = [
+        "rw"
+        "uid=1000"
+        "gid=100"
+      ];
+    };
   };
 
   swapDevices = [ ];
