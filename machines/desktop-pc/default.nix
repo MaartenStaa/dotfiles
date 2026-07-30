@@ -56,11 +56,20 @@
     };
   };
 
-  nix.settings = {
-    extra-experimental-features = [
-      "flakes"
-      "nix-command"
-    ];
+  nix = {
+    settings = {
+      extra-experimental-features = [
+        "flakes"
+        "nix-command"
+      ];
+    };
+
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+      persistent = true;
+    };
   };
 
   system.stateVersion = "26.05";
