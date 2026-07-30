@@ -2,7 +2,7 @@
   arch,
   email,
   pkgs,
-  oyui,
+  inputs,
   ...
 }:
 {
@@ -10,7 +10,7 @@
     jujutsu
     lazyjj
     mergiraf
-    oyui.packages.${arch}.default
+    inputs.oyui.packages.${arch}.default
   ];
 
   programs.jujutsu = {
@@ -27,7 +27,7 @@
         editor = "nvim";
       };
       merge-tools.oyui = {
-        program = "${oyui.packages.${arch}.default}/bin/oyui";
+        program = "${inputs.oyui.packages.${arch}.default}/bin/oyui";
         edit-args = [
           "diff"
           "$left"

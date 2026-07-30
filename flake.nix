@@ -96,7 +96,6 @@
       home-manager,
       nix-darwin,
       nix-homebrew,
-      oyui,
       tap-asheshgoplani-tap,
       tap-homebrew-bundle,
       tap-homebrew-cask,
@@ -242,7 +241,6 @@
                 username
                 email
                 inputs
-                oyui
                 _sources
                 ;
               system = arch;
@@ -287,7 +285,6 @@
                 username
                 email
                 inputs
-                oyui
                 ;
               system = arch;
             };
