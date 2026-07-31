@@ -67,6 +67,9 @@
       flake = false;
     };
 
+    opencode-vim.url = "github:leohenon/opencode-vim";
+    opencode-vim.inputs.nixpkgs.follows = "nixpkgs";
+
     # Work-specific modules (private)
     spotify-dotfiles.url = "git+ssh://git@ghe.spotify.net/maartens/spotify-dotfiles.git";
     spotify-dotfiles.inputs.nixpkgs.follows = "nixpkgs";

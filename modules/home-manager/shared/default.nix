@@ -5,6 +5,7 @@
 
     ./bat.nix
     ./catppuccin.nix
+    ./claude.nix
     ./development.nix
     ./fd
     ./fzf.nix
@@ -13,7 +14,9 @@
     ./herdr
     ./jj
     ./kitty
+    ./mcp.nix
     ./neovim
+    ./opencode.nix
     ./pkgs.nix
     ./python.nix
     ./shell
