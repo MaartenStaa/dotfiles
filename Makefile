@@ -29,13 +29,13 @@ switch-home-manager:
 ## Upgrade the system (update, commit, switch)
 ## @param MACHINE_NAME=work-mbp The name of the machine to build for
 upgrade:
-upgrade: update update-sources switch
+upgrade: update switch
 .PHONY: upgrade
 
 ## Upgrade home-manager (update, commit, switch)
 ## @param MACHINE_NAME=work-mbp The name of the machine to build for
 upgrade-home-manager:
-upgrade-home-manager: update update-sources switch-home-manager
+upgrade-home-manager: update switch-home-manager
 .PHONY: upgrade-home-manager
 
 ## @section Granular switching
@@ -73,11 +73,6 @@ collect-garbage:
 
 	nix store optimise
 .PHONY: collect-garbage
-
-## Update ad-hoc sources
-update-sources:
-	nix run nixpkgs#nvfetcher
-.PHONY: update-sources
 
 ## Update the flake inputs
 update:
