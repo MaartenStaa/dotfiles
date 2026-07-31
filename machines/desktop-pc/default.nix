@@ -24,8 +24,14 @@
     algorithm = "zstd";
   };
 
-  networking.hostName = "maarten-pc";
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "maarten-pc";
+    networkmanager.enable = true;
+    firewall.allowedTCPPorts = [
+      # KRDP
+      3389
+    ];
+  };
 
   time.timeZone = "Europe/Amsterdam";
   i18n.defaultLocale = "en_US.UTF-8";
