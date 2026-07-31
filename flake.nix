@@ -16,10 +16,18 @@
 
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
 
-    oyui = {
-      url = "github:emilien-jegou/oyui";
+    # Packages to build from source
+    herdr = {
+      url = "github:MaartenStaa/herdr/issue/1169-undercurl-color-not-rendered";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.rust-overlay.follows = "rust-overlay";
+    };
+    oyui = {
+      url = "github:emilien-jegou/oyui";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        rust-overlay.follows = "rust-overlay";
+      };
     };
 
     # Homebrew taps
@@ -50,11 +58,6 @@
     tap-nikitabobko-tap = {
       url = "github:nikitabobko/homebrew-tap";
       flake = false;
-    };
-    herdr = {
-      url = "github:MaartenStaa/herdr/issue/1169-undercurl-color-not-rendered";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.rust-overlay.follows = "rust-overlay";
     };
 
     # Herdr plugins
