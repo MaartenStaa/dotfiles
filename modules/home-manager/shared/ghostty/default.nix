@@ -4,7 +4,8 @@
 
   programs.ghostty = {
     enable = true;
-    installBatSyntax = true;
+    package = if pkgs.stdenv.isDarwin then null else pkgs.ghostty;
+    installBatSyntax = !pkgs.stdenv.isDarwin;
     settings = {
       font-family = "JetBrainsMono Nerd Font Mono Light";
 
