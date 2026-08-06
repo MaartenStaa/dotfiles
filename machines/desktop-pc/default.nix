@@ -57,7 +57,10 @@
       };
     };
 
-    openssh = {
+    openssh.enable = true;
+
+    printing = {
+      drivers = [ pkgs.samsung-unified-linux-driver ];
       enable = true;
     };
   };
