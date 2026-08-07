@@ -101,5 +101,21 @@ in
         export VISUAL=${pkgs.neovim}/bin/nvim
         export NIX_PATH=${nixPath}
       '';
+    # This is what `homebrew.enableFishIntegration` does, but that's outside the
+    # scope of Home Manager, so we do it here manually instead.
+    interactiveShellInit =
+      let
+        prefix = "/opt/homebrew";
+      in
+      # fish
+      ''
+        eval (${prefix}/bin/brew shellenv fish)
+        if test -d "${prefix}/share/fish/completions"
+          set -p fish_complete_path "${prefix}/share/fish/completions"
+        end
+        if test -d "${prefix}/share/fish/vendor_completions.d"
+          set -p fish_complete_path "${prefix}/share/fish/vendor_completions.d"
+        end
+      '';
   };
 }
