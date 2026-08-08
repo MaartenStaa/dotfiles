@@ -73,10 +73,6 @@
     opencode-vim.url = "github:leohenon/opencode-vim";
     opencode-vim.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Work-specific modules (private)
-    spotify-dotfiles.url = "git+ssh://git@ghe.spotify.net/maartens/spotify-dotfiles.git";
-    spotify-dotfiles.inputs.nixpkgs.follows = "nixpkgs";
-
     # Fish plugins
     fish-plugin-nvm = {
       url = "github:jorgebucaran/nvm.fish";
@@ -127,12 +123,32 @@
         email = "maarten@staa.dev";
         arch = "x86_64-linux";
       };
+      mkSources =
+        pkgs:
+        import ./_sources/generated.nix {
+          inherit (pkgs)
+            fetchurl
+            fetchFromGitHub
+            dockerTools
+            ;
+          fetchgit =
+            args:
+            (pkgs.fetchgit args).overrideAttrs (old: {
+              GIT_SSH_COMMAND = "${pkgs.openssh}/bin/ssh -o StrictHostKeyChecking=accept-new";
+              impureEnvVars = (old.impureEnvVars or [ ]) ++ [ "SSH_AUTH_SOCK" ];
+              preFetch = ''
+                export GIT_SSH_COMMAND
+              '';
+            });
+        };
+      spotifyDotfilesFor = pkgs: builtins.getFlake (toString (mkSources pkgs).spotify-dotfiles.src);
     in
     {
       darwinConfigurations = with work; {
         work-mbp =
           let
             system = arch;
+            spotify-dotfiles = spotifyDotfilesFor nixpkgs.legacyPackages.${system};
             args = {
               inherit
                 username
@@ -168,7 +184,7 @@
                 };
               }
 
-              inputs.spotify-dotfiles.darwinModules.default
+              spotify-dotfiles.darwinModules.default
 
               ./machines/work-mbp
               ./modules/nix-darwin/determinate.nix
@@ -213,8 +229,12 @@
       homeConfigurations = {
         work-mbp =
           with work;
-          home-manager.lib.homeManagerConfiguration {
+          let
             pkgs = nixpkgs.legacyPackages."${arch}";
+            spotify-dotfiles = spotifyDotfilesFor pkgs;
+          in
+          home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
             extraSpecialArgs = {
               inherit
                 arch
@@ -230,7 +250,7 @@
               ./modules/home-manager/darwin/shared
               ./modules/home-manager/darwin/work
 
-              inputs.spotify-dotfiles.homeManagerModules.default
+              spotify-dotfiles.homeManagerModules.default
             ];
           };
 

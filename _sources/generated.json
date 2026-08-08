@@ -1,0 +1,22 @@
+{
+    "spotify-dotfiles": {
+        "cargoLock": null,
+        "date": "2026-07-31",
+        "extract": null,
+        "name": "spotify-dotfiles",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "rev": "5709eac522f8eddd31aecccd49907b9115c17292",
+            "sha256": "sha256-lJoXvDPUZM5AAMt3ygcBj7mXW6KUmTfKSNwZsZ6+rXk=",
+            "sparseCheckout": [],
+            "type": "git",
+            "url": "git@ghe.spotify.net:maartens/spotify-dotfiles.git"
+        },
+        "version": "5709eac522f8eddd31aecccd49907b9115c17292"
+    }
+}

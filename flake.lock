@@ -71,22 +71,6 @@
         "type": "github"
       }
     },
-    "groove-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1785357352,
-        "narHash": "sha256-U4Ois3FJAhf/AfIAQp65r1YTHTZzcal64Atl5mv6upM=",
-        "ref": "refs/heads/master",
-        "rev": "04a084c43e43db7eb5d30d41ae0d95b22097a603",
-        "revCount": 793,
-        "type": "git",
-        "url": "ssh://git@ghe.spotify.net/work-management/work-graph-mcp.git"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://git@ghe.spotify.net/work-management/work-graph-mcp.git"
-      }
-    },
     "herdr": {
       "inputs": {
         "nixpkgs": [
@@ -295,7 +279,6 @@
         "oyui": "oyui",
         "rtw89": "rtw89",
         "rust-overlay": "rust-overlay",
-        "spotify-dotfiles": "spotify-dotfiles",
         "tap-asheshgoplani-tap": "tap-asheshgoplani-tap",
         "tap-homebrew-bundle": "tap-homebrew-bundle",
         "tap-homebrew-cask": "tap-homebrew-cask",
@@ -339,61 +322,6 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "type": "github"
-      }
-    },
-    "snipe-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1785501383,
-        "narHash": "sha256-aIQ+9DvoZcE0SUG4i1SPQyl2Ltcmpdk+4Xkd4ZV33Rw=",
-        "ref": "refs/heads/master",
-        "rev": "3b848d990a29e40e870e3bb9d49ad54a8a08ddca",
-        "revCount": 787,
-        "type": "git",
-        "url": "ssh://git@ghe.spotify.net/vibes/Snipe.git"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://git@ghe.spotify.net/vibes/Snipe.git"
-      }
-    },
-    "spotify-dotfiles": {
-      "inputs": {
-        "groove-src": "groove-src",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "snipe-src": "snipe-src",
-        "spotify-homebrew-sptaps": "spotify-homebrew-sptaps"
-      },
-      "locked": {
-        "lastModified": 1785518364,
-        "narHash": "sha256-lJoXvDPUZM5AAMt3ygcBj7mXW6KUmTfKSNwZsZ6+rXk=",
-        "ref": "refs/heads/master",
-        "rev": "5709eac522f8eddd31aecccd49907b9115c17292",
-        "revCount": 7,
-        "type": "git",
-        "url": "ssh://git@ghe.spotify.net/maartens/spotify-dotfiles.git"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://git@ghe.spotify.net/maartens/spotify-dotfiles.git"
-      }
-    },
-    "spotify-homebrew-sptaps": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1785438298,
-        "narHash": "sha256-BAKCl+RkADGpEq0doVlWOhUzbeV7Hnxu4wLeArm2Uz0=",
-        "ref": "refs/heads/master",
-        "rev": "2b3a81251d672c3cb03433f5fc4bf36cb48d72a8",
-        "revCount": 6411,
-        "type": "git",
-        "url": "ssh://git@ghe.spotify.net/shared/homebrew-spotify.git"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://git@ghe.spotify.net/shared/homebrew-spotify.git"
       }
     },
     "systems": {

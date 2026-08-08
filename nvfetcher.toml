@@ -1,0 +1,3 @@
+[spotify-dotfiles]
+src.git = "git@ghe.spotify.net:maartens/spotify-dotfiles.git"
+fetch.git = "git@ghe.spotify.net:maartens/spotify-dotfiles.git"
