@@ -65,6 +65,8 @@
     };
   };
 
+  security.polkit.enable = true;
+
   nix = {
     settings = {
       extra-experimental-features = [

@@ -1,6 +1,10 @@
-{ pkgs, ... }: {
+{ pkgs, username, ... }: {
   programs = {
-    _1password-gui.enable = true;
+    _1password.enable = true;
+    _1password-gui = {
+      enable = true;
+      polkitPolicyOwners = [ username ];
+    };
     firefox.enable = true;
     fish.enable = true;
     zsh.enable = true;
