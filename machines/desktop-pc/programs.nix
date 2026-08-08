@@ -14,6 +14,7 @@
     adwaita-icon-theme
     ghostty
     gnome-themes-extra
+    telegram-desktop
     vim
     wget
     zsh
