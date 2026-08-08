@@ -1,16 +1,4 @@
 { inputs, pkgs, ... }:
-with builtins;
-let
-  inputNames = attrNames inputs;
-  paths = map (
-    input:
-    let
-      path = getAttr input inputs;
-    in
-    "${input}=${path.outPath}"
-  ) inputNames;
-  nixPath = concatStringsSep ":" paths;
-in
 {
   # https://mynixos.com/home-manager/options/programs.fish
   programs.fish = {
@@ -99,7 +87,13 @@ in
       ''
         export EDITOR=${pkgs.neovim}/bin/nvim
         export VISUAL=${pkgs.neovim}/bin/nvim
-        export NIX_PATH=${nixPath}
+        if set -q NIX_PATH[1]
+            # Fish treats variables ending in PATH as lists, so restore the inherited NIX_PATH as a colon-delimited scalar.
+            set --global --export --unpath NIX_PATH (string join : $NIX_PATH)
+        else
+            # GUI-launched shells may not inherit NIX_PATH, so resolve nixpkgs through the flake registry.
+            set --global --export --unpath NIX_PATH nixpkgs=flake:nixpkgs
+        end
       '';
     # This is what `homebrew.enableFishIntegration` does, but that's outside the
     # scope of Home Manager, so we do it here manually instead.
