@@ -1,6 +1,7 @@
 { email, pkgs, ... }:
 {
   home.packages = with pkgs; [
+    forgejo-cli
     gh
     git
     git-absorb
