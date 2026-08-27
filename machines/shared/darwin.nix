@@ -2,13 +2,18 @@
 {
   nix = {
     package = pkgs.nix;
-    settings.trusted-users = [
-      "root"
-      username
-    ];
+    settings = {
+      trusted-users = [
+        "root"
+        username
+      ];
 
-    # Storage management on upgrades
-    settings.auto-optimise-store = false;
+      # Set download buffer limit to 512MB
+      download-buffer-size = 512 * 1024 * 1024;
+
+      # Storage management on upgrades
+      auto-optimise-store = false;
+    };
   };
 
   system = {
