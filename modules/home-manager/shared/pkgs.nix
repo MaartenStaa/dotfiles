@@ -11,6 +11,8 @@
       coreutils
       curl
       diff-so-fancy
+      just
+      nh
       exiftool
       eza
       ffmpeg

@@ -1,75 +1,102 @@
 # Maarten's dotfiles repo
 
-These are my dotfiles, managed using nix/nix-darwin/nix-homebrew. At the moment,
-they contain the configurations for my work and private MacBook Pro, but I may
-expand them in the future for my homelab (which is currently managed
-imperatively).
+These are my dotfiles, managed using Nix, nix-darwin, and nix-homebrew. They
+contain configurations for my work MacBook Pro, personal MacBook Pro, and
+desktop PC (NixOS).
 
-## Installation
+## Configuration names
 
-Make sure this repository is cloned in `~/.dotfiles`. Some parts of the
-configuration rely on this, to work around a known symlink issue (see Issues
-below).
+| Name | Platform | Description |
+|------|----------|-------------|
+| `work-mbp` | macOS (aarch64) | Work MacBook Pro |
+| `personal-mbp` | macOS (x86_64) | Personal MacBook Pro |
+| `maarten-pc` | NixOS (x86_64) | Desktop PC |
 
-First, install Nix. I like using [nix-installer].
+## First-time setup
+
+Clone this repository to `~/.dotfiles`:
+
+```sh
+git clone <repo> ~/.dotfiles
+cd ~/.dotfiles
+```
+
+Install Nix using [nix-installer]:
 
 ```sh
 curl -fsSL https://install.determinate.systems/nix | sh -s -- install --determinate
 ```
 
-Next, after sourcing the Nix shell functions or opening a new shell, run
-`nix-darwin` and `home-manager` to switch the appropriate configuration:
+On first install, `just` and `nh` aren't available yet. Bootstrap using the
+underlying tools directly:
+
+### macOS
 
 ```sh
-make switch MACHINE_NAME=<name>
+sudo nix run nix-darwin#darwin-rebuild -- switch --flake .#<name>
+nix run nixpkgs#home-manager -- switch --flake .#<name>
 ```
 
-The very first time this may not work, since `nix-darwin` is not yet available.
-To fix that, run it from the Nix source directly:
+### NixOS
 
 ```sh
-sudo nix run nix-darwin#darwin-rebuild -- switch --flake .#<machine-name>
+sudo nixos-rebuild switch --flake .#<name>
 ```
 
-In this case, also check the known issues below for SSH agent caveats. After
-running the above, refer to the various `make switch` commands to take care
-of the Home Manager activation as well.
+After the first switch, `just` and `nh` are installed and all further operations
+use the recipes below.
 
-## Updates
+See [Known issues](#known-issues) for SSH agent caveats on first install.
 
-### Updating Flake inputs & nvfetcher sources
+## Usage
+
+### Switching configurations
+
+After making changes, switch to the new configuration:
 
 ```sh
-make upgrade MACHINE_NAME=<name>
+just switch <name>
 ```
 
-This will pull in updates, let you commit the changes, and switch to the new
-configuration.
+On macOS this switches both nix-darwin and home-manager. On NixOS it switches
+the full system (including home-manager as a NixOS module).
 
-### Activating new version
-
-After making changes to the configuration, switch to the new configuration:
+To switch components individually on macOS:
 
 ```sh
-make switch MACHINE_NAME=<name>
+just switch-darwin <name>
+just switch-home <name>
 ```
 
-### Non-flake inputs
+### Upgrading
 
-This repository uses [nv-fetcher] to manage inputs that aren't flakes. These
-inputs are defined in `nvfetcher.toml`. They can be updated like this:
+Update all flake inputs, non-flake sources, and switch:
 
 ```sh
-make update-sources
+just upgrade <name>
 ```
 
-Note that running `make upgrade` already takes care of updating the non-flake
-inputs too.
+Or update inputs without switching:
 
-### Upgrading Nix
+```sh
+just update          # flake inputs
+just update-sources  # nvfetcher sources
+```
 
-As mentioned in the [nix-installer] readme, you can run the following command to
-the latest recommended version of Nix:
+### Building without switching
+
+```sh
+just check <name>
+```
+
+### Garbage collection
+
+```sh
+just gc                    # default: 14 days
+just gc older-than=30d     # custom threshold
+```
+
+### Upgrading Nix itself
 
 ```sh
 sudo -i nix upgrade-nix
@@ -77,51 +104,47 @@ sudo -i nix upgrade-nix
 
 ## Home Manager versus nix-darwin
 
-These dotfiles use both Home Manager and nix-darwin separately from each other,
-mainly to work around nix-darwin requiring running with sudo, and HM not liking
-this too much (possibly especially with Determinate Nix).
+These dotfiles use both Home Manager and nix-darwin separately on macOS,
+mainly because nix-darwin requires sudo while Home Manager doesn't play well
+with it (especially with Determinate Nix).
 
-This means nix-darwin and its `darwin-rebuild` is used for system-level
-configuration, including managing Homebrew, whereas Home Manager is used
-to handle installed packages and their configurations (e.g. files under `~/.config`).
+nix-darwin handles system-level configuration including Homebrew, while
+Home Manager handles user packages and their configurations (e.g. `~/.config`).
 
-In general, `make switch` will switch both nix-darwin and Home Manager, but
-they can be switched separately from each other if required:
+On NixOS, Home Manager is integrated as a NixOS module, so `just switch`
+handles everything in one step.
 
-```sh
-make switch-nix-darwin MACHINE_NAME=<name>
-make switch-home-manager MACHINE_NAME=<name>
-```
+## Non-flake inputs
+
+This repository uses [nvfetcher] to manage inputs that aren't flakes, defined
+in `nvfetcher.toml`. Running `just upgrade` takes care of updating these
+alongside flake inputs.
 
 ## Uninstalling
 
-If, for some reason, you need to uninstall Nix, you should be able to use run
-`/nix/nix-installer uninstall`, assuming you've used [nix-installer] as
-mentioned above.
+If using [nix-installer]:
 
-## Issues
+```sh
+/nix/nix-installer uninstall
+```
 
-- The first installation might be a little rough, particularly when using the
-  1Password SSH agent, for sources fetched over SSH. Running `make switch` with
-  `SSH_AUTH_SOCK=<path>` set may help.
+## Known issues
 
-- It is currently not possible to symlink directly to a file or directory using
-  `mkOutOfStoreSymlink`, as the symlink will point into the Nix store, rather
-  than to `~/.dotfiles/...` as expected. As such, instead of
+- First install with 1Password SSH agent may require setting `SSH_AUTH_SOCK`
+  explicitly for sources fetched over SSH.
 
-  ```nix
-  xdg.configFile."program" = {
-    source = config.lib.file.mkOutOfStoreSymlink ./config;
-  };
-  ```
-
-  You need to pass an absolute file path:
+- `mkOutOfStoreSymlink` requires absolute paths. Instead of:
 
   ```nix
-  xdg.configFile."program" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/modules/program/config";
-  };
+  xdg.configFile."program".source = config.lib.file.mkOutOfStoreSymlink ./config;
   ```
 
-[nix-installer]: https://github.com/DeterminateSystems/nix-installer?tab=readme-ov-file
-[nv-fetcher]: https://github.com/berberman/nvfetcher
+  Use:
+
+  ```nix
+  xdg.configFile."program".source = config.lib.file.mkOutOfStoreSymlink
+    "${config.home.homeDirectory}/.dotfiles/modules/program/config";
+  ```
+
+[nix-installer]: https://github.com/DeterminateSystems/nix-installer
+[nvfetcher]: https://github.com/berberman/nvfetcher
