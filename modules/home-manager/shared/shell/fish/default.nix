@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 {
   # https://mynixos.com/home-manager/options/programs.fish
   programs.fish = {
@@ -30,10 +30,6 @@
       {
         name = "fzf-fish";
         inherit (fzf-fish) src;
-      }
-      {
-        name = "nvm";
-        src = inputs.fish-plugin-nvm;
       }
     ];
     shellAbbrs = {

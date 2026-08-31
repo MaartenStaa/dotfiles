@@ -31,7 +31,7 @@
       deno
       dockerfile-language-server
       # eslintd
-      nodejs
+      fnm
       # oxlint
       # typescript-language-server # TODO: Remove? Replaced by vtsls?
       vscode-js-debug

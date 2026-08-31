@@ -73,12 +73,6 @@
     opencode-vim.url = "github:leohenon/opencode-vim";
     opencode-vim.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Fish plugins
-    fish-plugin-nvm = {
-      url = "github:jorgebucaran/nvm.fish";
-      flake = false;
-    };
-
     # Kernel modules
     rtw89 = {
       url = "github:morrownr/rtw89";
