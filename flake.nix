@@ -141,7 +141,12 @@
               '';
             });
         };
-      spotifyDotfilesFor = pkgs: builtins.getFlake (toString (mkSources pkgs).spotify-dotfiles.src);
+      spotifyDotfilesFor =
+        pkgs:
+        let
+          rev = (mkSources pkgs).spotify-dotfiles.version;
+        in
+        builtins.getFlake "git+ssh://git@ghe.spotify.net/maartens/spotify-dotfiles.git?rev=${rev}";
     in
     {
       darwinConfigurations = with work; {
