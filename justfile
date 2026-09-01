@@ -10,26 +10,26 @@ switch name:
     #!/usr/bin/env bash
     set -euo pipefail
     if [[ "$(uname)" == "Darwin" ]]; then
-        nh darwin switch ".#{{ name }}"
-        nh home switch ".#{{ name }}"
+        nh darwin switch . -H "{{ name }}"
+        nh home switch . -c "{{ name }}"
     else
-        nh os switch ".#{{ name }}"
+        nh os switch . -H "{{ name }}"
     fi
 
 # Switch only the nix-darwin configuration
 [group('switch')]
 switch-darwin name:
-    nh darwin switch ".#{{ name }}"
+    nh darwin switch . -H "{{ name }}"
 
 # Switch only the home-manager configuration
 [group('switch')]
 switch-home name:
-    nh home switch ".#{{ name }}"
+    nh home switch . -c "{{ name }}"
 
 # Switch only the NixOS configuration
 [group('switch')]
 switch-os name:
-    nh os switch ".#{{ name }}"
+    nh os switch . -H "{{ name }}"
 
 # Upgrade: update flake inputs and non-flake sources, then switch
 upgrade name: update update-sources (switch name)
