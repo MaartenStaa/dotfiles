@@ -8,16 +8,16 @@
 {
   spotify-dotfiles = {
     pname = "spotify-dotfiles";
-    version = "5709eac522f8eddd31aecccd49907b9115c17292";
+    version = "6166dfd183776130bc83ec1deb6c9a11ede9143f";
     src = fetchgit {
       url = "git@ghe.spotify.net:maartens/spotify-dotfiles.git";
-      rev = "5709eac522f8eddd31aecccd49907b9115c17292";
+      rev = "6166dfd183776130bc83ec1deb6c9a11ede9143f";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-lJoXvDPUZM5AAMt3ygcBj7mXW6KUmTfKSNwZsZ6+rXk=";
+      sha256 = "sha256-ADx6m5DBlJopnGPW4vTM5O+M92YDX7Hj+ekpbjqpJoU=";
     };
-    date = "2026-07-31";
+    date = "2026-09-01";
   };
 }

@@ -1,7 +1,7 @@
 {
     "spotify-dotfiles": {
         "cargoLock": null,
-        "date": "2026-07-31",
+        "date": "2026-09-01",
         "extract": null,
         "name": "spotify-dotfiles",
         "passthru": null,
@@ -11,12 +11,12 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "5709eac522f8eddd31aecccd49907b9115c17292",
-            "sha256": "sha256-lJoXvDPUZM5AAMt3ygcBj7mXW6KUmTfKSNwZsZ6+rXk=",
+            "rev": "6166dfd183776130bc83ec1deb6c9a11ede9143f",
+            "sha256": "sha256-ADx6m5DBlJopnGPW4vTM5O+M92YDX7Hj+ekpbjqpJoU=",
             "sparseCheckout": [],
             "type": "git",
             "url": "git@ghe.spotify.net:maartens/spotify-dotfiles.git"
         },
-        "version": "5709eac522f8eddd31aecccd49907b9115c17292"
+        "version": "6166dfd183776130bc83ec1deb6c9a11ede9143f"
     }
 }
